@@ -1,308 +1,379 @@
-import { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './App.css';
+import ThreeBackground from './components/ThreeBackground';
 
-gsap.registerPlugin(ScrollTrigger);
+const navLinks = [
+  { href: '#features', label: 'Features' },
+  { href: '#how-it-works', label: 'How It Works' },
+ { href: '#pricing', label: 'Pricing' },
+  { href: '#resources', label: 'Resources' },
+];
 
-function App() {
-  const canvasRef = useRef(null);
-  const [webglSupported, setWebglSupported] = useState(true);
+const features = [
+  {
+    title: 'Real-time Cost Monitoring',
+    description:
+      'Track your OpenAI spend with granular detail. See costs by model, endpoint, and user in real-time.',
+    detail: 'Per-request tracking • Dashboard analytics • Usage alerts',
+  },
+  {
+    title: 'Intelligent Caching',
+    description:
+      'Automatically cache responses to reduce API calls and cut costs by up to 50% without sacrificing quality.',
+    detail: 'Smart TTL • Context-aware • Performance optimized',
+  },
+ {
+    title: 'Rate Limiting & Queuing',
+    description:
+      'Prevent API limits and unexpected charges with intelligent rate limiting and request queuing.',
+    detail: 'Per-minute limits • Queue management • Retry logic',
+  },
+];
 
-  useEffect(() => {
-    console.log('App mounted, initializing Three.js...');
-    
-    // Check WebGL support
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    
-    if (!gl) {
-      console.warn('WebGL not supported, showing static background');
-      setWebglSupported(false);
-      return;
-    }
-    
-    try {
-      // Three.js Scene Setup with error handling
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      
-      let renderer;
-      try {
-        renderer = new THREE.WebGLRenderer({ 
-          canvas: canvasRef.current, 
-          alpha: true,
-          antialias: false,
-          powerPreference: 'low-power'
-        });
-      } catch (err) {
-        console.warn('WebGL renderer failed, using fallback:', err);
-        setWebglSupported(false);
-        return;
-      }
-      
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      camera.position.z = 50;
+const howItWorksSteps = [
+  {
+    step: 'Step 1',
+    title: 'Change Your Base URL',
+    description: 'Point your OpenAI requests to our secure proxy endpoint',
+    code: 'openai.api_base = "https://api.driftassure.com/v1"',
+  },
+  {
+    step: 'Step 2',
+    title: 'Use Your Same Keys',
+    description: 'We securely pass through your API keys without storing them',
+    code: 'openai.api_key = "your-openai-api-key"',
+  },
+  {
+    step: 'Step 3',
+    title: 'See Instant Savings',
+    description: 'Monitor your costs and performance in real-time',
+    screenshot: 'dashboard-screenshot',
+  },
+];
 
-      console.log('Three.js scene created');
+const pricingPlans = [
+  {
+    tier: 'Startups',
+    price: '$49/mo',
+    blurb: 'For teams tracking up to $1k/mo in spend.',
+    features: ['Up to 1M requests', 'Basic analytics', 'Email support'],
+  },
+  {
+    tier: 'Growth',
+    price: '$199/mo',
+    blurb: 'For teams tracking up to $10k/mo in spend.',
+    features: ['Up to 10M requests', 'Advanced analytics', 'Priority support', 'Custom caching rules'],
+  },
+];
 
-      // Blue particles (healthy data)
-      const particlesCount = 2000;
-      const particlesGeometry = new THREE.BufferGeometry();
-      const particlesPositions = new Float32Array(particlesCount * 3);
+const testimonials = [
+  {
+    quote:
+      '“DriftAssure cut our OpenAI bill by 43% in the first month. The real-time dashboard gives us complete visibility into our costs.”',
+    name: 'Sarah Johnson',
+    role: 'CTO, StartupX',
+  },
+ {
+    quote:
+      '“The caching layer saved us thousands without any changes to our application code. Setup took less than 5 minutes.”',
+    name: 'Michael Chen',
+    role: 'Engineering Lead, TechCorp',
+  },
+];
 
-      for (let i = 0; i < particlesCount * 3; i++) {
-        particlesPositions[i] = (Math.random() - 0.5) * 100;
-      }
+const stats = [
+  { value: '50%', label: 'Average cost reduction' },
+  { value: '60s', label: 'Setup time' },
+  { value: 'Zero', label: 'Code changes required' },
+  { value: '24/7', label: 'Monitoring coverage' },
+];
 
-      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPositions, 3));
-      const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.3,
-        color: 0x4F46E5,
-        transparent: true,
-        opacity: 0.8,
-      });
+const resourceLinks = [
+  { label: 'Cost Optimization Guide (PDF)', href: '#resources' },
+  { label: 'Integration Documentation', href: '#resources' },
+  { label: 'ROI Calculator', href: '#resources' },
+];
 
-      const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-      scene.add(particlesMesh);
 
-      console.log('Blue particles added');
-
-      // Red drift particles
-      const driftCount = 1000;
-      const driftGeometry = new THREE.BufferGeometry();
-      const driftPositions = new Float32Array(driftCount * 3);
-
-      for (let i = 0; i < driftCount * 3; i++) {
-        driftPositions[i] = (Math.random() - 0.5) * 80;
-      }
-
-      driftGeometry.setAttribute('position', new THREE.BufferAttribute(driftPositions, 3));
-      const driftMaterial = new THREE.PointsMaterial({
-        size: 0.4,
-        color: 0xEF4444,
-        transparent: true,
-        opacity: 0,
-      });
-
-      const driftMesh = new THREE.Points(driftGeometry, driftMaterial);
-      scene.add(driftMesh);
-
-      console.log('Red drift particles added');
-
-      // Animation
-      let animationId;
-      const animate = () => {
-        animationId = requestAnimationFrame(animate);
-        particlesMesh.rotation.y += 0.001;
-        particlesMesh.rotation.x += 0.0005;
-        driftMesh.rotation.y -= 0.002;
-        driftMesh.rotation.x -= 0.001;
-        renderer.render(scene, camera);
-      };
-
-      animate();
-      console.log('Animation started');
-
-      // GSAP Scroll Animation
-      gsap.to(driftMaterial, {
-        opacity: 0.9,
-        scrollTrigger: {
-          trigger: '.drift-trigger',
-          start: 'top center',
-          end: 'bottom center',
-          scrub: 1,
-        }
-      });
-
-      console.log('GSAP scroll trigger registered');
-
-      // Handle window resize
-      const handleResize = () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      };
-
-      window.addEventListener('resize', handleResize);
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        cancelAnimationFrame(animationId);
-        renderer.dispose();
-        console.log('Cleanup');
-      };
-    } catch (error) {
-      console.error('Error initializing Three.js:', error);
-      setWebglSupported(false);
-    }
-  }, []);
-
+function Header() {
   return (
-    <div className="app">
-      {webglSupported ? (
-        <canvas ref={canvasRef} id="bg-canvas"></canvas>
-      ) : (
-        <div className="fallback-bg"></div>
-      )}
-
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1 className="hero-title">Find the Drift Before It Finds You</h1>
-          <p className="hero-subtitle">
-            Your ML models are slowly <em>drifting away from reality</em>. 
-            DriftAssure catches it before your customers do.
-          </p>
-          <a href="https://app.driftassure.com" className="cta-button">
-            Start Free Trial
+    <header className="site-header">
+      <div className="container nav-container">
+        <div className="brand">DriftAssure</div>
+        <nav className="nav-links" aria-label="Primary">
+          {navLinks.map((link) => (
+            <a key={link.label} href={link.href} className="nav-link">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <div className="nav-actions">
+          <a className="ghost-button" href="https://app.driftassure.com">
+            Log in
+          </a>
+          <a className="primary-button" href="#cta">
+            Get Started
           </a>
         </div>
-      </section>
+      </div>
+    </header>
+  );
+}
 
-      {/* Drift Visualization Section */}
-      <section className="drift-trigger">
-        <div className="container">
-          <h2 className="section-title">Watch Drift Happen in Real-Time</h2>
-          <p className="section-subtitle">
-            Scroll down to see how drift quietly infiltrates your production models
+function Hero() {
+  return (
+    <section className="hero-section" id="top">
+      <ThreeBackground />
+      <div className="container hero-grid">
+        <div className="hero-copy">
+          <p className="eyebrow">AI Infrastructure</p>
+          <h1>
+            Cut Your OpenAI Bill in Half with One Line of Code
+          </h1>
+          <p className="hero-subtitle">
+            DriftAssure is the intelligent AI proxy that gives you real-time cost monitoring, caching, and rate-limiting for your LLM apps. Setup in 60 seconds.
+          </p>
+          <div className="hero-ctas">
+            <a className="primary-button" href="#cta">
+              Start Saving Now
+            </a>
+            <a className="ghost-button" href="#how-it-works">
+              See how it works
+            </a>
+          </div>
+          <dl className="hero-metrics" aria-label="Impact metrics">
+            <div>
+              <dt>50% average savings</dt>
+              <dd>Teams typically reduce their OpenAI costs by 40-60% in the first month.</dd>
+            </div>
+            <div>
+              <dt>60 seconds setup</dt>
+              <dd>Change one line of code and start saving without any application changes.</dd>
+            </div>
+          </dl>
+        </div>
+        <div className="hero-visual" aria-hidden="true">
+          <div className="visual-card">
+            <span className="visual-title">Cost Dashboard</span>
+            <div className="visual-chart">
+              <div className="chart-line chart-line-primary" />
+              <div className="chart-line chart-line-alert" />
+            </div>
+            <div className="visual-insight">
+              <p>$2,480 saved this month</p>
+              <span className="badge">Caching active</span>
+            </div>
+            <div className="visual-footer">
+              <span>Requests</span>
+              <span>1.2M • 43% cached</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Features() {
+  return (
+    <section className="section" id="features">
+      <div className="container section-header">
+        <p className="eyebrow">Platform Features</p>
+        <h2>Why DriftAssure Saves Teams Money</h2>
+        <p className="section-subtitle">
+          Built with cost efficiency, security, and seamless integration at its core. Each feature addresses a critical cost management gap in LLM applications.
+        </p>
+      </div>
+      <div className="container feature-grid">
+        {features.map((feature) => (
+          <article key={feature.title} className="feature-card">
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+            <span className="feature-detail">{feature.detail}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+ );
+}
+
+function HowItWorks() {
+  return (
+    <section className="section alt" id="how-it-works">
+      <div className="container section-header">
+        <p className="eyebrow">Simple Integration</p>
+        <h2>Get Started in 3 Easy Steps</h2>
+        <p className="section-subtitle">
+          Connect DriftAssure to your OpenAI application in minutes, not hours. No code changes required beyond redirecting your API calls.
+        </p>
+      </div>
+      <div className="container">
+        <div className="usecase-grid">
+          {howItWorksSteps.map((step, index) => (
+            <article key={index} className="usecase-card">
+              <h3>{step.title}</h3>
+              <p className="usecase-result">{step.description}</p>
+              {step.code ? (
+                <div className="code-block">
+                  <pre><code>{step.code}</code></pre>
+                </div>
+              ) : (
+                <div className="screenshot-placeholder">
+                  <div className="screenshot">Cost Dashboard Screenshot</div>
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Proof() {
+  return (
+    <section className="section proof" id="proof">
+      <div className="container proof-grid">
+        <div className="proof-testimonials">
+          <p className="eyebrow">Trusted by Engineering Teams</p>
+          <h2>Real Results from Real Teams</h2>
+          {testimonials.map((testimonial) => (
+            <blockquote key={testimonial.name}>
+              <p>{testimonial.quote}</p>
+              <footer>
+                <span>{testimonial.name}</span>
+                <span>{testimonial.role}</span>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+        <div className="proof-stats">
+          {stats.map((stat) => (
+            <div key={stat.value} className="stat-card">
+              <span className="stat-value">{stat.value}</span>
+              <span className="stat-label">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Pricing() {
+  return (
+    <section className="section" id="pricing">
+      <div className="container section-header">
+        <p className="eyebrow">Simple, Transparent Pricing</p>
+        <h2>Plans That Scale With Your Usage</h2>
+        <p className="section-subtitle">
+          Pay only for what you use. All plans include core features, with advanced capabilities for scaling teams.
+        </p>
+      </div>
+      <div className="container pricing-grid">
+        {pricingPlans.map((plan) => (
+          <article key={plan.tier} className="pricing-card">
+            <h3>{plan.tier}</h3>
+            <p className="pricing-price">{plan.price}</p>
+            <p>{plan.blurb}</p>
+            <ul className="pricing-features">
+              {plan.features.map((feature, idx) => (
+                <li key={idx}>✓ {feature}</li>
+              ))}
+            </ul>
+            <a className="secondary-button" href="#cta">
+              Start with {plan.tier}
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function CTA() {
+  return (
+    <section className="cta-section" id="cta">
+      <div className="container cta-grid">
+        <div>
+          <p className="eyebrow">Start Saving Today</p>
+          <h2>Ready to Cut Your OpenAI Bill?</h2>
+          <p>
+            Join thousands of teams using DriftAssure to optimize their AI costs. Get started in 60 seconds with a simple API change.
           </p>
         </div>
-      </section>
+        <form className="cta-form" aria-label="Get started form">
+          <label>
+            <span>Work email</span>
+            <input type="email" name="email" placeholder="you@company.com" required />
+          </label>
+          <label>
+            <span>Current monthly OpenAI spend</span>
+            <input type="text" name="spend" placeholder="e.g., $2000" />
+          </label>
+          <button type="submit" className="primary-button">
+            Get Started
+          </button>
+        </form>
+      </div>
+    </section>
+  );
+}
 
-      {/* How It Works */}
-      <section className="how-it-works">
-        <div className="container">
-          <h2 className="section-title">Three Steps to Peace of Mind</h2>
-          <p className="section-subtitle">Deploy monitoring in minutes, not weeks</p>
-
-          <div className="steps">
-            {/* Step 1 */}
-            <div className="step">
-              <div className="step-number">1</div>
-              <h3 className="step-title">Install & Connect</h3>
-              <div className="code-snippet">
-                <pre><code>{`pip install driftassure
-
-from driftassure import Client
-
-client = Client(api_key="your_key")`}</code></pre>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="step">
-              <div className="step-number">2</div>
-              <h3 className="step-title">Register Your Model</h3>
-              <div className="code-snippet">
-                <pre><code>{`client.register_model(
-  name="fraud_detector_v1",
-  baseline_data=X_train
-)`}</code></pre>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="step">
-              <div className="step-number">3</div>
-              <h3 className="step-title">Get Instant Alerts</h3>
-              <div className="alert-box">
-                <div className="alert-content">
-                  <div className="alert-title">Drift Detected!</div>
-                  <div className="alert-message">
-                    Model "fraud_detector_v1" has drifted 23% from baseline.
-                    Review the dashboard for feature-level diagnostics.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+function Resources() {
+  return (
+    <section className="section alt" id="resources">
+      <div className="container resources-grid">
+        <div>
+          <p className="eyebrow">Resource Hub</p>
+          <h2>Learn More About Cost Optimization</h2>
+          <p>
+            Access guides, documentation, and tools to maximize your AI cost efficiency with DriftAssure.
+          </p>
         </div>
-      </section>
+        <ul>
+          {resourceLinks.map((resource) => (
+            <li key={resource.label}>
+              <a href={resource.href}>{resource.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
 
-      {/* Pricing */}
-      <section className="pricing">
-        <div className="container">
-          <h2 className="section-title">Simple, Transparent Pricing</h2>
-          <p className="section-subtitle">No surprises. No hidden fees. Cancel anytime.</p>
-
-          <div className="pricing-grid">
-            {/* Starter */}
-            <div className="pricing-card">
-              <h3 className="pricing-tier">Starter</h3>
-              <div className="pricing-price">
-                <span className="price-amount">$49</span>
-                <span className="price-period">/month</span>
-              </div>
-              <ul className="pricing-features">
-                <li>Up to 3 models</li>
-                <li>10,000 predictions/month</li>
-                <li>Email alerts</li>
-                <li>7-day data retention</li>
-              </ul>
-              <a href="https://app.driftassure.com" className="pricing-button">
-                Get Started
-              </a>
-            </div>
-
-            {/* Professional */}
-            <div className="pricing-card featured">
-              <div className="popular-badge">Most Popular</div>
-              <h3 className="pricing-tier">Professional</h3>
-              <div className="pricing-price">
-                <span className="price-amount">$199</span>
-                <span className="price-period">/month</span>
-              </div>
-              <ul className="pricing-features">
-                <li>Up to 20 models</li>
-                <li>100,000 predictions/month</li>
-                <li>Slack + Email alerts</li>
-                <li>30-day data retention</li>
-                <li>API access</li>
-              </ul>
-              <a href="https://app.driftassure.com" className="pricing-button">
-                Get Started
-              </a>
-            </div>
-
-            {/* Enterprise */}
-            <div className="pricing-card">
-              <h3 className="pricing-tier">Enterprise</h3>
-              <div className="pricing-price">
-                <span className="price-amount">Custom</span>
-              </div>
-              <ul className="pricing-features">
-                <li>Unlimited models</li>
-                <li>Unlimited predictions</li>
-                <li>Custom integrations</li>
-                <li>Unlimited data retention</li>
-                <li>Dedicated support</li>
-                <li>On-premise deployment</li>
-              </ul>
-              <a href="https://app.driftassure.com" className="pricing-button">
-                Contact Sales
-              </a>
-            </div>
-          </div>
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <div className="container footer-grid">
+        <div>
+          <div className="brand">DriftAssure</div>
+          <p>© {new Date().getFullYear()} DriftAssure by Cognitude. All rights reserved.</p>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <p>© 2025 DriftAssure by Cognitude. All rights reserved.</p>
-            <div className="footer-links">
-              <a href="https://app.driftassure.com">Dashboard</a>
-              <a href="https://api.driftassure.com/docs">API Docs</a>
-              <a href="https://app.driftassure.com">Privacy</a>
-              <a href="https://app.driftassure.com">Terms</a>
-            </div>
-          </div>
+        <div className="footer-links">
+          <a href="#top">Back to top</a>
+          <a href="https://app.driftassure.com">Customer login</a>
+          <a href="#resources">Privacy & terms</a>
         </div>
-      </footer>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  return (
+    <div className="app-shell">
+      <Header />
+      <main>
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <Proof />
+        <Pricing />
+        <CTA />
+        <Resources />
+      </main>
+      <Footer />
     </div>
   );
 }
