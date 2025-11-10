@@ -35,7 +35,7 @@ const howItWorksSteps = [
     step: "Step 1",
     title: "Install OpenAI SDK",
     description: "Use the official OpenAI Python client",
-    code: 'pip install openai',
+    code: "pip install openai",
   },
   {
     step: "Step 2",
@@ -102,9 +102,10 @@ const stats = [
 ];
 
 const resourceLinks = [
-  { label: "Cost Optimization Guide (PDF)", href: "#resources" },
-  { label: "Integration Documentation", href: "#resources" },
-  { label: "ROI Calculator", href: "#resources" },
+  { label: "API Documentation (Swagger)", href: "https://api.driftassure.com/docs" },
+  { label: "API Documentation (ReDoc)", href: "https://api.driftassure.com/redoc" },
+  { label: "Integration Guide", href: "#resources" },
+  { label: "Cost Optimization Guide", href: "#resources" },
 ];
 
 function Header() {
