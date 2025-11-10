@@ -23,18 +23,20 @@ const ThreeBackground = ({
     const attemptPlay = async () => {
       try {
         // Small delay to ensure video is ready
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise((resolve) => setTimeout(resolve, 100));
         await video.play();
       } catch (error) {
         console.log("Video autoplay failed:", error);
         // Try again on first user interaction
         const playOnInteraction = () => {
           video.play();
-          document.removeEventListener('touchstart', playOnInteraction);
-          document.removeEventListener('click', playOnInteraction);
+          document.removeEventListener("touchstart", playOnInteraction);
+          document.removeEventListener("click", playOnInteraction);
         };
-        document.addEventListener('touchstart', playOnInteraction, { once: true });
-        document.addEventListener('click', playOnInteraction, { once: true });
+        document.addEventListener("touchstart", playOnInteraction, {
+          once: true,
+        });
+        document.addEventListener("click", playOnInteraction, { once: true });
       }
     };
 
@@ -42,11 +44,11 @@ const ThreeBackground = ({
     if (video.readyState >= 3) {
       attemptPlay();
     } else {
-      video.addEventListener('canplay', attemptPlay, { once: true });
+      video.addEventListener("canplay", attemptPlay, { once: true });
     }
 
     return () => {
-      video.removeEventListener('canplay', attemptPlay);
+      video.removeEventListener("canplay", attemptPlay);
     };
   }, []);
 
@@ -65,7 +67,10 @@ const ThreeBackground = ({
       >
         <source src={videoSrc} type="video/mp4" />
       </video>
-      <div className="hero-video__overlay" style={{ opacity: overlayOpacity }} />
+      <div
+        className="hero-video__overlay"
+        style={{ opacity: overlayOpacity }}
+      />
       <div
         className="hero-video__gradient"
         style={{

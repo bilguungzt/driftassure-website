@@ -33,15 +33,23 @@ const features = [
 const howItWorksSteps = [
   {
     step: "Step 1",
-    title: "Change Your Base URL",
-    description: "Point your OpenAI requests to our secure proxy endpoint",
-    code: 'openai.api_base = "https://api.driftassure.com/v1"',
+    title: "Install OpenAI SDK",
+    description: "Use the official OpenAI Python client",
+    code: 'pip install openai',
   },
   {
     step: "Step 2",
-    title: "Use Your Same Keys",
-    description: "We securely pass through your API keys without storing them",
-    code: 'openai.api_key = "your-openai-api-key"',
+    title: "Configure DriftAssure Proxy",
+    description: "Add your OpenAI key and DriftAssure API key",
+    code: `from openai import OpenAI
+
+client = OpenAI(
+    api_key="your-openai-key",
+    base_url="https://api.driftassure.com",
+    default_headers={
+        "X-API-Key": "your-driftassure-key"
+    }
+)`,
   },
   {
     step: "Step 3",
