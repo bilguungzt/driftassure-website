@@ -3,7 +3,7 @@ import heroVideoSrc from "../assets/video.mp4";
 
 const DEFAULTS = {
   videoSrc: heroVideoSrc,
-  poster: "/video-poster.svg",
+  poster: "",
   overlayOpacity: 0.55,
   gradientStop: 0.66,
 };
@@ -18,16 +18,36 @@ const ThreeBackground = ({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video) {
-      // Force play on mobile devices
-      video.play().catch((error) => {
+    if (!video) return;
+
+    const attemptPlay = async () => {
+      try {
+        // Small delay to ensure video is ready
+        await new Promise(resolve => setTimeout(resolve, 100));
+        await video.play();
+      } catch (error) {
         console.log("Video autoplay failed:", error);
-        // Try again after user interaction
-        document.addEventListener('touchstart', () => {
+        // Try again on first user interaction
+        const playOnInteraction = () => {
           video.play();
-        }, { once: true });
-      });
+          document.removeEventListener('touchstart', playOnInteraction);
+          document.removeEventListener('click', playOnInteraction);
+        };
+        document.addEventListener('touchstart', playOnInteraction, { once: true });
+        document.addEventListener('click', playOnInteraction, { once: true });
+      }
+    };
+
+    // Try to play when video has loaded enough data
+    if (video.readyState >= 3) {
+      attemptPlay();
+    } else {
+      video.addEventListener('canplay', attemptPlay, { once: true });
     }
+
+    return () => {
+      video.removeEventListener('canplay', attemptPlay);
+    };
   }, []);
 
   return (
