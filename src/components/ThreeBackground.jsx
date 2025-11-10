@@ -3,7 +3,7 @@ import heroVideoSrc from "../assets/video.mp4";
 
 const DEFAULTS = {
   videoSrc: heroVideoSrc,
-  poster: "https://placehold.co/1920x1080/0a0c20/0a0c20",
+  poster: "/video-poster.svg",
   overlayOpacity: 0.55,
   gradientStop: 0.66,
 };
