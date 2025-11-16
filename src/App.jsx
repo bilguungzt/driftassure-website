@@ -45,7 +45,7 @@ const howItWorksSteps = [
 
 client = OpenAI(
     api_key="your-openai-key",
-    base_url="https://api.cognitude.com",
+    base_url="https://api.cognitude.io",
     default_headers={
         "X-API-Key": "your-cognitude-key"
     }
@@ -104,11 +104,11 @@ const stats = [
 const resourceLinks = [
   {
     label: "API Documentation (Swagger)",
-    href: "https://api.cognitude.com/docs",
+    href: "https://api.cognitude.io/docs",
   },
   {
     label: "API Documentation (ReDoc)",
-    href: "https://api.cognitude.com/redoc",
+    href: "https://api.cognitude.io/redoc",
   },
   { label: "Integration Guide", href: "#resources" },
   { label: "Cost Optimization Guide", href: "#resources" },
@@ -127,7 +127,7 @@ function Header() {
           ))}
         </nav>
         <div className="nav-actions">
-          <a className="ghost-button" href="https://app.cognitude.com">
+          <a className="ghost-button" href="https://app.cognitude.io">
             Log in
           </a>
           <a className="primary-button" href="#cta">
@@ -426,7 +426,7 @@ function Footer() {
         </div>
         <div className="footer-links">
           <a href="#top">Back to top</a>
-          <a href="https://app.cognitude.com">Customer login</a>
+          <a href="https://app.cognitude.io">Customer login</a>
           <a href="#resources">Privacy & terms</a>
         </div>
       </div>
