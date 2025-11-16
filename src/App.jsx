@@ -39,15 +39,15 @@ const howItWorksSteps = [
   },
   {
     step: "Step 2",
-    title: "Configure DriftAssure Proxy",
-    description: "Add your OpenAI key and DriftAssure API key",
+    title: "Configure Cognitude Proxy",
+    description: "Add your OpenAI key and Cognitude API key",
     code: `from openai import OpenAI
 
 client = OpenAI(
     api_key="your-openai-key",
-    base_url="https://api.driftassure.com",
+    base_url="https://api.cognitude.com",
     default_headers={
-        "X-API-Key": "your-driftassure-key"
+        "X-API-Key": "your-cognitude-key"
     }
 )`,
   },
@@ -82,7 +82,7 @@ const pricingPlans = [
 const testimonials = [
   {
     quote:
-      "“DriftAssure cut our OpenAI bill by 43% in the first month. The real-time dashboard gives us complete visibility into our costs.”",
+      "“Cognitude cut our OpenAI bill by 43% in the first month. The real-time dashboard gives us complete visibility into our costs.”",
     name: "Sarah Johnson",
     role: "CTO, StartupX",
   },
@@ -102,8 +102,14 @@ const stats = [
 ];
 
 const resourceLinks = [
-  { label: "API Documentation (Swagger)", href: "https://api.driftassure.com/docs" },
-  { label: "API Documentation (ReDoc)", href: "https://api.driftassure.com/redoc" },
+  {
+    label: "API Documentation (Swagger)",
+    href: "https://api.cognitude.com/docs",
+  },
+  {
+    label: "API Documentation (ReDoc)",
+    href: "https://api.cognitude.com/redoc",
+  },
   { label: "Integration Guide", href: "#resources" },
   { label: "Cost Optimization Guide", href: "#resources" },
 ];
@@ -112,7 +118,7 @@ function Header() {
   return (
     <header className="site-header">
       <div className="container nav-container">
-        <div className="brand">DriftAssure</div>
+        <div className="brand">Cognitude</div>
         <nav className="nav-links" aria-label="Primary">
           {navLinks.map((link) => (
             <a key={link.label} href={link.href} className="nav-link">
@@ -121,7 +127,7 @@ function Header() {
           ))}
         </nav>
         <div className="nav-actions">
-          <a className="ghost-button" href="https://app.driftassure.com">
+          <a className="ghost-button" href="https://app.cognitude.com">
             Log in
           </a>
           <a className="primary-button" href="#cta">
@@ -142,9 +148,9 @@ function Hero() {
           <p className="eyebrow">AI Infrastructure</p>
           <h1>Cut Your OpenAI Bill in Half with One Line of Code</h1>
           <p className="hero-subtitle">
-            DriftAssure is the intelligent AI proxy that gives you real-time
-            cost monitoring, caching, and rate-limiting for your LLM apps. Setup
-            in 60 seconds.
+            Cognitude is the intelligent AI proxy that gives you real-time cost
+            monitoring, caching, and rate-limiting for your LLM apps. Setup in
+            60 seconds.
           </p>
           <div className="hero-ctas">
             <a className="primary-button" href="#cta">
@@ -226,7 +232,7 @@ function Features() {
     <section className="section" id="features">
       <div className="container section-header">
         <p className="eyebrow">Platform Features</p>
-        <h2>Why DriftAssure Saves Teams Money</h2>
+        <h2>Why Cognitude Saves Teams Money</h2>
         <p className="section-subtitle">
           Built with cost efficiency, security, and seamless integration at its
           core. Each feature addresses a critical cost management gap in LLM
@@ -253,8 +259,8 @@ function HowItWorks() {
         <p className="eyebrow">Simple Integration</p>
         <h2>Get Started in 3 Easy Steps</h2>
         <p className="section-subtitle">
-          Connect DriftAssure to your OpenAI application in minutes, not hours.
-          No code changes required beyond redirecting your API calls.
+          Connect Cognitude to your OpenAI application in minutes, not hours. No
+          code changes required beyond redirecting your API calls.
         </p>
       </div>
       <div className="container">
@@ -359,8 +365,8 @@ function CTA() {
           <p className="eyebrow">Start Saving Today</p>
           <h2>Ready to Cut Your OpenAI Bill?</h2>
           <p>
-            Join thousands of teams using DriftAssure to optimize their AI
-            costs. Get started in 60 seconds with a simple API change.
+            Join thousands of teams using Cognitude to optimize their AI costs.
+            Get started in 60 seconds with a simple API change.
           </p>
         </div>
         <form className="cta-form" aria-label="Get started form">
@@ -395,7 +401,7 @@ function Resources() {
           <h2>Learn More About Cost Optimization</h2>
           <p>
             Access guides, documentation, and tools to maximize your AI cost
-            efficiency with DriftAssure.
+            efficiency with Cognitude.
           </p>
         </div>
         <ul>
@@ -415,15 +421,12 @@ function Footer() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div>
-          <div className="brand">DriftAssure</div>
-          <p>
-            © {new Date().getFullYear()} DriftAssure by Cognitude. All rights
-            reserved.
-          </p>
+          <div className="brand">Cognitude</div>
+          <p>© {new Date().getFullYear()} Cognitude. All rights reserved.</p>
         </div>
         <div className="footer-links">
           <a href="#top">Back to top</a>
-          <a href="https://app.driftassure.com">Customer login</a>
+          <a href="https://app.cognitude.com">Customer login</a>
           <a href="#resources">Privacy & terms</a>
         </div>
       </div>
