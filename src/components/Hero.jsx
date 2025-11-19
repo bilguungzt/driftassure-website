@@ -1,82 +1,162 @@
-import { Sparkle, CalendarDots } from "@phosphor-icons/react";
+import { ArrowRight, ShieldCheck, PlayCircle } from "@phosphor-icons/react";
 
 function Hero({ onBookDemo = () => {} }) {
-  const companyLogos = [
-    { src: "/proof/company1.png", alt: "Company 1 logo" },
-    { src: "/proof/company2.png", alt: "Company 2 logo" },
-    { src: "/proof/company3.png", alt: "Company 3 logo" },
-    { src: "/proof/company4.png", alt: "Company 4 logo" },
-  ];
-
   return (
-    <section className="relative overflow-hidden bg-[#020617] text-white">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#020617] via-slate-950 to-[#020617]"></div>
-        <div
-          className="absolute inset-0 opacity-[0.08]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(148,163,184,0.5) 1px, transparent 0)",
-            backgroundSize: "24px 24px",
-          }}
-        ></div>
-        <div className="pointer-events-none absolute -top-64 -right-32 h-64 w-64 sm:h-[36rem] sm:w-[36rem] rounded-full bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.5),_transparent_60%)] blur-3xl"></div>
-        <div className="pointer-events-none absolute -bottom-80 -left-40 h-72 w-72 sm:h-[40rem] sm:w-[40rem] rounded-full bg-[radial-gradient(circle_at_bottom,_rgba(236,72,153,0.45),_transparent_60%)] blur-3xl"></div>
-      </div>
+    <section className="relative bg-[#F8FAFF] text-slate-900 pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 text-center">
+        {/* Headline */}
+        <h1 className="text-5xl sm:text-7xl lg:text-[120px] leading-[0.9] font-['Inter_Tight',sans-serif] font-medium text-black tracking-tighter mb-8 sm:mb-12">
+          Stop paying GPT-4 prices for&nbsp;grep.
+        </h1>
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 pb-16 sm:pb-20">
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-8 flex flex-col items-center text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-3 py-1.5 text-xs text-indigo-200/90 shadow-[0_0_30px_rgba(79,70,229,0.4)]">
-              <Sparkle className="w-4 h-4" />
-              <span>LLM Cost Optimization</span>
-              <span className="inline-flex items-center gap-1 text-[0.6rem] uppercase tracking-[0.18em] text-indigo-100">
-                Live
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              </span>
-            </div>
+        {/* Subhead */}
+        <p className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-[1.2] text-slate-900 tracking-tight max-w-6xl mx-auto mb-6">
+          Cognitude Autopilot classifies every prompt in real-time, routes
+          simple ones to 10× cheaper models, enforces your JSON schemas with
+          automatic retries, and caches everything.
+        </p>
 
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
-                Cut your LLM costs by{" "}
-                <span className="text-indigo-300">30–50%</span> automatically
-              </h1>
-              <p className="text-base sm:text-lg text-slate-200/80 max-w-xl mx-auto">
-                Cognitude is a drop-in autopilot that reduces OpenAI, Anthropic,
-                Groq, and Mistral spend without touching your prompts. Point
-                your SDKs to our proxy and keep shipping.
-              </p>
-            </div>
+        {/* Savings Stats */}
+        <div className="text-sm sm:text-base text-slate-500 font-medium mb-8 max-w-2xl mx-auto space-y-1">
+          <p>
+            <span className="text-emerald-600 font-bold">$0 → $400/month</span>{" "}
+            average savings for customers under 10k/month spend
+          </p>
+          <p>
+            <span className="text-emerald-600 font-bold">$2k+/month</span> saved
+            for customers over 100k/month spend
+          </p>
+        </div>
 
-            <div className="flex flex-wrap gap-3 items-center justify-center">
-              <button className="inline-flex items-center rounded-full bg-indigo-500 text-white text-sm font-medium px-5 py-2.5 shadow-lg shadow-indigo-500/40 hover:bg-indigo-400 transition">
-                Join today
-              </button>
-              <button
-                type="button"
-                onClick={onBookDemo}
-                className="inline-flex items-center rounded-full border border-white/15 bg-white/5 text-sm text-slate-100 px-4 py-2.5 hover:bg-white/10 transition"
-              >
-                <CalendarDots className="w-4 h-4 mr-2" /> Book Demo
-              </button>
-              <div className="flex items-center gap-2 text-[0.7rem] text-slate-300/80">
-                <div className="flex -space-x-2">
-                  {companyLogos.map(({ src, alt }) => (
-                    <span
-                      key={src}
-                      className="h-6 w-6 rounded-full border border-slate-900 bg-slate-900 overflow-hidden"
-                    >
-                      <img
-                        src={src}
-                        alt={alt}
-                        className="h-full w-full object-cover"
-                      />
-                    </span>
-                  ))}
+        {/* Third Line */}
+        <p className="text-lg sm:text-2xl lg:text-3xl font-normal text-slate-600 mb-12">
+          Average 43% savings · Zero code changes · Zero JSON parsing errors
+          since launch
+        </p>
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-24">
+          <button className="inline-flex items-center justify-center rounded-full bg-[#6366f1] text-white text-xl font-semibold px-10 py-5 shadow-xl shadow-indigo-600/20 hover:bg-indigo-600 hover:-translate-y-1 transition-all duration-200 min-w-[280px]">
+            Start Saving in 2 Minutes
+          </button>
+          <button
+            type="button"
+            onClick={onBookDemo}
+            className="inline-flex items-center justify-center rounded-full text-xl font-medium text-slate-600 px-10 py-5 hover:text-slate-900 hover:bg-slate-50 transition-all group"
+          >
+            See Autopilot in Action{" "}
+            <ArrowRight
+              className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform"
+              weight="bold"
+            />
+          </button>
+        </div>
+
+        {/* Schema Enforcer Micro-Section */}
+        <div className="max-w-5xl mx-auto mt-12 mb-20">
+          <div className="flex flex-col items-center mb-10">
+            <ShieldCheck
+              className="w-20 h-20 text-slate-900 mb-6"
+              weight="fill"
+            />
+            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+              The Schema Enforcer™
+            </h2>
+            <p className="text-xl sm:text-2xl text-slate-600 max-w-3xl leading-relaxed">
+              We don’t just validate responses.{" "}
+              <span className="font-bold text-slate-900">We fix them.</span>
+              <br />
+              If the LLM returns invalid JSON → we automatically retry with a
+              corrective prompt until it’s perfect.
+              <br />
+              Your app never sees broken data. Ever.
+            </p>
+          </div>
+
+          {/* Code Comparison */}
+          <div className="grid md:grid-cols-2 gap-8 text-left">
+            {/* Before */}
+            <div className="rounded-2xl border border-red-100 bg-red-50/30 p-6 sm:p-8">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-sm font-bold text-red-600 uppercase tracking-wider">
+                  Before Cognitude
+                </span>
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-200"></div>
+                  <div className="w-3 h-3 rounded-full bg-red-200"></div>
                 </div>
-                <span>Trusted by AI teams shipping to production</span>
               </div>
+              <pre className="font-mono text-sm sm:text-base leading-relaxed overflow-x-auto">
+                <code className="block text-slate-700">
+                  <span className="text-purple-600">try</span>:<br />
+                  {"  "}data = response.
+                  <span className="text-blue-600">parse</span>(JSONSchema)
+                  <br />
+                  <span className="text-purple-600">except</span>{" "}
+                  ValidationError:
+                  <br />
+                  {"  "}log.<span className="text-blue-600">error</span>(
+                  <span className="text-green-600">
+                    "LLM gave garbage again"
+                  </span>
+                  )<br />
+                  {"  "}
+                  <span className="text-slate-500 italic">
+                    # Wasted 3 retries & $0.05
+                  </span>
+                  <br />
+                  {"  "}
+                  <span className="text-blue-600">retry_or_fail</span>()
+                </code>
+              </pre>
             </div>
+
+            {/* After */}
+            <div className="rounded-2xl border border-emerald-100 bg-emerald-50/30 p-6 sm:p-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-bl-full -mr-10 -mt-10"></div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-sm font-bold text-emerald-600 uppercase tracking-wider">
+                  After
+                </span>
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-emerald-200"></div>
+                  <div className="w-3 h-3 rounded-full bg-emerald-200"></div>
+                </div>
+              </div>
+              <pre className="font-mono text-sm sm:text-base leading-relaxed overflow-x-auto flex flex-col justify-center h-full pb-8">
+                <code className="block text-slate-900">
+                  data = response.<span className="text-blue-600">parse</span>
+                  (JSONSchema)
+                  <br />
+                  <span className="text-slate-400 italic">
+                    # ← just works, every time
+                  </span>
+                </code>
+              </pre>
+            </div>
+          </div>
+
+          <p className="mt-6 text-center text-slate-500 text-sm sm:text-base font-medium">
+            Average retry rate:{" "}
+            <span className="text-slate-900 font-bold">0.7%</span> – most
+            customers see &lt;0.1% after first week as models learn from our
+            corrective prompts.
+          </p>
+        </div>
+
+        {/* Security Badges */}
+        <div className="flex flex-wrap justify-center gap-8 sm:gap-12 grayscale opacity-60 hover:opacity-100 transition-opacity duration-300">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-6 h-6" />
+            <span className="font-semibold">SOC 2 Type II</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-6 h-6" />
+            <span className="font-semibold">HIPAA Compliant</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-6 h-6" />
+            <span className="font-semibold">GDPR Ready</span>
           </div>
         </div>
       </div>

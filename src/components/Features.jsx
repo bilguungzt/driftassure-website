@@ -20,7 +20,7 @@ const ChatGPTLogo = (props) => (
     src="/logos/chatgpt.svg"
     alt="ChatGPT"
     {...props}
-    className={`${props.className} brightness-0 invert`}
+    className={`${props.className}`}
   />
 );
 const GeminiLogo = (props) => (
@@ -28,7 +28,7 @@ const GeminiLogo = (props) => (
     src="/logos/gemini.svg"
     alt="Gemini"
     {...props}
-    className={`${props.className} brightness-0 invert`}
+    className={`${props.className}`}
   />
 );
 const GrokLogo = (props) => (
@@ -36,7 +36,7 @@ const GrokLogo = (props) => (
     src="/logos/grok.svg"
     alt="Grok"
     {...props}
-    className={`${props.className} brightness-0 invert`}
+    className={`${props.className}`}
   />
 );
 const ClaudeLogo = (props) => (
@@ -44,7 +44,7 @@ const ClaudeLogo = (props) => (
     src="/logos/claude.svg"
     alt="Claude"
     {...props}
-    className={`${props.className} brightness-0 invert`}
+    className={`${props.className}`}
   />
 );
 const DeepSeekLogo = (props) => (
@@ -52,7 +52,7 @@ const DeepSeekLogo = (props) => (
     src="/logos/deepseek.svg"
     alt="DeepSeek"
     {...props}
-    className={`${props.className} brightness-0 invert`}
+    className={`${props.className}`}
   />
 );
 const OpenRouterLogo = (props) => (
@@ -60,7 +60,7 @@ const OpenRouterLogo = (props) => (
     src="/logos/openrouter.svg"
     alt="OpenRouter"
     {...props}
-    className={`${props.className} brightness-0 invert`}
+    className={`${props.className}`}
   />
 );
 
@@ -136,7 +136,7 @@ function NetworkAnimation() {
             >
               <div className="flex h-24 w-24 items-center justify-center transition-transform duration-300 group-hover:scale-110">
                 <IconRender
-                  className={`${sizeClass} opacity-90 transition-opacity group-hover:opacity-100`}
+                  className={`${sizeClass} opacity-90 transition-opacity group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300`}
                 />
               </div>
             </a>
@@ -195,7 +195,7 @@ function NetworkAnimation() {
       </svg>
 
       <div className="absolute bottom-16 left-1/2 -translate-x-1/2">
-        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-200 ring-2 ring-indigo-400/40 shadow-[0_0_20px_rgba(99,102,241,0.6)]">
+        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 border border-indigo-100 shadow-lg ring-4 ring-white">
           <img
             src="/logos/cognitude_logo.png"
             alt="Cognitude core"
@@ -210,12 +210,12 @@ function NetworkAnimation() {
           return (
             <div
               key={label}
-              className="flex items-center gap-2 text-sm text-slate-200/80"
+              className="flex items-center gap-2 text-sm text-slate-500 font-medium"
             >
-              <FeatureRender className="h-4 w-4 text-indigo-300" />
+              <FeatureRender className="h-4 w-4 text-indigo-600" />
               <span>{label}</span>
               {idx < features.length - 1 && (
-                <svg width="60" height="2" className="text-indigo-400/40">
+                <svg width="60" height="2" className="text-slate-200">
                   <line
                     x1="0"
                     y1="1"
@@ -265,17 +265,19 @@ function Features() {
   return (
     <section
       id="features"
-      className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24"
+      className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-24 bg-slate-50/50"
     >
       <div className="flex flex-col items-center text-center mb-10">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-          <ShieldCheck className="w-4 h-4 text-sky-300" />
-          <span className="text-xs text-sky-100/90">Autopilot Engine</span>
+        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1.5">
+          <ShieldCheck className="w-4 h-4 text-indigo-600" />
+          <span className="text-xs text-indigo-700 font-medium">
+            Autopilot Engine
+          </span>
         </div>
-        <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
+        <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
           Turn your LLM stack into a self-optimizing system
         </h2>
-        <p className="mt-3 max-w-2xl text-base text-slate-200/80">
+        <p className="mt-3 max-w-2xl text-base text-slate-600">
           Cognitude sits as a smart proxy in front of OpenAI, Anthropic, Groq,
           and Mistral, continuously routing, caching, and fine-tuning calls for
           cost, latency, and quality.
@@ -283,67 +285,68 @@ function Features() {
       </div>
 
       <div className="mt-6 mb-12">
-        <div className="hidden md:block text-center text-sm text-slate-200/80 max-w-3xl mx-auto">
+        <div className="hidden md:block text-center text-sm text-slate-600 max-w-3xl mx-auto">
           <NetworkAnimation />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 pb-10 sm:pb-14">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
         {/* Card 1: Schema Enforcement */}
-        <section className="group relative overflow-hidden rounded-3xl bg-white/[0.03] ring-1 ring-white/10 p-5 md:p-6">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent pointer-events-none"></div>
-          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-indigo-500/10 blur-3xl"></div>
+        <section className="group relative overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-sm p-5 md:p-6 hover:shadow-md transition-all">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-transparent to-transparent pointer-events-none opacity-50"></div>
 
-          <div className="rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.03] p-4 ring-1 ring-white/10 backdrop-blur">
-            <div className="flex items-center gap-2 text-white/80 text-sm mb-3">
-              <ShieldCheck className="w-4 h-4 text-indigo-300" />
+          <div className="rounded-2xl bg-slate-50 border border-slate-100 p-4 mb-6">
+            <div className="flex items-center gap-2 text-slate-600 text-sm mb-3">
+              <ShieldCheck className="w-4 h-4 text-indigo-600" />
               <span className="font-medium">Guaranteed Valid Responses</span>
-              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-indigo-200/80">
+              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-indigo-600 font-medium">
                 Only on Cognitude
               </span>
             </div>
-            <div className="space-y-3 text-[0.75rem] text-slate-200/80">
+            <div className="space-y-3 text-[0.75rem]">
               {/* Before Panel */}
-              <div className="rounded-xl bg-slate-900/80 border border-rose-500/20 p-3 relative overflow-hidden">
+              <div className="rounded-xl bg-white border border-rose-200 p-3 relative overflow-hidden shadow-sm">
                 <div className="absolute top-0 right-0 p-1.5">
-                  <XCircle className="w-4 h-4 text-rose-400" />
+                  <XCircle className="w-4 h-4 text-rose-500" />
                 </div>
                 <p className="text-slate-400 mb-1 text-xs uppercase tracking-wider">
                   Before
                 </p>
                 <div className="space-y-1 font-mono text-[0.7rem]">
-                  <p className="text-slate-300">
-                    <span className="text-blue-300">User:</span> "Extract
+                  <p className="text-slate-600">
+                    <span className="text-blue-600">User:</span> "Extract
                     invoice..."
                   </p>
-                  <p className="text-slate-300">
-                    <span className="text-green-300">GPT-4:</span> "Sure! Here
+                  <p className="text-slate-600">
+                    <span className="text-green-600">GPT-4:</span> "Sure! Here
                     is JSON: ```json..."
                   </p>
-                  <p className="text-rose-300">Error: JSONDecodeError ❌</p>
+                  <p className="text-rose-600 font-medium">
+                    Error: JSONDecodeError ❌
+                  </p>
                 </div>
               </div>
 
               {/* After Panel */}
-              <div className="rounded-xl bg-slate-900/80 border border-emerald-500/20 p-3 relative overflow-hidden">
+              <div className="rounded-xl bg-white border border-emerald-200 p-3 relative overflow-hidden shadow-sm">
                 <div className="absolute top-0 right-0 p-1.5">
-                  <CheckCircle className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle className="w-4 h-4 text-emerald-500" />
                 </div>
                 <p className="text-slate-400 mb-1 text-xs uppercase tracking-wider">
                   With Cognitude
                 </p>
                 <div className="space-y-1 font-mono text-[0.7rem]">
-                  <p className="text-slate-300">
-                    <span className="text-purple-300">Cognitude:</span>
+                  <p className="text-slate-600">
+                    <span className="text-purple-600">Cognitude:</span>
                   </p>
                   <ul className="list-none pl-2 space-y-0.5">
-                    <li className="flex items-center gap-1.5 text-emerald-300/90">
+                    <li className="flex items-center gap-1.5 text-emerald-700">
                       ✓ Injects schema
                     </li>
-                    <li className="flex items-center gap-1.5 text-emerald-300/90">
+                    <li className="flex items-center gap-1.5 text-emerald-700">
                       ✓ Validates response
                     </li>
-                    <li className="flex items-center gap-1.5 text-emerald-300/90">
+                    <li className="flex items-center gap-1.5 text-emerald-700">
                       ✓ Auto-retries if invalid
                     </li>
                   </ul>
@@ -352,58 +355,63 @@ function Features() {
             </div>
           </div>
 
-          <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight">
+          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-slate-900">
             Schema Enforcement
           </h3>
-          <p className="mt-1.5 text-sm text-slate-200/80">
+          <p className="mt-1.5 text-sm text-slate-500">
             Guaranteed valid JSON outputs. Cognitude validates, fixes, and
             retries responses automatically before they hit your code.
           </p>
         </section>
 
         {/* Card 2: Smart Model Routing */}
-        <section className="group relative overflow-hidden rounded-3xl bg-white/[0.03] ring-1 ring-white/10 p-5 md:p-6">
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-transparent pointer-events-none"></div>
-          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl"></div>
+        <section className="group relative overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-sm p-5 md:p-6 hover:shadow-md transition-all">
+          <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-transparent to-transparent pointer-events-none opacity-50"></div>
 
-          <div className="rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.03] p-4 ring-1 ring-white/10 backdrop-blur">
-            <div className="flex items-center gap-2 text-white/80 text-sm mb-3">
-              <Target className="w-4 h-4 text-sky-300" />
+          <div className="rounded-2xl bg-slate-50 border border-slate-100 p-4 mb-6">
+            <div className="flex items-center gap-2 text-slate-600 text-sm mb-3">
+              <Target className="w-4 h-4 text-sky-600" />
               <span className="font-medium">Smart Model Routing</span>
-              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-sky-200/80">
+              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-sky-600 font-medium">
                 Multi-vendor
               </span>
             </div>
-            <div className="space-y-3 text-[0.75rem] text-slate-200/80">
+            <div className="space-y-3 text-[0.75rem]">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
-                <span>Cost-optimized</span>
-                <span className="h-[1px] flex-1 bg-slate-600/60 mx-2"></span>
-                <span className="text-emerald-300 font-medium">
-                  -67% savings
+                <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+                <span className="text-slate-700 font-medium">
+                  Cost-optimized
                 </span>
+                <span className="h-[1px] flex-1 bg-slate-200 mx-2"></span>
+                <span className="text-emerald-600 font-bold">-67% savings</span>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-xl bg-slate-900/80 border border-slate-700/80 p-3">
+                <div className="rounded-xl bg-white border border-slate-200 p-3 shadow-sm">
                   <p className="text-slate-400 mb-1 text-xs">Before</p>
-                  <p className="text-sm text-white">Model: gpt-5</p>
-                  <p className="text-xs text-slate-400">Task: Classify email</p>
-                  <p className="text-sm text-rose-300 mt-1">$0.00350/req</p>
+                  <p className="text-sm text-slate-900">Model: gpt-5</p>
+                  <p className="text-xs text-slate-500">Task: Classify email</p>
+                  <p className="text-sm text-rose-500 font-medium mt-1">
+                    $0.00350/req
+                  </p>
                 </div>
-                <div className="rounded-xl bg-slate-900/80 border border-emerald-500/50 p-3">
+                <div className="rounded-xl bg-white border border-emerald-200 p-3 shadow-sm">
                   <p className="text-slate-400 mb-1 text-xs">After</p>
-                  <p className="text-sm text-white">Model: gemini-2.5</p>
-                  <p className="text-xs text-emerald-300">Same quality ✓</p>
-                  <p className="text-sm text-emerald-300 mt-1">$0.00040/req</p>
+                  <p className="text-sm text-slate-900">Model: gemini-2.5</p>
+                  <p className="text-xs text-emerald-600 font-medium">
+                    Same quality ✓
+                  </p>
+                  <p className="text-sm text-emerald-600 font-bold mt-1">
+                    $0.00040/req
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight">
+          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-slate-900">
             Smart Model Routing
           </h3>
-          <p className="mt-1.5 text-sm text-slate-200/80">
+          <p className="mt-1.5 text-sm text-slate-500">
             Auto-route each request to the cheapest model that still hits your
             quality and latency SLOs across OpenAI, Anthropic, Google, and
             DeepSeek.
@@ -411,70 +419,75 @@ function Features() {
         </section>
 
         {/* Card 3: Intelligent Team Caching */}
-        <section className="group relative overflow-hidden rounded-3xl bg-white/[0.03] ring-1 ring-white/10 p-5 md:p-6">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent pointer-events-none"></div>
-          <div className="absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl"></div>
+        <section className="group relative overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-sm p-5 md:p-6 hover:shadow-md transition-all">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-transparent to-transparent pointer-events-none opacity-50"></div>
 
-          <div className="rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.03] p-4 ring-1 ring-white/10 backdrop-blur">
-            <div className="flex items-center gap-2 text-white/80 text-sm mb-3">
-              <Lightning className="w-4 h-4 text-emerald-300" />
+          <div className="rounded-2xl bg-slate-50 border border-slate-100 p-4 mb-6">
+            <div className="flex items-center gap-2 text-slate-600 text-sm mb-3">
+              <Lightning className="w-4 h-4 text-emerald-600" />
               <span className="font-medium">Intelligent Team Caching</span>
-              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-emerald-200/80">
+              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-emerald-600 font-medium">
                 Deduped
               </span>
             </div>
 
             <div className="space-y-2.5 text-[0.75rem]">
               {/* Alice */}
-              <div className="rounded-lg bg-slate-900/60 p-2.5 border border-white/5">
+              <div className="rounded-lg bg-white p-2.5 border border-slate-200 shadow-sm">
                 <div className="flex justify-between items-start mb-1">
                   <div className="flex items-center gap-1.5">
-                    <Users className="w-3 h-3 text-blue-300" />
-                    <span className="text-slate-200">Alice (10am)</span>
+                    <Users className="w-3 h-3 text-blue-500" />
+                    <span className="text-slate-700 font-medium">
+                      Alice (10am)
+                    </span>
                   </div>
                   <span className="text-slate-500 text-[0.65rem]">$0.003</span>
                 </div>
-                <p className="text-slate-400 italic">"Translate 'Hello'..."</p>
+                <p className="text-slate-500 italic">"Translate 'Hello'..."</p>
               </div>
 
               {/* Bob */}
-              <div className="rounded-lg bg-emerald-900/20 p-2.5 border border-emerald-500/20">
+              <div className="rounded-lg bg-emerald-50 p-2.5 border border-emerald-100 shadow-sm">
                 <div className="flex justify-between items-start mb-1">
                   <div className="flex items-center gap-1.5">
-                    <Users className="w-3 h-3 text-emerald-300" />
-                    <span className="text-slate-200">Bob (11am)</span>
+                    <Users className="w-3 h-3 text-emerald-600" />
+                    <span className="text-slate-900 font-medium">
+                      Bob (11am)
+                    </span>
                   </div>
-                  <span className="text-emerald-400 font-bold text-[0.65rem]">
+                  <span className="text-emerald-600 font-bold text-[0.65rem]">
                     $0.00 ✨
                   </span>
                 </div>
-                <p className="text-emerald-200/70 italic">
+                <p className="text-emerald-700/70 italic">
                   Gets Alice's cached result
                 </p>
               </div>
 
               {/* Carol */}
-              <div className="rounded-lg bg-emerald-900/20 p-2.5 border border-emerald-500/20">
+              <div className="rounded-lg bg-emerald-50 p-2.5 border border-emerald-100 shadow-sm">
                 <div className="flex justify-between items-start mb-1">
                   <div className="flex items-center gap-1.5">
-                    <Users className="w-3 h-3 text-emerald-300" />
-                    <span className="text-slate-200">Carol (2pm)</span>
+                    <Users className="w-3 h-3 text-emerald-600" />
+                    <span className="text-slate-900 font-medium">
+                      Carol (2pm)
+                    </span>
                   </div>
-                  <span className="text-emerald-400 font-bold text-[0.65rem]">
+                  <span className="text-emerald-600 font-bold text-[0.65rem]">
                     $0.00 ✨
                   </span>
                 </div>
-                <p className="text-emerald-200/70 italic">
+                <p className="text-emerald-700/70 italic">
                   "Traducir 'Hello'..." (Semantic Match)
                 </p>
               </div>
             </div>
           </div>
 
-          <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight">
+          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-slate-900">
             Intelligent Team Caching
           </h3>
-          <p className="mt-1.5 text-sm text-slate-200/80">
+          <p className="mt-1.5 text-sm text-slate-500">
             Share a semantic cache across your entire team. If one person
             requests it, everyone else gets the result instantly for free.
           </p>
@@ -482,74 +495,74 @@ function Features() {
 
         {/* Card 4: Automatic Optimization */}
         <div className="relative">
-          <div className="relative rounded-3xl border border-white/10 bg-slate-950/70 backdrop-blur p-5 shadow-xl shadow-indigo-500/30">
-            <div className="flex items-center justify-between text-[0.7rem] text-slate-300 mb-3">
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-2 py-1">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Autopilot on
+          <div className="relative rounded-3xl border border-slate-200 bg-white p-5 shadow-lg shadow-indigo-500/5 hover:shadow-xl hover:shadow-indigo-500/10 transition-all">
+            <div className="flex items-center justify-between text-[0.7rem] text-slate-500 mb-3">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-200 px-2 py-1">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="font-medium text-slate-700">Autopilot on</span>
               </div>
               <div className="flex items-center gap-1 text-slate-400">
                 {"OpenAI • Anthropic • Groq • Mistral"}
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900/80 to-slate-950/90 overflow-hidden">
-              <div className="flex items-center justify-between px-3 py-2 border-b border-white/10 text-[0.7rem] text-slate-300">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 overflow-hidden mb-4">
+              <div className="flex items-center justify-between px-3 py-2 border-b border-slate-200 text-[0.7rem] text-slate-500 bg-slate-100/50">
                 <div className="flex items-center gap-2">
                   <div className="flex gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-rose-400/80"></span>
-                    <span className="h-2 w-2 rounded-full bg-amber-400/80"></span>
-                    <span className="h-2 w-2 rounded-full bg-emerald-400/80"></span>
+                    <span className="h-2 w-2 rounded-full bg-rose-400"></span>
+                    <span className="h-2 w-2 rounded-full bg-amber-400"></span>
+                    <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
                   </div>
-                  <span className="ml-1">index.ts · zero code change</span>
+                  <span className="ml-1 font-mono">index.ts</span>
                 </div>
-                <span className="text-indigo-200/80 bg-indigo-500/10 border border-indigo-400/40 rounded-full px-2 py-0.5">
+                <span className="text-indigo-600 bg-indigo-50 border border-indigo-100 rounded-full px-2 py-0.5 font-medium">
                   Savings simulation
                 </span>
               </div>
-              <div className="p-4 space-y-3 font-mono text-xs">
-                <pre className="text-slate-400">{`// Point your SDKs to Cognitude`}</pre>
-                <pre className="text-indigo-200">{`const openai = new OpenAI({
+              <div className="p-4 space-y-3 font-mono text-xs bg-white">
+                <pre className="text-slate-500">{`// Point your SDKs to Cognitude`}</pre>
+                <pre className="text-purple-600">{`const openai = new OpenAI({
   baseURL: "https://api.cognitude.io/v1",
   defaultHeaders: { "X-API-Key": "cog_..." }
 })`}</pre>
-                <pre className="text-slate-400">{`// Existing code stays the same`}</pre>
-                <pre className="text-emerald-200">{`const completion = await openai.chat.completions.create({
+                <pre className="text-slate-500">{`// Existing code stays the same`}</pre>
+                <pre className="text-emerald-600">{`const completion = await openai.chat.completions.create({
   model: "gpt-5.1-codex",
   messages: [{ role: "user", content: "Classify this email" }]
 })`}</pre>
                 <pre className="text-slate-400">{`// Autopilot routing + budget protection automatic + validation`}</pre>
-                <pre className="text-slate-300">{`/* smartRoute → gpt-5.1-mini | cacheHit ${liveMetrics.cache.toFixed(
+                <pre className="text-slate-600">{`/* smartRoute → gpt-5.1-mini | cacheHit ${liveMetrics.cache.toFixed(
                   1
                 )}% | totalSavings -${liveMetrics.cost.toFixed(1)}% */`}</pre>
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-3 gap-3 text-[0.75rem]">
-              <div className="rounded-xl bg-emerald-500/5 border border-emerald-400/40 px-3 py-2">
-                <div className="flex items-center justify-between text-slate-300/80 mb-1">
+            <div className="grid grid-cols-3 gap-3 text-[0.75rem]">
+              <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-3 py-2">
+                <div className="flex items-center justify-between text-slate-500 mb-1">
                   <span>Cost</span>
-                  <TrendDown className="w-4 h-4 text-emerald-300" />
+                  <TrendDown className="w-4 h-4 text-emerald-600" />
                 </div>
-                <p className="text-lg font-semibold text-emerald-200">
+                <p className="text-lg font-bold text-emerald-600">
                   -{liveMetrics.cost.toFixed(1)}%
                 </p>
               </div>
-              <div className="rounded-xl bg-sky-500/5 border border-sky-400/40 px-3 py-2">
-                <div className="flex items-center justify-between text-slate-300/80 mb-1">
+              <div className="rounded-xl bg-sky-50 border border-sky-100 px-3 py-2">
+                <div className="flex items-center justify-between text-slate-500 mb-1">
                   <span>Cache hit</span>
-                  <Sparkle className="w-4 h-4 text-sky-300" />
+                  <Sparkle className="w-4 h-4 text-sky-600" />
                 </div>
-                <p className="text-lg font-semibold text-sky-200">
+                <p className="text-lg font-bold text-sky-600">
                   {liveMetrics.cache.toFixed(1)}%
                 </p>
               </div>
-              <div className="rounded-xl bg-violet-500/5 border border-violet-400/40 px-3 py-2">
-                <div className="flex items-center justify-between text-slate-300/80 mb-1">
+              <div className="rounded-xl bg-violet-50 border border-violet-100 px-3 py-2">
+                <div className="flex items-center justify-between text-slate-500 mb-1">
                   <span>Latency</span>
-                  <Cpu className="w-4 h-4 text-violet-300" />
+                  <Cpu className="w-4 h-4 text-violet-600" />
                 </div>
-                <p className="text-lg font-semibold text-violet-200">
+                <p className="text-lg font-bold text-violet-600">
                   +{liveMetrics.latency.toFixed(0)}ms
                 </p>
               </div>

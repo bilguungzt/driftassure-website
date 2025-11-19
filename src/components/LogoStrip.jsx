@@ -25,26 +25,22 @@ function LogoStrip() {
   return (
     <section
       id="customers"
-      className="py-16 bg-slate-950/80 border-y border-white/5"
+      className="py-12 bg-white border-y border-slate-100"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <div className="text-center space-y-3">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="text-center space-y-2">
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">
             Trusted by fast-moving AI teams
           </p>
-          <h3 className="text-2xl md:text-3xl font-semibold text-white">
-            "Even anonymous logos beat no logos" — so here are ours until yours
-            go live.
-          </h3>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {customerLogos.map((logo) => (
             <div
               key={logo.name}
-              className="p-5 rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur flex flex-col items-start gap-3"
+              className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col items-center text-center gap-3 hover:bg-slate-50 transition-colors"
             >
-              <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden border border-white/10">
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden border border-slate-200 shadow-sm">
                 <img
                   src={logo.logo}
                   alt={`${logo.name} logo`}
@@ -52,8 +48,10 @@ function LogoStrip() {
                 />
               </div>
               <div>
-                <p className="text-white font-semibold">{logo.name}</p>
-                <p className="text-sm text-slate-400">{logo.note}</p>
+                <p className="text-slate-900 font-semibold text-sm">
+                  {logo.name}
+                </p>
+                <p className="text-xs text-slate-500">{logo.note}</p>
               </div>
             </div>
           ))}
