@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   Target,
   ShieldCheck,
@@ -6,10 +7,12 @@ import {
   TrendDown,
   ChartBar,
   Receipt,
-  ArrowClockwise,
-  Clock,
+  CheckCircle,
+  XCircle,
+  Users,
+  Flask,
   Sparkle,
-  Binoculars,
+  Cpu,
 } from "@phosphor-icons/react";
 
 const ChatGPTLogo = (props) => (
@@ -192,8 +195,12 @@ function NetworkAnimation() {
       </svg>
 
       <div className="absolute bottom-16 left-1/2 -translate-x-1/2">
-        <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/20 text-indigo-200 ring-2 ring-indigo-400/40 shadow-[0_0_20px_rgba(99,102,241,0.6)]">
-          <Lightning className="h-6 w-6" />
+        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-200 ring-2 ring-indigo-400/40 shadow-[0_0_20px_rgba(99,102,241,0.6)]">
+          <img
+            src="/logos/cognitude_logo.png"
+            alt="Cognitude core"
+            className="h-8 w-8 rounded-full object-cover"
+          />
         </span>
       </div>
 
@@ -229,6 +236,32 @@ function NetworkAnimation() {
 }
 
 function Features() {
+  const [liveMetrics, setLiveMetrics] = useState({
+    cost: 34.6,
+    cache: 32.1,
+    latency: 17,
+    savings: 35.6,
+  });
+
+  useEffect(() => {
+    const jitter = (value, min, max, decimals = 1) => {
+      const delta = (Math.random() - 0.5) * 4;
+      const next = Math.min(max, Math.max(min, value + delta));
+      return Number(next.toFixed(decimals));
+    };
+
+    const interval = setInterval(() => {
+      setLiveMetrics((prev) => ({
+        cost: jitter(prev.cost, 30, 55),
+        cache: jitter(prev.cache, 24, 52),
+        latency: jitter(prev.latency, 8, 28, 0),
+        savings: jitter(prev.savings, 30, 50),
+      }));
+    }, 2600);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id="features"
@@ -255,16 +288,89 @@ function Features() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 pb-10 sm:pb-14">
+        {/* Card 1: Schema Enforcement */}
         <section className="group relative overflow-hidden rounded-3xl bg-white/[0.03] ring-1 ring-white/10 p-5 md:p-6">
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent pointer-events-none"></div>
           <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-indigo-500/10 blur-3xl"></div>
 
           <div className="rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.03] p-4 ring-1 ring-white/10 backdrop-blur">
             <div className="flex items-center gap-2 text-white/80 text-sm mb-3">
-              <Target className="w-4 h-4 text-indigo-300" />
-              <span className="font-medium">Smart Model Routing</span>
+              <ShieldCheck className="w-4 h-4 text-indigo-300" />
+              <span className="font-medium">Guaranteed Valid Responses</span>
               <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-indigo-200/80">
+                Only on Cognitude
+              </span>
+            </div>
+            <div className="space-y-3 text-[0.75rem] text-slate-200/80">
+              {/* Before Panel */}
+              <div className="rounded-xl bg-slate-900/80 border border-rose-500/20 p-3 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-1.5">
+                  <XCircle className="w-4 h-4 text-rose-400" />
+                </div>
+                <p className="text-slate-400 mb-1 text-xs uppercase tracking-wider">
+                  Before
+                </p>
+                <div className="space-y-1 font-mono text-[0.7rem]">
+                  <p className="text-slate-300">
+                    <span className="text-blue-300">User:</span> "Extract
+                    invoice..."
+                  </p>
+                  <p className="text-slate-300">
+                    <span className="text-green-300">GPT-4:</span> "Sure! Here
+                    is JSON: ```json..."
+                  </p>
+                  <p className="text-rose-300">Error: JSONDecodeError ❌</p>
+                </div>
+              </div>
+
+              {/* After Panel */}
+              <div className="rounded-xl bg-slate-900/80 border border-emerald-500/20 p-3 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-1.5">
+                  <CheckCircle className="w-4 h-4 text-emerald-400" />
+                </div>
+                <p className="text-slate-400 mb-1 text-xs uppercase tracking-wider">
+                  With Cognitude
+                </p>
+                <div className="space-y-1 font-mono text-[0.7rem]">
+                  <p className="text-slate-300">
+                    <span className="text-purple-300">Cognitude:</span>
+                  </p>
+                  <ul className="list-none pl-2 space-y-0.5">
+                    <li className="flex items-center gap-1.5 text-emerald-300/90">
+                      ✓ Injects schema
+                    </li>
+                    <li className="flex items-center gap-1.5 text-emerald-300/90">
+                      ✓ Validates response
+                    </li>
+                    <li className="flex items-center gap-1.5 text-emerald-300/90">
+                      ✓ Auto-retries if invalid
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight">
+            Schema Enforcement
+          </h3>
+          <p className="mt-1.5 text-sm text-slate-200/80">
+            Guaranteed valid JSON outputs. Cognitude validates, fixes, and
+            retries responses automatically before they hit your code.
+          </p>
+        </section>
+
+        {/* Card 2: Smart Model Routing */}
+        <section className="group relative overflow-hidden rounded-3xl bg-white/[0.03] ring-1 ring-white/10 p-5 md:p-6">
+          <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-transparent pointer-events-none"></div>
+          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl"></div>
+
+          <div className="rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.03] p-4 ring-1 ring-white/10 backdrop-blur">
+            <div className="flex items-center gap-2 text-white/80 text-sm mb-3">
+              <Target className="w-4 h-4 text-sky-300" />
+              <span className="font-medium">Smart Model Routing</span>
+              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-sky-200/80">
                 Multi-vendor
               </span>
             </div>
@@ -273,20 +379,22 @@ function Features() {
                 <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
                 <span>Cost-optimized</span>
                 <span className="h-[1px] flex-1 bg-slate-600/60 mx-2"></span>
-                <span className="text-emerald-300 font-medium">-42.3%</span>
+                <span className="text-emerald-300 font-medium">
+                  -67% savings
+                </span>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-xl bg-slate-900/80 border border-slate-700/80 p-3">
                   <p className="text-slate-400 mb-1 text-xs">Before</p>
-                  <p className="text-sm text-white">Vendor: OpenAI</p>
-                  <p className="text-sm text-white">Model: gpt-4.1</p>
-                  <p className="text-sm text-rose-300">$0.0028/token</p>
+                  <p className="text-sm text-white">Model: gpt-5</p>
+                  <p className="text-xs text-slate-400">Task: Classify email</p>
+                  <p className="text-sm text-rose-300 mt-1">$0.00350/req</p>
                 </div>
                 <div className="rounded-xl bg-slate-900/80 border border-emerald-500/50 p-3">
                   <p className="text-slate-400 mb-1 text-xs">After</p>
-                  <p className="text-sm text-white">Vendor: Anthropic</p>
-                  <p className="text-sm text-white">Model: claude-3.5-sonnet</p>
-                  <p className="text-sm text-emerald-300">$0.0015/token</p>
+                  <p className="text-sm text-white">Model: gemini-2.5</p>
+                  <p className="text-xs text-emerald-300">Same quality ✓</p>
+                  <p className="text-sm text-emerald-300 mt-1">$0.00040/req</p>
                 </div>
               </div>
             </div>
@@ -297,177 +405,157 @@ function Features() {
           </h3>
           <p className="mt-1.5 text-sm text-slate-200/80">
             Auto-route each request to the cheapest model that still hits your
-            quality and latency SLOs across OpenAI, Anthropic, Groq, and
-            Mistral.
+            quality and latency SLOs across OpenAI, Anthropic, Google, and
+            DeepSeek.
           </p>
         </section>
 
-        <section className="group relative overflow-hidden rounded-3xl bg-white/[0.03] ring-1 ring-white/10 p-5 md:p-6">
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-transparent pointer-events-none"></div>
-          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl"></div>
-
-          <div className="rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.03] p-4 ring-1 ring-white/10 backdrop-blur">
-            <div className="flex items-center gap-2 text-white/80 text-sm mb-3">
-              <Lightning className="w-4 h-4 text-sky-300" />
-              <span className="font-medium">Real-time Reinforcement & A/B</span>
-              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-sky-200/80">
-                Continuous
-              </span>
-            </div>
-            <div className="space-y-3 text-[0.75rem] text-slate-200/80">
-              <div className="flex items-center justify-between">
-                <span>Exploring variants</span>
-                <span className="text-emerald-300 flex items-center gap-1">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400"></span>{" "}
-                  live
-                </span>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {["45.9%", "63.6%", "50.0%"].map((val, idx) => (
-                  <div
-                    key={val}
-                    className={`rounded-lg p-2 ${
-                      idx === 1
-                        ? "bg-emerald-500/10 border border-emerald-400/40"
-                        : "bg-white/5"
-                    }`}
-                  >
-                    <p className="text-slate-300/80 mb-1">
-                      Variant {String.fromCharCode(65 + idx)}
-                    </p>
-                    <p
-                      className={`text-sm font-semibold tracking-tight ${
-                        idx === 1 ? "text-emerald-200" : "text-slate-100"
-                      }`}
-                    >
-                      {val}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <p className="text-[0.7rem] text-slate-300/80">
-                Reward models tune towards lower cost / higher quality prompts
-                automatically.
-              </p>
-            </div>
-          </div>
-
-          <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight">
-            Real-time Reinforcement & A/B Testing
-          </h3>
-          <p className="mt-1.5 text-sm text-slate-200/80">
-            Automatically explore prompt and model variants, allocate traffic to
-            winners, and learn from user feedback without manual
-            experimentation.
-          </p>
-        </section>
-
+        {/* Card 3: Intelligent Team Caching */}
         <section className="group relative overflow-hidden rounded-3xl bg-white/[0.03] ring-1 ring-white/10 p-5 md:p-6">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent pointer-events-none"></div>
           <div className="absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl"></div>
 
           <div className="rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.03] p-4 ring-1 ring-white/10 backdrop-blur">
             <div className="flex items-center gap-2 text-white/80 text-sm mb-3">
-              <ShieldCheck className="w-4 h-4 text-emerald-300" />
-              <span className="font-medium">Multi-agent Caching</span>
+              <Lightning className="w-4 h-4 text-emerald-300" />
+              <span className="font-medium">Intelligent Team Caching</span>
               <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-emerald-200/80">
                 Deduped
               </span>
             </div>
-            <div className="grid grid-cols-3 gap-2 text-[0.75rem]">
-              {["66.2%", "49.2%", "45.0%"].map((val, idx) => (
-                <div
-                  key={val}
-                  className={`rounded-xl bg-slate-900/80 border border-white/10 p-2 ${
-                    idx === 2 ? "border-emerald-400/40" : ""
-                  }`}
-                >
-                  <p className="text-slate-300/80 mb-1">
-                    {idx === 2 ? "Global" : `Agent ${idx + 1}`}
-                  </p>
-                  <p className="text-emerald-300 font-semibold tracking-tight">
-                    {val}
-                  </p>
-                  <p className="text-[0.65rem] text-slate-400">
-                    {idx === 2 ? "deduped" : "cache hit"}
-                  </p>
+
+            <div className="space-y-2.5 text-[0.75rem]">
+              {/* Alice */}
+              <div className="rounded-lg bg-slate-900/60 p-2.5 border border-white/5">
+                <div className="flex justify-between items-start mb-1">
+                  <div className="flex items-center gap-1.5">
+                    <Users className="w-3 h-3 text-blue-300" />
+                    <span className="text-slate-200">Alice (10am)</span>
+                  </div>
+                  <span className="text-slate-500 text-[0.65rem]">$0.003</span>
                 </div>
-              ))}
-            </div>
-            <div className="mt-3 flex items-center justify-between text-[0.7rem] text-slate-200/80">
-              <span className="flex items-center gap-1.5">
-                <Lightning className="w-3.5 h-3.5 text-emerald-300" />{" "}
-                Auto-fallback routing
-              </span>
-              <span>0.42% fallbacks</span>
+                <p className="text-slate-400 italic">"Translate 'Hello'..."</p>
+              </div>
+
+              {/* Bob */}
+              <div className="rounded-lg bg-emerald-900/20 p-2.5 border border-emerald-500/20">
+                <div className="flex justify-between items-start mb-1">
+                  <div className="flex items-center gap-1.5">
+                    <Users className="w-3 h-3 text-emerald-300" />
+                    <span className="text-slate-200">Bob (11am)</span>
+                  </div>
+                  <span className="text-emerald-400 font-bold text-[0.65rem]">
+                    $0.00 ✨
+                  </span>
+                </div>
+                <p className="text-emerald-200/70 italic">
+                  Gets Alice's cached result
+                </p>
+              </div>
+
+              {/* Carol */}
+              <div className="rounded-lg bg-emerald-900/20 p-2.5 border border-emerald-500/20">
+                <div className="flex justify-between items-start mb-1">
+                  <div className="flex items-center gap-1.5">
+                    <Users className="w-3 h-3 text-emerald-300" />
+                    <span className="text-slate-200">Carol (2pm)</span>
+                  </div>
+                  <span className="text-emerald-400 font-bold text-[0.65rem]">
+                    $0.00 ✨
+                  </span>
+                </div>
+                <p className="text-emerald-200/70 italic">
+                  "Traducir 'Hello'..." (Semantic Match)
+                </p>
+              </div>
             </div>
           </div>
 
           <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight">
-            Multi-agent Caching & Auto-fallback
+            Intelligent Team Caching
           </h3>
           <p className="mt-1.5 text-sm text-slate-200/80">
-            Deduplicate semantically similar calls across agents and
-            automatically fall back between vendors on rate limits, timeouts,
-            and errors.
+            Share a semantic cache across your entire team. If one person
+            requests it, everyone else gets the result instantly for free.
           </p>
         </section>
 
-        <section className="group relative overflow-hidden rounded-3xl bg-white/[0.03] ring-1 ring-white/10 p-5 md:p-6">
-          <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/10 via-transparent to-transparent pointer-events-none"></div>
-          <div className="absolute -left-24 -bottom-24 h-72 w-72 rounded-full bg-fuchsia-500/10 blur-3xl"></div>
+        {/* Card 4: Automatic Optimization */}
+        <div className="relative">
+          <div className="relative rounded-3xl border border-white/10 bg-slate-950/70 backdrop-blur p-5 shadow-xl shadow-indigo-500/30">
+            <div className="flex items-center justify-between text-[0.7rem] text-slate-300 mb-3">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-2 py-1">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Autopilot on
+              </div>
+              <div className="flex items-center gap-1 text-slate-400">
+                {"OpenAI • Anthropic • Groq • Mistral"}
+              </div>
+            </div>
 
-          <div className="rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.03] p-4 ring-1 ring-white/10 backdrop-blur">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2 text-white/80 text-sm">
-                <TrendUp className="w-4 h-4 text-fuchsia-300" />
-                <span className="font-medium">
-                  Real-time Performance Dashboard
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900/80 to-slate-950/90 overflow-hidden">
+              <div className="flex items-center justify-between px-3 py-2 border-b border-white/10 text-[0.7rem] text-slate-300">
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-rose-400/80"></span>
+                    <span className="h-2 w-2 rounded-full bg-amber-400/80"></span>
+                    <span className="h-2 w-2 rounded-full bg-emerald-400/80"></span>
+                  </div>
+                  <span className="ml-1">index.ts · zero code change</span>
+                </div>
+                <span className="text-indigo-200/80 bg-indigo-500/10 border border-indigo-400/40 rounded-full px-2 py-0.5">
+                  Savings simulation
                 </span>
               </div>
-              <span className="inline-flex items-center gap-1 text-[0.65rem] text-fuchsia-200/90 bg-fuchsia-500/15 border border-fuchsia-400/40 rounded-full px-2 py-0.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-300"></span>
-                live
-              </span>
+              <div className="p-4 space-y-3 font-mono text-xs">
+                <pre className="text-slate-400">{`// Point your SDKs to Cognitude`}</pre>
+                <pre className="text-indigo-200">{`const openai = new OpenAI({
+  baseURL: "https://api.cognitude.io/v1",
+  defaultHeaders: { "X-API-Key": "cog_..." }
+})`}</pre>
+                <pre className="text-slate-400">{`// Existing code stays the same`}</pre>
+                <pre className="text-emerald-200">{`const completion = await openai.chat.completions.create({
+  model: "gpt-5.1-codex",
+  messages: [{ role: "user", content: "Classify this email" }]
+})`}</pre>
+                <pre className="text-slate-400">{`// Autopilot routing + budget protection automatic + validation`}</pre>
+                <pre className="text-slate-300">{`/* smartRoute → gpt-5.1-mini | cacheHit ${liveMetrics.cache.toFixed(
+                  1
+                )}% | totalSavings -${liveMetrics.cost.toFixed(1)}% */`}</pre>
+              </div>
             </div>
-            <div className="grid grid-cols-3 gap-2 text-[0.7rem]">
-              {[
-                {
-                  label: "Spend / min",
-                  value: "$16.28",
-                  color: "text-emerald-300",
-                },
-                { label: "Tokens / s", value: "12.2k", color: "text-sky-300" },
-                { label: "GPU util", value: "70%", color: "text-emerald-300" },
-              ].map((metric) => (
-                <div
-                  key={metric.label}
-                  className="rounded-lg bg-slate-900/80 border border-white/10 p-2"
-                >
-                  <p className="text-slate-300/80 mb-0.5">{metric.label}</p>
-                  <p
-                    className={`text-sm font-semibold tracking-tight ${metric.color}`}
-                  >
-                    {metric.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-3 text-[0.7rem] text-slate-300/80">
-              GPU-level optimizations automatically batch, stream, and schedule
-              traffic across regions.
-            </p>
-          </div>
 
-          <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight">
-            GPU-level Optimizations & Live Observability
-          </h3>
-          <p className="mt-1.5 text-sm text-slate-200/80">
-            Inspect every call with token-level traces, GPU utilization, and
-            real-time cost curves. Squeeze more throughput from the same
-            hardware.
-          </p>
-        </section>
+            <div className="mt-4 grid grid-cols-3 gap-3 text-[0.75rem]">
+              <div className="rounded-xl bg-emerald-500/5 border border-emerald-400/40 px-3 py-2">
+                <div className="flex items-center justify-between text-slate-300/80 mb-1">
+                  <span>Cost</span>
+                  <TrendDown className="w-4 h-4 text-emerald-300" />
+                </div>
+                <p className="text-lg font-semibold text-emerald-200">
+                  -{liveMetrics.cost.toFixed(1)}%
+                </p>
+              </div>
+              <div className="rounded-xl bg-sky-500/5 border border-sky-400/40 px-3 py-2">
+                <div className="flex items-center justify-between text-slate-300/80 mb-1">
+                  <span>Cache hit</span>
+                  <Sparkle className="w-4 h-4 text-sky-300" />
+                </div>
+                <p className="text-lg font-semibold text-sky-200">
+                  {liveMetrics.cache.toFixed(1)}%
+                </p>
+              </div>
+              <div className="rounded-xl bg-violet-500/5 border border-violet-400/40 px-3 py-2">
+                <div className="flex items-center justify-between text-slate-300/80 mb-1">
+                  <span>Latency</span>
+                  <Cpu className="w-4 h-4 text-violet-300" />
+                </div>
+                <p className="text-lg font-semibold text-violet-200">
+                  +{liveMetrics.latency.toFixed(0)}ms
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

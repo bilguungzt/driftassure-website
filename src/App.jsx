@@ -20,6 +20,7 @@ import Pricing from "./components/Pricing";
 import TechnicalFeatures from "./components/TechnicalFeatures";
 import FAQ from "./components/FAQ";
 import HowItWorks from "./components/HowItWorks";
+import ContactModal from "./components/ContactModal";
 
 // Navigation Links
 const navLinks = [
@@ -36,9 +37,11 @@ function Header() {
     <header className="sticky top-0 z-40 backdrop-blur-md border-b border-white/10 bg-slate-950/60">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-4">
         <a href="#" className="inline-flex items-center gap-2">
-          <div className="flex items-center justify-center h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 ring-1 ring-indigo-300/40 shadow-lg shadow-indigo-500/30">
-            <span className="text-sm font-semibold tracking-tight">Cg</span>
-          </div>
+          <img
+            src="/logos/cognitude_logo.png"
+            alt="Cognitude logo"
+            className="h-9 w-9 rounded-full ring-1 ring-indigo-300/40 shadow-lg shadow-indigo-500/30 object-cover"
+          />
           <span className="text-sm sm:text-base font-medium tracking-tight text-slate-100">
             Cognitude
           </span>
@@ -58,7 +61,9 @@ function Header() {
 
         <div className="hidden sm:flex items-center gap-3">
           <a
-            href="#"
+            href="https://app.cognitude.io/"
+            target="_blank"
+            rel="noreferrer"
             className="text-xs sm:text-sm text-slate-200/80 hover:text-white transition-colors"
           >
             Log in
@@ -67,7 +72,7 @@ function Header() {
             href="#pricing"
             className="inline-flex items-center justify-center rounded-full bg-white text-slate-900 text-xs sm:text-sm font-medium px-4 py-2 shadow-lg shadow-indigo-500/30 hover:bg-slate-100 transition"
           >
-            Start Free
+            Try Cognitude
           </a>
         </div>
 
@@ -92,14 +97,19 @@ function Header() {
                 {link.label}
               </a>
             ))}
-            <a href="#" className="hover:text-white transition-colors">
+            <a
+              href="https://app.cognitude.io/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition-colors"
+            >
               Log in
             </a>
             <a
               href="#pricing"
               className="inline-flex items-center justify-center rounded-full bg-white text-slate-900 font-medium px-4 py-2"
             >
-              Start Free
+              Try Cognitude
             </a>
           </nav>
         </div>
@@ -498,7 +508,7 @@ function Testimonials() {
   );
 }
 
-function FinalCTA() {
+function FinalCTA({ onTalkWithEngineer = () => {} }) {
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24" id="cta">
       <div className="relative overflow-hidden rounded-3xl border border-indigo-400/40 bg-gradient-to-r from-indigo-600/40 via-slate-950 to-fuchsia-600/40 p-6 sm:p-8 shadow-xl shadow-indigo-500/40">
@@ -525,12 +535,13 @@ function FinalCTA() {
             >
               Start Free in 2 Minutes
             </a>
-            <a
-              href="#product"
+            <button
+              type="button"
+              onClick={onTalkWithEngineer}
               className="inline-flex items-center justify-center flex-1 sm:flex-none rounded-full border border-white/20 bg-white/5 text-xs sm:text-sm text-slate-50 px-5 py-2.5 hover:bg-white/10 transition"
             >
               <PlayCircle size={18} className="mr-1.5" /> Talk with an engineer
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -544,9 +555,11 @@ function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2">
-            <div className="flex items-center justify-center h-8 w-8 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 ring-1 ring-indigo-300/40">
-              <span className="text-sm font-semibold tracking-tight">Cg</span>
-            </div>
+            <img
+              src="/logos/cognitude_logo.png"
+              alt="Cognitude logo"
+              className="h-8 w-8 rounded-full ring-1 ring-indigo-300/40 object-cover"
+            />
             <span className="text-sm font-medium tracking-tight text-slate-100">
               Cognitude
             </span>
@@ -618,6 +631,12 @@ function Footer() {
 }
 
 function App() {
+  const [contactModalVariant, setContactModalVariant] = useState(null);
+
+  const openContactModal = (variant) => setContactModalVariant(variant);
+  const closeContactModal = () => setContactModalVariant(null);
+  const isContactModalOpen = contactModalVariant !== null;
+
   return (
     <div className="relative min-h-screen bg-[#020617] text-white font-sans">
       <div className="absolute inset-0 -z-20 bg-gradient-to-br from-[#020617] via-slate-950 to-[#020617]"></div>
@@ -634,7 +653,7 @@ function App() {
 
       <Header />
       <main className="relative z-10">
-        <Hero />
+        <Hero onBookDemo={() => openContactModal("engineer")} />
         <LogoStrip />
         <ProblemSection />
         <Features />
@@ -645,10 +664,15 @@ function App() {
         <Pricing />
         <TechnicalFeatures />
         <Testimonials />
-        <FAQ />
-        <FinalCTA />
+        <FAQ onContactSupport={() => openContactModal("support")} />
+        <FinalCTA onTalkWithEngineer={() => openContactModal("engineer")} />
       </main>
       <Footer />
+      <ContactModal
+        isOpen={isContactModalOpen}
+        variant={contactModalVariant || "support"}
+        onClose={closeContactModal}
+      />
     </div>
   );
 }

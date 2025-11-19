@@ -37,8 +37,8 @@ function Pricing() {
       popular: true,
       badge: "MOST POPULAR",
       highlight: {
-        text: "Net savings: $27/mo",
-        sub: "18% reduction",
+        text: "Net savings: $850/mo",
+        sub: "40% reduction",
       },
     },
     {

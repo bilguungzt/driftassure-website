@@ -79,7 +79,7 @@ const faqs = [
   },
 ];
 
-function FAQ() {
+function FAQ({ onContactSupport = () => {} }) {
   const [openIndex, setOpenIndex] = useState(null);
   const [showAll, setShowAll] = useState(false);
 
@@ -124,12 +124,13 @@ function FAQ() {
                   Drop us a line and we’ll walk through your architecture and
                   estimate savings for your exact workload.
                 </p>
-                <a
-                  href="#contact"
+                <button
+                  type="button"
+                  onClick={onContactSupport}
                   className="text-xs font-medium text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1"
                 >
                   Contact Support &rarr;
-                </a>
+                </button>
               </div>
             </div>
           </div>
