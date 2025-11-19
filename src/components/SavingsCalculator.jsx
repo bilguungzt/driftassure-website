@@ -99,40 +99,40 @@ function SavingsCalculator() {
       className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24"
     >
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
-          <Calculator className="w-4 h-4 text-indigo-300" />
-          <span className="text-xs text-indigo-100">Savings simulator</span>
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 shadow-sm">
+          <Calculator className="w-4 h-4 text-indigo-600" />
+          <span className="text-xs text-indigo-700">Savings simulator</span>
         </div>
-        <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
+        <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
           Model what Cognitude would save you
         </h2>
-        <p className="mt-3 max-w-2xl mx-auto text-base text-slate-200/80">
+        <p className="mt-3 max-w-2xl mx-auto text-base text-slate-600">
           Drop in your current traffic mix and see projected savings from
           routing, caching, and budget enforcement.
         </p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8">
-        <div className="rounded-3xl border border-white/10 bg-slate-950/80 backdrop-blur p-6 sm:p-8 shadow-lg shadow-indigo-500/20">
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-200/20">
           <div className="flex gap-4 mb-8">
             <button
               onClick={setStartupMode}
-              className="flex-1 py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-medium text-slate-200 transition-colors"
+              className="flex-1 py-2 px-4 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-sm font-medium text-slate-700 transition-colors"
             >
               Startup
             </button>
             <button
               onClick={setEnterpriseMode}
-              className="flex-1 py-2 px-4 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 text-sm font-medium text-indigo-200 transition-colors"
+              className="flex-1 py-2 px-4 rounded-lg bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-sm font-medium text-indigo-700 transition-colors"
             >
               Enterprise
             </button>
           </div>
 
           <div className="mb-6">
-            <label className="flex items-center justify-between text-xs text-slate-200/80 mb-2">
+            <label className="flex items-center justify-between text-xs text-slate-600 mb-2">
               <span>Monthly tokens</span>
-              <span className="text-slate-400">
+              <span className="text-slate-500">
                 {formatTokens(tokensPerMonth)}
               </span>
             </label>
@@ -143,32 +143,32 @@ function SavingsCalculator() {
               step={5_000_000}
               value={tokensPerMonth}
               onChange={handleTokenChange}
-              className="w-full accent-indigo-500"
+              className="w-full accent-indigo-600"
             />
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="flex items-center justify-between text-xs text-slate-200/80 mb-1.5">
+              <label className="flex items-center justify-between text-xs text-slate-600 mb-1.5">
                 <span>Calls per month</span>
               </label>
               <input
                 type="number"
                 value={callsPerMonth}
                 onChange={handleCallsChange}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/60"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-slate-900"
                 placeholder="e.g. 250000"
               />
             </div>
             <div>
-              <label className="flex items-center justify-between text-xs text-slate-200/80 mb-1.5">
+              <label className="flex items-center justify-between text-xs text-slate-600 mb-1.5">
                 <span>Avg prompt size (input + output)</span>
               </label>
               <input
                 type="number"
                 value={promptSize}
                 onChange={handlePromptChange}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/60"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-slate-900"
                 placeholder="e.g. 1500"
               />
             </div>
@@ -177,28 +177,28 @@ function SavingsCalculator() {
           <button
             type="button"
             onClick={calculate}
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white text-sm font-medium px-5 py-2.5 shadow-lg shadow-indigo-500/40 hover:bg-indigo-400 transition"
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-indigo-600 text-white text-sm font-medium px-5 py-2.5 shadow-lg shadow-indigo-500/40 hover:bg-indigo-500 transition"
           >
             <Lightning className="w-4 h-4 mr-2" /> Calculate savings
           </button>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-slate-950/80 backdrop-blur p-6 sm:p-8 shadow-lg shadow-indigo-500/20 flex flex-col">
-          <div className="text-center pt-2 pb-8 border-b border-white/5 mb-6">
-            <p className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-4">
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl shadow-indigo-200/20 flex flex-col">
+          <div className="text-center pt-2 pb-8 border-b border-slate-100 mb-6">
+            <p className="text-slate-500 text-sm font-medium uppercase tracking-wider mb-4">
               Avg. customer saves
             </p>
             <div className="flex items-baseline justify-center gap-2 mb-5">
-              <span className="text-5xl sm:text-6xl font-bold text-white tracking-tight">
+              <span className="text-5xl sm:text-6xl font-bold text-emerald-600 tracking-tight">
                 $
                 {Math.floor(projectedSavings).toLocaleString(undefined, {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 0,
                 })}
               </span>
-              <span className="text-xl text-slate-500 font-medium">/mo</span>
+              <span className="text-xl text-emerald-600 font-medium">/mo</span>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-bold tracking-wide">
+            <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 text-sm font-bold tracking-wide">
               <ChartLineUp className="w-4 h-4" weight="bold" />
               <span>{Math.floor(projectedRate / 4)}x ROI</span>
             </div>
@@ -206,8 +206,8 @@ function SavingsCalculator() {
 
           <div className="grid grid-cols-2 gap-4 text-xs mb-8">
             <div className="space-y-1">
-              <p className="text-slate-400">Current cost</p>
-              <p className="text-lg font-medium text-slate-200">
+              <p className="text-slate-500">Current cost</p>
+              <p className="text-lg font-medium text-slate-700">
                 $
                 {currentCost.toLocaleString(undefined, {
                   minimumFractionDigits: 2,
@@ -216,8 +216,8 @@ function SavingsCalculator() {
               </p>
             </div>
             <div className="space-y-1 text-right">
-              <p className="text-emerald-400">New cost</p>
-              <p className="text-lg font-bold text-emerald-300">
+              <p className="text-slate-500">New cost</p>
+              <p className="text-lg font-bold text-slate-900">
                 $
                 {optimizedCost.toLocaleString(undefined, {
                   minimumFractionDigits: 2,
@@ -227,35 +227,35 @@ function SavingsCalculator() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 text-sm text-slate-200/80 mt-auto">
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-3 text-center flex flex-col items-center justify-center gap-2">
+          <div className="grid grid-cols-3 gap-3 text-sm text-slate-600 mt-auto">
+            <div className="rounded-2xl bg-slate-50 border border-slate-200 p-3 text-center flex flex-col items-center justify-center gap-2">
               <CurrencyDollarSimple
-                className="w-5 h-5 text-emerald-300"
+                className="w-5 h-5 text-emerald-500"
                 weight="bold"
               />
               <div>
-                <p className="text-[10px] text-slate-400 uppercase tracking-wide">
+                <p className="text-[10px] text-slate-500 uppercase tracking-wide">
                   Budget
                 </p>
-                <p className="text-white font-semibold text-xs">Enforced</p>
+                <p className="text-slate-900 font-semibold text-xs">Enforced</p>
               </div>
             </div>
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-3 text-center flex flex-col items-center justify-center gap-2">
-              <ChartLineUp className="w-5 h-5 text-sky-300" weight="bold" />
+            <div className="rounded-2xl bg-slate-50 border border-slate-200 p-3 text-center flex flex-col items-center justify-center gap-2">
+              <ChartLineUp className="w-5 h-5 text-sky-500" weight="bold" />
               <div>
-                <p className="text-[10px] text-slate-400 uppercase tracking-wide">
+                <p className="text-[10px] text-slate-500 uppercase tracking-wide">
                   Routing
                 </p>
-                <p className="text-white font-semibold text-xs">Active</p>
+                <p className="text-slate-900 font-semibold text-xs">Active</p>
               </div>
             </div>
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-3 text-center flex flex-col items-center justify-center gap-2">
-              <Lightning className="w-5 h-5 text-violet-300" weight="fill" />
+            <div className="rounded-2xl bg-slate-50 border border-slate-200 p-3 text-center flex flex-col items-center justify-center gap-2">
+              <Lightning className="w-5 h-5 text-violet-500" weight="fill" />
               <div>
-                <p className="text-[10px] text-slate-400 uppercase tracking-wide">
+                <p className="text-[10px] text-slate-500 uppercase tracking-wide">
                   Caching
                 </p>
-                <p className="text-white font-semibold text-xs">~38%</p>
+                <p className="text-slate-900 font-semibold text-xs">~38%</p>
               </div>
             </div>
           </div>

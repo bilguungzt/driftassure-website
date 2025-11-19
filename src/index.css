@@ -17,8 +17,8 @@ body {
     font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #020617;
-    color: #fff;
+    background-color: #ffffff;
+    color: #0f172a;
     overflow-x: hidden;
 }
 
@@ -41,7 +41,7 @@ body {
 }
 
 .gradient-border>* {
-    background: #0F172A;
+    background: #ffffff;
     border-radius: inherit;
 }
 

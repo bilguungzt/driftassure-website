@@ -37,11 +37,11 @@ function SocialProof() {
           </div>
 
           <div className="relative z-10 w-full max-w-5xl">
-            <div className="rounded-[2rem] bg-slate-950 p-2 shadow-2xl ring-1 ring-white/10 sm:rounded-[3rem] sm:p-4">
+            <div className="rounded-[2rem] bg-slate-950 p-2 shadow-2xl shadow-slate-300/40 ring-1 ring-slate-950 sm:rounded-[2.5rem] sm:p-3">
               <img
                 src={DASHBOARD_IMAGE}
                 alt="Live routing dashboard"
-                className="block h-auto w-full rounded-[1.5rem] bg-slate-900 shadow-inner sm:rounded-[2.5rem]"
+                className="block h-auto w-full rounded-[1.5rem] bg-white shadow-inner shadow-slate-900/10 sm:rounded-[1.8rem]"
                 loading="lazy"
               />
             </div>

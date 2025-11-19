@@ -4,7 +4,7 @@ import heroVideoSrc from "../assets/video.mp4";
 const DEFAULTS = {
   videoSrc: heroVideoSrc,
   poster: "",
-  overlayOpacity: 0.55,
+  overlayOpacity: 0.25,
   gradientStop: 0.66,
 };
 
@@ -74,9 +74,9 @@ const ThreeBackground = ({
       <div
         className="hero-video__gradient"
         style={{
-          background: `linear-gradient(160deg, rgba(5,5,16,0.92) 0%, rgba(13,15,35,0.85) ${
+          background: `linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.85) ${
             gradientStop * 100
-          }%, rgba(8,10,25,0.6) 100%)`,
+          }%, rgba(241,245,249,0.6) 100%)`,
         }}
       />
     </div>

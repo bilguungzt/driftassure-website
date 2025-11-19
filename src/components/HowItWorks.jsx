@@ -38,22 +38,22 @@ export default function HowItWorks() {
   return (
     <section
       ref={containerRef}
-      className="relative h-[300vh] bg-black mb-20 sm:mb-32"
+      className="relative h-auto md:h-[300vh] bg-white mb-20 sm:mb-32"
     >
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+      <div className="relative md:sticky md:top-0 md:h-screen block md:flex md:items-center md:overflow-hidden py-12 md:py-0">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
           {/* Header */}
           <div className="mb-12 md:mb-16 text-center md:text-left">
             <p className="text-xs uppercase tracking-[0.2em] text-indigo-400 font-semibold mb-3">
               Workflow
             </p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
               Setup in minutes. <br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
                 Save immediately.
               </span>
             </h2>
-            <p className="text-slate-400 max-w-xl text-lg">
+            <p className="text-slate-600 max-w-xl text-lg">
               Integration is seamless. Just change your base URL and let our
               intelligence layer handle the rest.
             </p>
@@ -77,72 +77,72 @@ export default function HowItWorks() {
               className="flex flex-col relative group"
             >
               {/* Card */}
-              <div className="h-[420px] w-full bg-[#0F1117] border border-slate-800 rounded-2xl mb-8 relative overflow-hidden shadow-2xl shadow-black/50 group-hover:border-indigo-500/30 transition-colors duration-500">
+              <div className="h-[420px] w-full bg-slate-50 border border-slate-200 rounded-2xl mb-8 relative overflow-hidden shadow-xl shadow-slate-200/50 group-hover:border-indigo-500/30 transition-colors duration-500">
                 <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent pointer-events-none" />
 
                 {/* MacOS Window Header */}
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-800 bg-[#0F1117]/90 backdrop-blur">
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-200 bg-slate-100/90 backdrop-blur">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                  <div className="ml-auto text-xs font-mono text-slate-500">
+                  <div className="ml-auto text-xs font-mono text-slate-400">
                     config.py
                   </div>
                 </div>
 
                 {/* Code Content */}
                 <div className="p-5 font-mono text-[13px] leading-relaxed overflow-hidden">
-                  <div className="text-slate-300">
-                    <span className="text-purple-400">from</span> openai{" "}
-                    <span className="text-purple-400">import</span> OpenAI
+                  <div className="text-slate-700">
+                    <span className="text-purple-600">from</span> openai{" "}
+                    <span className="text-purple-600">import</span> OpenAI
                   </div>
-                  <div className="text-slate-500 h-4" />
-                  <div className="text-slate-300">client = OpenAI(</div>
-                  <div className="text-slate-300 pl-4">
-                    api_key=<span className="text-green-400">"sk-..."</span>,
+                  <div className="text-slate-400 h-4" />
+                  <div className="text-slate-700">client = OpenAI(</div>
+                  <div className="text-slate-700 pl-4">
+                    api_key=<span className="text-green-600">"sk-..."</span>,
                   </div>
                   {/* Highlighted Line */}
                   <div className="relative">
                     <div className="absolute -left-5 -right-5 top-0 bottom-0 bg-indigo-500/10 border-l-2 border-indigo-500 pointer-events-none" />
-                    <div className="text-slate-300 pl-4 relative">
+                    <div className="text-slate-700 pl-4 relative">
                       base_url=
-                      <span className="text-green-400">
+                      <span className="text-green-600">
                         "https://api.cognitude.io/v1"
                       </span>
                       ,
                     </div>
                   </div>
                   <div className="text-slate-500 pl-4"># ^ One line change</div>
-                  <div className="text-slate-300">)</div>
-                  <div className="text-slate-500 h-4" />
+                  <div className="text-slate-700">)</div>
+                  <div className="text-slate-400 h-4" />
                   <div className="text-slate-500 italic">
                     # Works with any provider
                   </div>
-                  <div className="text-slate-300">
+                  <div className="text-slate-700">
                     response = client.chat.completions.create(
                   </div>
-                  <div className="text-slate-300 pl-4">
+                  <div className="text-slate-700 pl-4">
                     model=
-                    <span className="text-green-400">"gpt-5.1-codex"</span>,
+                    <span className="text-green-600">"gpt-5.1-codex"</span>,
                   </div>
-                  <div className="text-slate-300 pl-4">messages=[...]</div>
-                  <div className="text-slate-300">)</div>
+                  <div className="text-slate-700 pl-4">messages=[...]</div>
+                  <div className="text-slate-700">)</div>
                 </div>
               </div>
 
               {/* Description */}
               <div className="px-2">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 font-bold text-sm border border-indigo-500/20">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 font-bold text-sm border border-indigo-200">
                     1
                   </div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-slate-900">
                     Configure Gateway
                   </h3>
                 </div>
-                <p className="text-slate-400 text-sm leading-relaxed">
+                <p className="text-slate-600 text-sm leading-relaxed">
                   Simply replace your OpenAI{" "}
-                  <code className="text-indigo-300 bg-indigo-500/10 px-1 py-0.5 rounded">
+                  <code className="text-indigo-700 bg-indigo-50 px-1 py-0.5 rounded">
                     base_url
                   </code>{" "}
                   with our proxy endpoint. No SDK migration required.
@@ -155,15 +155,15 @@ export default function HowItWorks() {
               style={{ opacity: step2Opacity, y: step2Y }}
               className="flex flex-col relative group"
             >
-              <div className="h-[420px] w-full bg-[#0F1117] border border-slate-800 rounded-2xl mb-8 relative overflow-hidden shadow-2xl shadow-black/50 group-hover:border-purple-500/30 transition-colors duration-500 flex flex-col">
+              <div className="h-[420px] w-full bg-slate-50 border border-slate-200 rounded-2xl mb-8 relative overflow-hidden shadow-xl shadow-slate-200/50 group-hover:border-purple-500/30 transition-colors duration-500 flex flex-col">
                 <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-transparent pointer-events-none" />
 
                 {/* Visual representation of routing */}
                 <div className="flex-1 flex flex-col items-center justify-center p-6 relative">
                   {/* Input */}
-                  <div className="w-full max-w-[220px] bg-slate-800/50 border border-slate-700 rounded-lg p-3 mb-8 flex items-center gap-3">
+                  <div className="w-full max-w-[220px] bg-white border border-slate-200 rounded-lg p-3 mb-8 flex items-center gap-3 shadow-sm">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-                    <div className="text-[10px] sm:text-[11px] text-slate-300 font-mono truncate">
+                    <div className="text-[10px] sm:text-[11px] text-slate-600 font-mono truncate">
                       Generate quarterly report...
                     </div>
                   </div>
@@ -185,14 +185,14 @@ export default function HowItWorks() {
                   {/* The Brain/Router */}
                   <div className="relative z-10 mb-8">
                     <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full" />
-                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-900/30 border border-white/10 relative">
+                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30 border border-white/20 relative">
                       <Cpu
                         size={32}
                         color="white"
                         weight="duotone"
                         className="animate-pulse"
                       />
-                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-[#0F1117]" />
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white" />
                     </div>
                   </div>
 
@@ -227,26 +227,26 @@ export default function HowItWorks() {
 
                   {/* Options */}
                   <div className="w-full grid grid-cols-3 gap-2">
-                    <div className="bg-slate-900/50 border border-slate-800 rounded p-2 text-center opacity-50 scale-90">
-                      <div className="text-[10px] font-bold text-slate-400">
+                    <div className="bg-white border border-slate-200 rounded p-2 text-center opacity-50 scale-90">
+                      <div className="text-[10px] font-bold text-slate-500">
                         GPT-5.1
                       </div>
-                      <div className="text-[9px] text-slate-600">$$$</div>
+                      <div className="text-[9px] text-slate-400">$$$</div>
                     </div>
-                    <div className="bg-gradient-to-b from-slate-800 to-slate-900 border border-indigo-500/40 rounded p-2 text-center relative shadow-lg shadow-indigo-900/20 transform scale-105">
-                      <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-green-500 text-black text-[8px] font-bold px-1.5 py-0.5 rounded-full">
+                    <div className="bg-gradient-to-b from-slate-50 to-white border border-indigo-500/40 rounded p-2 text-center relative shadow-lg shadow-indigo-200/50 transform scale-105">
+                      <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-green-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">
                         BEST
                       </div>
-                      <div className="text-[10px] font-bold text-white">
+                      <div className="text-[10px] font-bold text-slate-900">
                         Flash
                       </div>
-                      <div className="text-[9px] text-green-400">$</div>
+                      <div className="text-[9px] text-green-600">$</div>
                     </div>
-                    <div className="bg-slate-900/50 border border-slate-800 rounded p-2 text-center opacity-50 scale-90">
-                      <div className="text-[10px] font-bold text-slate-400">
+                    <div className="bg-white border border-slate-200 rounded p-2 text-center opacity-50 scale-90">
+                      <div className="text-[10px] font-bold text-slate-500">
                         Opus
                       </div>
-                      <div className="text-[9px] text-slate-600">$$</div>
+                      <div className="text-[9px] text-slate-400">$$</div>
                     </div>
                   </div>
                 </div>
@@ -254,16 +254,22 @@ export default function HowItWorks() {
 
               <div className="px-2">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 font-bold text-sm border border-purple-500/20">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-50 text-purple-600 font-bold text-sm border border-purple-200">
                     2
                   </div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-slate-900">
                     Autopilot Engages
                   </h3>
                 </div>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  Our engine analyzes complexity in real-time and routes simple
-                  prompts to cheaper models without sacrificing quality.
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  <span className="font-semibold text-slate-900">
+                    Intelligent Routing
+                  </span>{" "}
+                  — The Task Classifier scores prompt complexity in real-time.
+                  Simple queries route to cheaper models, while our{" "}
+                  <span className="font-semibold">Schema Enforcer</span>{" "}
+                  guarantees the output structure matches your JSON definitions
+                  perfectly.
                 </p>
               </div>
             </motion.div>
@@ -273,7 +279,7 @@ export default function HowItWorks() {
               style={{ opacity: step3Opacity, y: step3Y }}
               className="flex flex-col relative group"
             >
-              <div className="h-[420px] w-full bg-[#0F1117] border border-slate-800 rounded-2xl mb-8 relative overflow-hidden shadow-2xl shadow-black/50 group-hover:border-emerald-500/30 transition-colors duration-500 flex flex-col">
+              <div className="h-[420px] w-full bg-slate-50 border border-slate-200 rounded-2xl mb-8 relative overflow-hidden shadow-xl shadow-slate-200/50 group-hover:border-emerald-500/30 transition-colors duration-500 flex flex-col">
                 <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent pointer-events-none" />
 
                 <div className="flex-1 p-6 flex flex-col justify-center">
@@ -283,15 +289,15 @@ export default function HowItWorks() {
                       <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">
                         Est. Savings
                       </p>
-                      <h4 className="text-4xl font-bold text-white flex items-center gap-2">
+                      <h4 className="text-4xl font-bold text-slate-900 flex items-center gap-2">
                         $2,490
-                        <span className="text-lg text-emerald-400 font-medium bg-emerald-500/10 px-2 py-1 rounded-full border border-emerald-500/20">
+                        <span className="text-lg text-emerald-600 font-medium bg-emerald-50 px-2 py-1 rounded-full border border-emerald-200">
                           -42%
                         </span>
                       </h4>
                     </div>
-                    <div className="p-2 bg-slate-800 rounded-lg border border-slate-700">
-                      <TrendDown className="text-emerald-400" size={20} />
+                    <div className="p-2 bg-white rounded-lg border border-slate-200 shadow-sm">
+                      <TrendDown className="text-emerald-500" size={20} />
                     </div>
                   </div>
 
@@ -364,16 +370,16 @@ export default function HowItWorks() {
                   </div>
 
                   {/* Bottom Status */}
-                  <div className="mt-8 pt-6 border-t border-slate-800/60 flex items-center gap-3">
+                  <div className="mt-8 pt-6 border-t border-slate-200 flex items-center gap-3">
                     <CheckCircle
                       size={18}
-                      className="text-emerald-400"
+                      className="text-emerald-500"
                       weight="fill"
                     />
-                    <span className="text-sm text-slate-300">
+                    <span className="text-sm text-slate-700">
                       Optimization active
                     </span>
-                    <span className="ml-auto text-xs font-mono text-slate-600">
+                    <span className="ml-auto text-xs font-mono text-slate-400">
                       LIVE
                     </span>
                   </div>
@@ -382,14 +388,14 @@ export default function HowItWorks() {
 
               <div className="px-2">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 font-bold text-sm border border-emerald-500/20">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 font-bold text-sm border border-emerald-200">
                     3
                   </div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-slate-900">
                     See Instant Savings
                   </h3>
                 </div>
-                <p className="text-slate-400 text-sm leading-relaxed">
+                <p className="text-slate-600 text-sm leading-relaxed">
                   Watch your costs drop immediately on the dashboard. No
                   contract commitments, pay only for what you use.
                 </p>

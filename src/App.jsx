@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   List,
   X,
-  ArrowRight,
   PlayCircle,
   CheckCircle,
   WarningCircle,
@@ -12,8 +11,8 @@ import {
 
 // Import all components
 import Hero from "./components/Hero";
+import SchemaEnforcer from "./components/SchemaEnforcer";
 import SocialProof from "./components/SocialProof";
-import LogoStrip from "./components/LogoStrip";
 import Features from "./components/Features";
 import SavingsCalculator from "./components/SavingsCalculator";
 import Pricing from "./components/Pricing";
@@ -145,19 +144,33 @@ function ProblemSection() {
       <div className="grid md:grid-cols-2 gap-12 items-center">
         {/* Left Column (Static) */}
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-4">
+          <p className="text-xs uppercase tracking-[0.18em] text-slate-500 mb-4 font-medium">
             The problem
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-6">
-            Cut Your LLM Costs{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-400">
-              in Half. Automatically.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight mb-6">
+            The "Set-and-Forget"{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+              Reliability Layer.
             </span>
           </h2>
-          <p className="text-lg text-slate-300 leading-relaxed">
-            The only intelligent gateway that guarantees cost reduction and
-            response reliability.
-          </p>
+          <ul className="text-lg text-slate-600 space-y-2">
+            <li className="flex items-start">
+              <span className="text-indigo-600 font-bold mr-2">•</span>
+              <span><strong>One-line change:</strong> Drop-in replacement for OpenAI base URL.</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-indigo-600 font-bold mr-2">•</span>
+              <span><strong>Full Stack:</strong> We handle routing, caching, schema validation, and fallbacks.</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-indigo-600 font-bold mr-2">•</span>
+              <span><strong>The Result:</strong> Perfect JSON responses at the lowest possible price.</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-indigo-600 font-bold mr-2">•</span>
+              <span><strong>The Win:</strong> Finance sees lower bills. Engineers see zero downtime.</span>
+            </li>
+          </ul>
         </div>
 
         {/* Right Column (Carousel) */}
@@ -194,7 +207,7 @@ function ProblemSection() {
                   }}
                   className={`absolute w-full text-center font-bold tracking-tight transition-colors duration-500 ${
                     isActive
-                      ? "text-3xl sm:text-4xl text-white"
+                      ? "text-3xl sm:text-4xl text-slate-900"
                       : "text-xl sm:text-2xl text-slate-400"
                   }`}
                 >
@@ -305,10 +318,10 @@ function ComparisonTable() {
     },
     {
       name: "Setup Time",
-      cognitude: { text: "60 sec", color: "text-emerald-400" },
-      helicone: { text: "60 sec", color: "text-emerald-400" },
-      langsmith: { text: "10 min", color: "text-amber-300" },
-      arize: { text: "30 min", color: "text-orange-400" },
+      cognitude: { text: "60 sec", color: "text-emerald-500" },
+      helicone: { text: "60 sec", color: "text-emerald-500" },
+      langsmith: { text: "10 min", color: "text-amber-500" },
+      arize: { text: "30 min", color: "text-orange-500" },
       details: "Time required to integrate and start seeing value.",
     },
   ];
@@ -317,11 +330,11 @@ function ComparisonTable() {
     if (typeof value === "boolean") {
       return value ? (
         <CheckCircle
-          className="w-5 h-5 text-emerald-400 mx-auto"
-          weight="bold"
+          className="w-5 h-5 text-emerald-500 mx-auto"
+          weight="regular"
         />
       ) : (
-        <X className="w-5 h-5 text-rose-500/40 mx-auto" weight="bold" />
+        <X className="w-5 h-5 text-rose-400/60 mx-auto" weight="regular" />
       );
     }
     if (value === "Limited") {
@@ -329,7 +342,7 @@ function ComparisonTable() {
         <div className="group relative inline-flex items-center justify-center cursor-help w-full">
           <WarningCircle
             className="w-5 h-5 text-amber-400 mx-auto"
-            weight="bold"
+            weight="regular"
           />
           <span className="absolute bottom-full mb-2 hidden group-hover:block w-max px-2 py-1 bg-slate-800 text-xs text-white rounded shadow-lg z-10">
             Limited functionality
@@ -339,13 +352,15 @@ function ComparisonTable() {
     }
     if (typeof value === "object" && value.text) {
       return (
-        <span className={`font-medium ${value.color} block text-center`}>
+        <span
+          className={`font-medium ${value.color} block text-center text-xs`}
+        >
           {value.text}
         </span>
       );
     }
     return (
-      <span className="text-slate-300 font-medium block text-center">
+      <span className="text-slate-600 font-medium block text-center text-xs">
         {value}
       </span>
     );
@@ -356,15 +371,15 @@ function ComparisonTable() {
       id="comparison"
       className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24"
     >
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+          <p className="text-xs uppercase tracking-[0.18em] text-indigo-600 mb-3 font-medium">
             Comparison
           </p>
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
-            Cognitude vs DIY & other tools
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+            Cognitude vs Other Tools
           </h2>
-          <p className="mt-3 text-base text-slate-200/80 max-w-2xl">
+          <p className="mt-4 text-base text-slate-700 max-w-2xl leading-relaxed">
             Don’t duct-tape spreadsheets, homegrown proxies, and dashboards.
             Replace them with a single autopilot designed for production
             workloads.
@@ -372,28 +387,28 @@ function ComparisonTable() {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur">
-        <table className="min-w-full text-xs sm:text-sm">
-          <thead className="border-b border-white/10 bg-white/5 text-slate-200">
-            <tr>
-              <th className="text-left py-4 pl-6 pr-3 font-medium w-1/3">
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <table className="min-w-full text-sm">
+          <thead>
+            <tr className="bg-slate-50/80 border-b border-slate-200">
+              <th className="text-left py-5 pl-8 pr-4 font-semibold text-slate-900 w-1/3">
                 Capability
               </th>
-              <th className="text-center py-4 px-3 text-indigo-300 font-semibold bg-indigo-500/5 w-1/6">
+              <th className="text-center py-5 px-4 text-indigo-600 font-bold bg-indigo-50/50 w-1/6 border-x border-indigo-100">
                 Cognitude
               </th>
-              <th className="text-center py-4 px-3 text-slate-400 w-1/6">
+              <th className="text-center py-5 px-4 text-slate-500 font-medium w-1/6">
                 Helicone
               </th>
-              <th className="text-center py-4 px-3 text-slate-400 w-1/6">
+              <th className="text-center py-5 px-4 text-slate-500 font-medium w-1/6">
                 LangSmith
               </th>
-              <th className="text-center py-4 px-3 text-slate-400 w-1/6">
+              <th className="text-center py-5 px-4 text-slate-500 font-medium w-1/6">
                 Arize
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-slate-100">
             {features.map((feature, idx) => (
               <>
                 <tr
@@ -401,37 +416,37 @@ function ComparisonTable() {
                   onClick={() =>
                     setExpandedRow(expandedRow === idx ? null : idx)
                   }
-                  className="group cursor-pointer hover:bg-white/5 transition-colors"
+                  className="group cursor-pointer hover:bg-slate-50/50 transition-colors"
                 >
-                  <td className="py-4 pl-6 pr-3 text-slate-200 font-medium flex items-center gap-2">
+                  <td className="py-5 pl-8 pr-4 text-slate-700 font-medium flex items-center gap-3">
                     <CaretDown
-                      className={`w-3 h-3 text-slate-500 transition-transform ${
-                        expandedRow === idx ? "rotate-180" : ""
+                      className={`w-3 h-3 text-slate-400 transition-transform ${
+                        expandedRow === idx ? "rotate-180" : "-rotate-90"
                       }`}
                       weight="bold"
                     />
                     {feature.name}
                   </td>
-                  <td className="py-4 px-3 text-center bg-indigo-500/5 shadow-[inset_0_0_20px_rgba(99,102,241,0.03)]">
+                  <td className="py-5 px-4 text-center bg-indigo-50/30 border-x border-indigo-50">
                     {renderCell(feature.cognitude)}
                   </td>
-                  <td className="py-4 px-3 text-center">
+                  <td className="py-5 px-4 text-center">
                     {renderCell(feature.helicone)}
                   </td>
-                  <td className="py-4 px-3 text-center">
+                  <td className="py-5 px-4 text-center">
                     {renderCell(feature.langsmith)}
                   </td>
-                  <td className="py-4 px-3 text-center">
+                  <td className="py-5 px-4 text-center">
                     {renderCell(feature.arize)}
                   </td>
                 </tr>
                 {expandedRow === idx && (
-                  <tr className="bg-white/[0.02]">
+                  <tr className="bg-slate-50/30">
                     <td
                       colSpan="5"
-                      className="py-3 px-6 text-slate-400 text-xs leading-relaxed border-t border-white/5 shadow-inner"
+                      className="py-4 px-8 text-slate-500 text-xs leading-relaxed border-t border-slate-100 shadow-inner"
                     >
-                      <span className="font-semibold text-indigo-300">
+                      <span className="font-semibold text-indigo-600">
                         Detail:
                       </span>{" "}
                       {feature.details}
@@ -468,10 +483,10 @@ function Testimonials() {
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24">
       <div className="text-center mb-10">
-        <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+        <p className="text-xs uppercase tracking-[0.18em] text-slate-500 mb-2 font-medium">
           Featured reviews
         </p>
-        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
           Engineers saving real money
         </h2>
       </div>
@@ -480,28 +495,28 @@ function Testimonials() {
         {cards.map((card, idx) => (
           <div
             key={card.name}
-            className={`relative w-full sm:w-72 rounded-2xl border border-white/20 bg-slate-950/90 p-6 shadow-2xl backdrop-blur ${
+            className={`relative w-full sm:w-72 rounded-2xl border border-slate-200 bg-white p-6 shadow-xl ${
               idx === 0 ? "sm:-rotate-6" : "sm:rotate-6"
             }`}
           >
-            <p className="text-sm text-slate-100 leading-relaxed mb-4">
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
               {card.quote}
             </p>
-            <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
               <div>
-                <p className="text-xs font-medium text-slate-100">
+                <p className="text-xs font-medium text-slate-900">
                   {card.name}
                 </p>
-                <p className="text-xs text-slate-400">{card.role}</p>
+                <p className="text-xs text-slate-500">{card.role}</p>
               </div>
-              <div className="flex items-center gap-1 text-amber-300 text-xs">
+              <div className="flex items-center gap-1 text-amber-400 text-xs">
                 ★ {card.score}
               </div>
             </div>
           </div>
         ))}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="h-48 w-48 rounded-full bg-indigo-500/20 blur-3xl opacity-60"></div>
+          <div className="h-48 w-48 rounded-full bg-indigo-500/10 blur-3xl opacity-60"></div>
         </div>
       </div>
     </section>
@@ -511,18 +526,18 @@ function Testimonials() {
 function FinalCTA({ onTalkWithEngineer = () => {} }) {
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24" id="cta">
-      <div className="relative overflow-hidden rounded-3xl border border-indigo-400/40 bg-gradient-to-r from-indigo-600/40 via-slate-950 to-fuchsia-600/40 p-6 sm:p-8 shadow-xl shadow-indigo-500/40">
-        <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-500/40 blur-3xl opacity-70"></div>
-        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-fuchsia-500/40 blur-3xl opacity-70"></div>
+      <div className="relative overflow-hidden rounded-3xl border border-indigo-200 bg-gradient-to-r from-indigo-50 via-white to-purple-50 p-6 sm:p-8 shadow-xl shadow-indigo-200/40">
+        <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-200/40 blur-3xl opacity-70"></div>
+        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-purple-200/40 blur-3xl opacity-70"></div>
         <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-indigo-100/90 mb-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-indigo-600 mb-2 font-medium">
               Get started
             </p>
-            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-2">
+            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-2 text-slate-900">
               Drop-in cost optimization for your LLM stack
             </h2>
-            <p className="text-sm sm:text-base text-slate-100/90 max-w-xl">
+            <p className="text-sm sm:text-base text-slate-600 max-w-xl">
               Point your SDKs at Cognitude, set your guardrails, and watch your
               LLM bill shrink. No prompt rewrites, no vendor lock-in, no big
               migration.
@@ -531,14 +546,14 @@ function FinalCTA({ onTalkWithEngineer = () => {} }) {
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <a
               href="#pricing"
-              className="inline-flex items-center justify-center flex-1 sm:flex-none rounded-full bg-white text-slate-900 text-xs sm:text-sm font-medium px-5 py-2.5 shadow-lg shadow-slate-900/40 hover:bg-slate-100 transition"
+              className="inline-flex items-center justify-center flex-1 sm:flex-none rounded-full bg-slate-900 text-white text-xs sm:text-sm font-medium px-5 py-2.5 shadow-lg hover:bg-slate-800 transition"
             >
               Start Free in 2 Minutes
             </a>
             <button
               type="button"
               onClick={onTalkWithEngineer}
-              className="inline-flex items-center justify-center flex-1 sm:flex-none rounded-full border border-white/20 bg-white/5 text-xs sm:text-sm text-slate-50 px-5 py-2.5 hover:bg-white/10 transition"
+              className="inline-flex items-center justify-center flex-1 sm:flex-none rounded-full border border-slate-200 bg-white text-xs sm:text-sm text-slate-700 px-5 py-2.5 hover:bg-slate-50 transition"
             >
               <PlayCircle size={18} className="mr-1.5" /> Talk with an engineer
             </button>
@@ -551,76 +566,94 @@ function FinalCTA({ onTalkWithEngineer = () => {} }) {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-slate-950/70 backdrop-blur">
+    <footer className="border-t border-slate-200 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2">
             <img
               src="/logos/cognitude_logo.png"
               alt="Cognitude logo"
-              className="h-8 w-8 rounded-full ring-1 ring-indigo-300/40 object-cover"
+              className="h-8 w-8 rounded-full ring-1 ring-slate-200 object-cover"
             />
-            <span className="text-sm font-medium tracking-tight text-slate-100">
+            <span className="text-sm font-medium tracking-tight text-slate-900">
               Cognitude
             </span>
           </div>
-          <p className="text-xs text-slate-400 max-w-xs">
+          <p className="text-xs text-slate-500 max-w-xs">
             The LLM cost-optimization autopilot for teams that ship to
             production.
           </p>
-          <p className="text-[0.7rem] text-slate-500">
+          <p className="text-[0.7rem] text-slate-400">
             © {new Date().getFullYear()} Cognitude, Inc.
           </p>
         </div>
-        <div className="flex flex-wrap gap-8 text-[0.75rem] text-slate-300/85">
+        <div className="flex flex-wrap gap-8 text-[0.75rem] text-slate-600">
           <div className="space-y-2">
-            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em]">
+            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
               Product
             </p>
             <a
               href="#features"
-              className="block hover:text-white transition-colors"
+              className="block hover:text-indigo-600 transition-colors"
             >
               Features
             </a>
             <a
               href="#pricing"
-              className="block hover:text-white transition-colors"
+              className="block hover:text-indigo-600 transition-colors"
             >
               Pricing
             </a>
             <a
               href="#infrastructure"
-              className="block hover:text-white transition-colors"
+              className="block hover:text-indigo-600 transition-colors"
             >
               Security
             </a>
           </div>
           <div className="space-y-2">
-            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em]">
+            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
               Company
             </p>
-            <a href="#" className="block hover:text-white transition-colors">
+            <a
+              href="#"
+              className="block hover:text-indigo-600 transition-colors"
+            >
               Blog
             </a>
-            <a href="#" className="block hover:text-white transition-colors">
+            <a
+              href="#"
+              className="block hover:text-indigo-600 transition-colors"
+            >
               Changelog
             </a>
-            <a href="#" className="block hover:text-white transition-colors">
+            <a
+              href="#"
+              className="block hover:text-indigo-600 transition-colors"
+            >
               Careers
             </a>
           </div>
           <div className="space-y-2">
-            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em]">
+            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
               Legal
             </p>
-            <a href="#" className="block hover:text-white transition-colors">
+            <a
+              href="#"
+              className="block hover:text-indigo-600 transition-colors"
+            >
               Privacy
             </a>
-            <a href="#" className="block hover:text-white transition-colors">
+            <a
+              href="#"
+              className="block hover:text-indigo-600 transition-colors"
+            >
               Terms
             </a>
-            <a href="#" className="block hover:text-white transition-colors">
+            <a
+              href="#"
+              className="block hover:text-indigo-600 transition-colors"
+            >
               DPA
             </a>
           </div>
@@ -638,23 +671,23 @@ function App() {
   const isContactModalOpen = contactModalVariant !== null;
 
   return (
-    <div className="relative min-h-screen bg-[#020617] text-white font-sans">
-      <div className="absolute inset-0 -z-20 bg-gradient-to-br from-[#020617] via-slate-950 to-[#020617]"></div>
+    <div className="relative min-h-screen bg-white text-slate-900 font-sans">
+      <div className="absolute inset-0 -z-20 bg-gradient-to-br from-white via-slate-50 to-white"></div>
       <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08]"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.4]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 1px 1px, rgba(148,163,184,0.5) 1px, transparent 0)",
+            "radial-gradient(circle at 1px 1px, rgba(148,163,184,0.3) 1px, transparent 0)",
           backgroundSize: "24px 24px",
         }}
       ></div>
-      <div className="pointer-events-none absolute -top-64 -right-32 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.5),_transparent_60%)] blur-3xl"></div>
-      <div className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 h-[20rem] w-[30rem] rounded-full bg-[radial-gradient(circle,_rgba(236,72,153,0.35),_transparent_60%)] blur-3xl"></div>
+      <div className="pointer-events-none absolute -top-64 -right-32 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.2),_transparent_60%)] blur-3xl"></div>
+      <div className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 h-[20rem] w-[30rem] rounded-full bg-[radial-gradient(circle,_rgba(236,72,153,0.2),_transparent_60%)] blur-3xl"></div>
 
       <Header />
       <main className="relative z-10">
         <Hero onBookDemo={() => openContactModal("engineer")} />
-        <LogoStrip />
+        <SchemaEnforcer />
         <ProblemSection />
         <Features />
         <SocialProof />

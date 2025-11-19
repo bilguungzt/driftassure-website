@@ -2,18 +2,23 @@
 @import url('https://api.fontshare.com/v2/css?f[]=gilroy@700&display=swap');
 
 :root {
-  color-scheme: dark;
-  --bg-primary: #050510;
-  --bg-elevated: rgba(22, 20, 35, 0.8);
-  --bg-alt: rgba(9, 12, 25, 0.75);
-  --gradient-hero: linear-gradient(135deg, #1d1b4b, #331f6c 45%, #11112b 90%);
-  --gradient-card: linear-gradient(140deg, rgba(35, 32, 70, 0.7), rgba(19, 21, 42, 0.8));
-  --text-primary: #f5f7ff;
-  --text-muted: #9aa4d0;
+  color-scheme: light;
+  --bg-primary: #ffffff;
+  --bg-elevated: rgba(255, 255, 255, 0.9);
+  --bg-alt: #f8fafc;
+  --gradient-hero: linear-gradient(135deg, #fdfbff, #f3e8ff 45%, #ffffff 90%);
+  --gradient-card: linear-gradient(140deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.95));
+  --text-primary: #0f172a;
+  --text-muted: #475569;
   --accent: #7c5cfc;
   --accent-strong: #5e38ff;
   --success: #1fc77e;
   --nav-height: 5rem;
+  /* Preserved Navbar Variables */
+  --nav-text-primary: #f5f7ff;
+  --nav-text-muted: #9aa4d0;
+  --nav-bg: rgba(8, 9, 24, 0.82);
+
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
@@ -26,8 +31,8 @@
 }
 
 body {
-  background: radial-gradient(circle at top left, rgba(80, 66, 200, 0.35), transparent 45%),
-    radial-gradient(circle at bottom right, rgba(13, 169, 255, 0.18), transparent 40%),
+  background: radial-gradient(circle at top left, rgba(147, 51, 234, 0.1), transparent 45%),
+    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.1), transparent 40%),
     var(--bg-primary);
   color: var(--text-primary);
 }
@@ -83,7 +88,7 @@ body {
 }
 
 .nav-link {
-  color: var(--text-muted);
+  color: var(--nav-text-muted);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
@@ -92,7 +97,7 @@ body {
 
 .nav-link:hover,
 .nav-link:focus {
-  color: var(--text-primary);
+  color: var(--nav-text-primary);
 }
 
 .nav-actions {
@@ -206,7 +211,7 @@ body {
 .hero-minimal__inner .hero-subtitle {
   font-size: 1.2rem;
   line-height: 1.65;
-  color: rgba(221, 226, 255, 0.78);
+  color: var(--text-muted);
   max-width: 680px;
   margin: 0 auto 1rem;
 }
@@ -272,23 +277,23 @@ body {
   max-width: 400px;
   padding: 1.75rem 2rem;
   border-radius: 20px;
-  background: rgba(8, 10, 26, 0.7);
-  border: 1px solid rgba(124, 92, 252, 0.25);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(124, 92, 252, 0.15);
   backdrop-filter: blur(16px);
-  box-shadow: 0 20px 50px rgba(5, 7, 25, 0.5);
+  box-shadow: 0 20px 50px rgba(5, 7, 25, 0.05);
 }
 
 .hero-minimal .hero-metrics dt {
   font-size: 0.95rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: rgba(199, 207, 255, 0.88);
+  color: var(--text-muted);
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 .hero-minimal .hero-metrics dd {
-  color: rgba(221, 226, 255, 0.72);
+  color: var(--text-primary);
   font-size: 0.9rem;
   line-height: 1.6;
 }
@@ -547,7 +552,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.75rem;
-  color: rgba(199, 207, 255, 0.7);
+  color: #7c5cfc;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -578,27 +583,27 @@ body {
 }
 
 .visual-card {
-  background: rgba(10, 12, 30, 0.85);
-  border: 1px solid rgba(124, 92, 252, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(124, 92, 252, 0.15);
   border-radius: 18px;
   padding: 1.75rem;
   display: grid;
   gap: 1.4rem;
   width: min(380px, 100%);
-  box-shadow: 0 25px 60px rgba(17, 23, 58, 0.45);
+  box-shadow: 0 25px 60px rgba(17, 23, 58, 0.08);
 }
 
 .visual-title {
   font-weight: 600;
   font-size: 1rem;
-  color: rgba(201, 211, 255, 0.8);
+  color: var(--text-primary);
 }
 
 .visual-chart {
   height: 160px;
   position: relative;
   border-radius: 12px;
-  background: linear-gradient(180deg, rgba(26, 29, 54, 0.7), rgba(12, 14, 30, 0.9));
+  background: linear-gradient(180deg, rgba(241, 245, 249, 0.7), rgba(248, 250, 252, 0.9));
   overflow: hidden;
   padding: 1rem;
 }
@@ -708,13 +713,13 @@ body {
 
 .feature-card {
   position: relative;
-  background: rgba(12, 15, 38, 0.62);
-  border: 1px solid rgba(124, 92, 252, 0.16);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(124, 92, 252, 0.1);
   border-radius: 20px;
   padding: 2.1rem;
   display: grid;
   gap: 1.2rem;
-  box-shadow: 0 18px 45px rgba(4, 6, 18, 0.32);
+  box-shadow: 0 18px 45px rgba(4, 6, 18, 0.05);
   backdrop-filter: blur(14px);
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   overflow: hidden;
@@ -752,7 +757,7 @@ body {
 
 .feature-detail {
   font-size: 0.85rem;
-  color: rgba(201, 211, 255, 0.65);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
@@ -765,8 +770,8 @@ body {
 
 .usecase-card {
   position: relative;
-  background: rgba(8, 10, 26, 0.62);
-  border: 1px solid rgba(94, 56, 255, 0.18);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(94, 56, 255, 0.1);
   border-radius: 20px;
   padding: 2.05rem;
   display: grid;
@@ -797,8 +802,8 @@ body {
 }
 
 .code-block {
-  background: rgba(5, 6, 18, 0.9);
-  border: 1px solid rgba(124, 92, 252, 0.25);
+  background: #f1f5f9;
+  border: 1px solid rgba(124, 92, 252, 0.15);
   border-radius: 12px;
   padding: 1rem;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -809,14 +814,14 @@ body {
 
 .code-block pre {
   margin: 0;
-  color: #c9d3ff;
+  color: #334155;
 }
 
 .screenshot-placeholder {
   margin-top: 1rem;
   padding: 2.5rem 2rem;
-  background: rgba(8, 10, 26, 0.6);
-  border: 1px solid rgba(124, 92, 252, 0.25);
+  background: #f8fafc;
+  border: 1px solid rgba(124, 92, 252, 0.15);
   border-radius: 12px;
   position: relative;
   overflow: hidden;
@@ -830,7 +835,7 @@ body {
 .screenshot {
   font-size: 0.8rem;
   font-weight: 500;
-  color: rgba(201, 211, 255, 0.5);
+  color: var(--text-muted);
   text-align: center;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -889,7 +894,7 @@ body {
 }
 
 .proof {
-  background: rgba(6, 7, 18, 0.92);
+  background: #f8fafc;
 }
 
 .proof-grid {
@@ -905,13 +910,14 @@ body {
 }
 
 .proof-testimonials blockquote {
-  background: rgba(12, 15, 35, 0.8);
+  background: #ffffff;
   border-left: 4px solid rgba(124, 92, 252, 0.75);
   border-radius: 14px;
   padding: 1.5rem 1.75rem;
-  color: #d9dcff;
+  color: var(--text-primary);
   line-height: 1.7;
   font-size: 0.98rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .proof-testimonials footer {
@@ -930,9 +936,9 @@ body {
 
 .stat-card {
   padding: 1.6rem 1.8rem;
-  background: rgba(10, 12, 28, 0.68);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 18px;
-  border: 1px solid rgba(124, 92, 252, 0.2);
+  border: 1px solid rgba(124, 92, 252, 0.15);
   display: grid;
   gap: 0.4rem;
   backdrop-filter: blur(14px);
@@ -956,13 +962,13 @@ body {
 
 .pricing-card {
   position: relative;
-  background: rgba(12, 14, 34, 0.65);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 22px;
-  border: 1px solid rgba(124, 92, 252, 0.18);
+  border: 1px solid rgba(124, 92, 252, 0.15);
   padding: 2.25rem;
   display: grid;
   gap: 1.35rem;
-  box-shadow: 0 20px 50px rgba(8, 10, 28, 0.42);
+  box-shadow: 0 20px 50px rgba(8, 10, 28, 0.08);
   backdrop-filter: blur(16px);
   overflow: hidden;
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
@@ -1047,8 +1053,8 @@ body {
 }
 
 .cta-form {
-  background: rgba(8, 10, 24, 0.7);
-  border: 1px solid rgba(124, 92, 252, 0.25);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(124, 92, 252, 0.2);
   border-radius: 18px;
   padding: 2rem;
   display: grid;
@@ -1059,12 +1065,12 @@ body {
   display: grid;
   gap: 0.5rem;
   font-size: 0.85rem;
-  color: rgba(201, 211, 255, 0.7);
+  color: var(--text-muted);
 }
 
 .cta-form input {
-  background: rgba(5, 6, 18, 0.9);
-  border: 1px solid rgba(124, 92, 252, 0.25);
+  background: #ffffff;
+  border: 1px solid rgba(124, 92, 252, 0.2);
   border-radius: 12px;
   padding: 0.85rem 1rem;
   color: var(--text-primary);
@@ -1105,19 +1111,19 @@ body {
 }
 
 .resources-grid a {
-  color: #c9d3ff;
+  color: var(--accent-strong);
   text-decoration: none;
   font-weight: 500;
 }
 
 .resources-grid a:hover {
-  color: #ffffff;
+  color: var(--accent);
 }
 
 .site-footer {
   padding: 2.5rem 0;
-  background: rgba(5, 5, 16, 0.95);
-  border-top: 1px solid rgba(124, 92, 252, 0.12);
+  background: #f8fafc;
+  border-top: 1px solid rgba(124, 92, 252, 0.1);
 }
 
 .footer-grid {

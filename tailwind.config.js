@@ -7,14 +7,14 @@ export default {
         primary: "#9333EA",
         secondary: "#EC4899",
         dark: {
-          900: "#0F172A",
-          800: "#1E293B",
-          700: "#334155",
+          900: "#ffffff",
+          800: "#f8fafc",
+          700: "#f1f5f9",
         },
-        light: "#F8FAFC",
+        light: "#0f172a",
       },
       fontFamily: {
-        sans: ["Space Grotesk", "Inter", "system-ui", "sans-serif"],
+        sans: ["Inter Tight", "Inter", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },
       animation: {

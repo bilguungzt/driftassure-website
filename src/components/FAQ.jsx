@@ -97,37 +97,37 @@ function FAQ({ onContactSupport = () => {} }) {
       <div className="grid lg:grid-cols-3 gap-12 items-start">
         {/* Left Column: Header & Support */}
         <div className="lg:col-span-1 lg:sticky lg:top-24">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-200/80">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600">
             FAQ
           </div>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900">
             Answers for engineering teams
           </h2>
-          <p className="mt-4 text-sm text-slate-400 leading-relaxed">
+          <p className="mt-4 text-sm text-slate-500 leading-relaxed">
             If you’re building on OpenAI, Anthropic, Groq, or Mistral today,
             Cognitude can usually be added in under an hour.
           </p>
 
-          <div className="mt-8 rounded-2xl border border-white/10 bg-slate-900/50 p-5 backdrop-blur-sm">
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex items-start gap-4">
-              <div className="h-10 w-10 shrink-0 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
+              <div className="h-10 w-10 shrink-0 rounded-lg bg-emerald-50 flex items-center justify-center border border-emerald-200">
                 <ChatCircleDots
-                  className="w-5 h-5 text-emerald-400"
+                  className="w-5 h-5 text-emerald-500"
                   weight="fill"
                 />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-white mb-1">
+                <h3 className="text-sm font-semibold text-slate-900 mb-1">
                   Still unsure?
                 </h3>
-                <p className="text-xs text-slate-400 leading-relaxed mb-3">
+                <p className="text-xs text-slate-500 leading-relaxed mb-3">
                   Drop us a line and we’ll walk through your architecture and
                   estimate savings for your exact workload.
                 </p>
                 <button
                   type="button"
                   onClick={onContactSupport}
-                  className="text-xs font-medium text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1"
+                  className="text-xs font-medium text-emerald-600 hover:text-emerald-500 transition-colors flex items-center gap-1"
                 >
                   Contact Support &rarr;
                 </button>
@@ -143,8 +143,8 @@ function FAQ({ onContactSupport = () => {} }) {
               key={faq.question}
               className={`group rounded-xl border transition-all duration-200 ${
                 openIndex === index
-                  ? "bg-slate-900 border-white/10 shadow-lg shadow-indigo-500/5"
-                  : "bg-slate-950/30 border-white/5 hover:border-white/10 hover:bg-slate-900/50"
+                  ? "bg-white border-slate-200 shadow-md shadow-indigo-100"
+                  : "bg-slate-50 border-slate-200 hover:border-indigo-200 hover:bg-white"
               }`}
             >
               <button
@@ -155,8 +155,8 @@ function FAQ({ onContactSupport = () => {} }) {
                 <span
                   className={`text-sm font-medium transition-colors ${
                     openIndex === index
-                      ? "text-white"
-                      : "text-slate-300 group-hover:text-white"
+                      ? "text-indigo-600"
+                      : "text-slate-700 group-hover:text-indigo-600"
                   }`}
                 >
                   {faq.question}
@@ -169,8 +169,8 @@ function FAQ({ onContactSupport = () => {} }) {
                   <Plus
                     className={`w-4 h-4 ${
                       openIndex === index
-                        ? "text-indigo-400"
-                        : "text-slate-500 group-hover:text-slate-400"
+                        ? "text-indigo-500"
+                        : "text-slate-400 group-hover:text-indigo-400"
                     }`}
                   />
                 </span>
@@ -183,7 +183,7 @@ function FAQ({ onContactSupport = () => {} }) {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <div className="px-6 pb-5 pt-0 text-sm text-slate-400 leading-relaxed">
+                  <div className="px-6 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
                     {faq.answer}
                   </div>
                 </div>
@@ -192,7 +192,7 @@ function FAQ({ onContactSupport = () => {} }) {
           ))}
           <button
             onClick={() => setShowAll(!showAll)}
-            className="w-full mt-4 py-3 text-sm font-medium text-slate-400 hover:text-white transition-colors border border-white/5 hover:border-white/10 rounded-xl bg-slate-950/30 hover:bg-slate-900/50"
+            className="w-full mt-4 py-3 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors border border-slate-200 hover:border-slate-300 rounded-xl bg-slate-50 hover:bg-white"
           >
             {showAll ? "Show less" : `Show ${faqs.length - 5} more questions`}
           </button>
