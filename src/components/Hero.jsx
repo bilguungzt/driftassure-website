@@ -5,6 +5,7 @@ function Hero({ onBookDemo = () => {} }) {
     { src: "/proof/company1.png", alt: "Company 1 logo" },
     { src: "/proof/company2.png", alt: "Company 2 logo" },
     { src: "/proof/company3.png", alt: "Company 3 logo" },
+    { src: "/proof/company4.png", alt: "Company 4 logo" },
   ];
 
   return (
@@ -19,11 +20,11 @@ function Hero({ onBookDemo = () => {} }) {
             backgroundSize: "24px 24px",
           }}
         ></div>
-        <div className="pointer-events-none absolute -top-64 -right-32 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.5),_transparent_60%)] blur-3xl"></div>
-        <div className="pointer-events-none absolute -bottom-80 -left-40 h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle_at_bottom,_rgba(236,72,153,0.45),_transparent_60%)] blur-3xl"></div>
+        <div className="pointer-events-none absolute -top-64 -right-32 h-64 w-64 sm:h-[36rem] sm:w-[36rem] rounded-full bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.5),_transparent_60%)] blur-3xl"></div>
+        <div className="pointer-events-none absolute -bottom-80 -left-40 h-72 w-72 sm:h-[40rem] sm:w-[40rem] rounded-full bg-[radial-gradient(circle_at_bottom,_rgba(236,72,153,0.45),_transparent_60%)] blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 pb-16 sm:pb-20">
         <div className="max-w-4xl mx-auto">
           <div className="space-y-8 flex flex-col items-center text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-3 py-1.5 text-xs text-indigo-200/90 shadow-[0_0_30px_rgba(79,70,229,0.4)]">

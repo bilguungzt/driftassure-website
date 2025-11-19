@@ -1,8 +1,24 @@
 const customerLogos = [
-  { name: "TensorWave", note: "42% cost reduction", initials: "TW" },
-  { name: "Atlas Robotics", note: "Budget caps in 48h", initials: "AR" },
-  { name: "NovaMind", note: "Zero bill shocks", initials: "NM" },
-  { name: "Helix Labs", note: "Multi-provider routing", initials: "HL" },
+  {
+    name: "Baixing Intelligence",
+    note: "42% cost reduction",
+    logo: "/proof/company1.png",
+  },
+  {
+    name: "Wecaria",
+    note: "Budget caps in 48h",
+    logo: "/proof/company2.png",
+  },
+  {
+    name: "Supernova",
+    note: "Zero bill shocks",
+    logo: "/proof/company3.png",
+  },
+  {
+    name: "Toma",
+    note: "Multi-provider routing",
+    logo: "/proof/company4.png",
+  },
 ];
 
 function LogoStrip() {
@@ -28,8 +44,12 @@ function LogoStrip() {
               key={logo.name}
               className="p-5 rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur flex flex-col items-start gap-3"
             >
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500/50 to-pink-500/70 flex items-center justify-center text-white font-semibold">
-                {logo.initials}
+              <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden border border-white/10">
+                <img
+                  src={logo.logo}
+                  alt={`${logo.name} logo`}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <p className="text-white font-semibold">{logo.name}</p>

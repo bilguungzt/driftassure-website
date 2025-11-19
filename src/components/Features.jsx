@@ -283,7 +283,7 @@ function Features() {
       </div>
 
       <div className="mt-6 mb-12">
-        <div className="text-center text-sm text-slate-200/80 max-w-3xl mx-auto">
+        <div className="hidden md:block text-center text-sm text-slate-200/80 max-w-3xl mx-auto">
           <NetworkAnimation />
         </div>
       </div>

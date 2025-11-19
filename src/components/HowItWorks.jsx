@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Code,
@@ -12,6 +12,14 @@ import {
 
 export default function HowItWorks() {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -38,9 +46,9 @@ export default function HowItWorks() {
   return (
     <section
       ref={containerRef}
-      className="relative h-[300vh] bg-black mb-20 sm:mb-32"
+      className="relative md:h-[300vh] h-auto bg-black mb-20 sm:mb-32"
     >
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+      <div className="md:sticky md:top-0 md:h-screen h-auto flex items-center md:overflow-hidden overflow-visible py-20 md:py-0">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
           {/* Header */}
           <div className="mb-12 md:mb-16 text-center md:text-left">
@@ -73,7 +81,10 @@ export default function HowItWorks() {
 
             {/* STEP 1: CODE */}
             <motion.div
-              style={{ opacity: step1Opacity, y: step1Y }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : {}}
+              viewport={{ once: true, margin: "-50px" }}
+              style={isMobile ? {} : { opacity: step1Opacity, y: step1Y }}
               className="flex flex-col relative group"
             >
               {/* Card */}
@@ -270,7 +281,10 @@ export default function HowItWorks() {
 
             {/* STEP 3: SAVINGS */}
             <motion.div
-              style={{ opacity: step3Opacity, y: step3Y }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : {}}
+              viewport={{ once: true, margin: "-50px" }}
+              style={isMobile ? {} : { opacity: step3Opacity, y: step3Y }}
               className="flex flex-col relative group"
             >
               <div className="h-[420px] w-full bg-[#0F1117] border border-slate-800 rounded-2xl mb-8 relative overflow-hidden shadow-2xl shadow-black/50 group-hover:border-emerald-500/30 transition-colors duration-500 flex flex-col">
