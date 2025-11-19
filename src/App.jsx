@@ -1,20 +1,31 @@
-import { useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  List,
+  X,
+  ArrowRight,
+  PlayCircle,
+  CheckCircle,
+  WarningCircle,
+  CaretDown,
+} from "@phosphor-icons/react";
 
 // Import all components
 import Hero from "./components/Hero";
 import SocialProof from "./components/SocialProof";
+import LogoStrip from "./components/LogoStrip";
 import Features from "./components/Features";
 import SavingsCalculator from "./components/SavingsCalculator";
 import Pricing from "./components/Pricing";
 import TechnicalFeatures from "./components/TechnicalFeatures";
 import FAQ from "./components/FAQ";
+import HowItWorks from "./components/HowItWorks";
 
 // Navigation Links
 const navLinks = [
   { href: "#features", label: "Features" },
-  { href: "#calculator", label: "Calculator" },
   { href: "#pricing", label: "Pricing" },
+  { href: "#infrastructure", label: "Security" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -22,146 +33,166 @@ function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 w-full bg-slate-900/90 backdrop-blur-md z-50 border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-              Cognitude
-            </span>
+    <header className="sticky top-0 z-40 backdrop-blur-md border-b border-white/10 bg-slate-950/60">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-4">
+        <a href="#" className="inline-flex items-center gap-2">
+          <div className="flex items-center justify-center h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 ring-1 ring-indigo-300/40 shadow-lg shadow-indigo-500/30">
+            <span className="text-sm font-semibold tracking-tight">Cg</span>
           </div>
+          <span className="text-sm sm:text-base font-medium tracking-tight text-slate-100">
+            Cognitude
+          </span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-8 text-xs sm:text-sm text-slate-200/80">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="hover:text-white transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="hidden sm:flex items-center gap-3">
+          <a
+            href="#"
+            className="text-xs sm:text-sm text-slate-200/80 hover:text-white transition-colors"
+          >
+            Log in
+          </a>
+          <a
+            href="#pricing"
+            className="inline-flex items-center justify-center rounded-full bg-white text-slate-900 text-xs sm:text-sm font-medium px-4 py-2 shadow-lg shadow-indigo-500/30 hover:bg-slate-100 transition"
+          >
+            Start Free
+          </a>
+        </div>
+
+        <button
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          className="sm:hidden inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-white"
+        >
+          {mobileMenuOpen ? <X size={20} /> : <List size={20} />}
+        </button>
+      </div>
+
+      {mobileMenuOpen && (
+        <div className="sm:hidden border-t border-white/10 bg-slate-950/90">
+          <nav className="flex flex-col gap-4 px-6 py-4 text-slate-200/80 text-sm">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-gray-300 hover:text-white transition-colors"
+                className="hover:text-white transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
               </a>
             ))}
-          </nav>
-
-          {/* Desktop CTAs */}
-          <div className="hidden md:flex items-center gap-4">
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
+            <a href="#" className="hover:text-white transition-colors">
               Log in
             </a>
             <a
-              href="#"
-              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+              href="#pricing"
+              className="inline-flex items-center justify-center rounded-full bg-white text-slate-900 font-medium px-4 py-2"
             >
-              Get Started
+              Start Free
             </a>
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-white"
-          >
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
+          </nav>
         </div>
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-white/10">
-            <nav className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-gray-300 hover:text-white transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                Log in
-              </a>
-              <a
-                href="#"
-                className="inline-block px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 text-center"
-              >
-                Get Started
-              </a>
-            </nav>
-          </div>
-        )}
-      </div>
+      )}
     </header>
   );
 }
 
 function ProblemSection() {
-  const painPoints = [
-    {
-      emoji: "💸",
-      title: "Wasted Spend",
-      description: "Using GPT-4-Codex for simple tasks wastes 70% of budget",
-      stat: "70% wasted",
-    },
-    {
-      emoji: "🔒",
-      title: "Vendor Lock-in",
-      description: "One provider = no leverage when prices spike",
-      stat: "1 provider = Risk",
-    },
-    {
-      emoji: "🎲",
-      title: "No Visibility",
-      description: "Track costs after the fact, can't prevent waste",
-      stat: "Reactive not proactive",
-    },
+  const problems = [
+    "Unpredictable Monthly Bills",
+    "Malicious JSON Errors",
+    "Provider Outages",
+    "High Latency on Simple Tasks",
+    "Wasted Spend on Caching",
+    "Lack of Budget Enforcement",
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % problems.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [problems.length]);
+
   return (
-    <section className="py-24 bg-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Your LLM Bill Is{" "}
-            <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-              Out of Control
+    <section
+      id="problem"
+      className="max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-24"
+    >
+      <div className="grid md:grid-cols-2 gap-12 items-center">
+        {/* Left Column (Static) */}
+        <div>
+          <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-4">
+            The problem
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-6">
+            Cut Your LLM Costs{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-400">
+              in Half. Automatically.
             </span>
           </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {painPoints.map((pain, index) => (
-            <div
-              key={index}
-              className="bg-slate-800/50 border border-red-900/20 hover:border-red-500/40 rounded-xl p-6 transition-all duration-300"
-            >
-              <div className="text-4xl mb-4">{pain.emoji}</div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                {pain.title}
-              </h3>
-              <p className="text-gray-400 mb-4">{pain.description}</p>
-              <div className="text-red-400 font-semibold">{pain.stat}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center bg-red-900/10 border border-red-900/20 rounded-xl p-8">
-          <p className="text-xl text-gray-300 mb-6">
-            "Every AI startup: LLM bill doubled last quarter, no idea how to
-            optimize it"
+          <p className="text-lg text-slate-300 leading-relaxed">
+            The only intelligent gateway that guarantees cost reduction and
+            response reliability.
           </p>
-          <button className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-            Sound familiar?
-            <ArrowRight className="w-5 h-5" />
-          </button>
+        </div>
+
+        {/* Right Column (Carousel) */}
+        <div className="relative h-[320px] w-full flex items-center justify-center overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+          <AnimatePresence initial={false} mode="popLayout">
+            {problems.map((problem, index) => {
+              // Calculate relative position
+              let position =
+                (index - currentIndex + problems.length) % problems.length;
+              if (position > problems.length / 2) position -= problems.length;
+
+              // Only render visible items to prevent "fly-by" during wrapping
+              if (Math.abs(position) > 2.5) return null;
+
+              const isActive = position === 0;
+
+              return (
+                <motion.div
+                  key={problem}
+                  layout
+                  initial={{ opacity: 0, y: 240 }}
+                  animate={{
+                    y: position * 80, // 80px spacing
+                    scale: isActive ? 1 : 0.75,
+                    opacity: isActive ? 1 : 0.2,
+                    filter: isActive ? "blur(0px)" : "blur(2px)",
+                    zIndex: isActive ? 10 : 0,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                    opacity: { duration: 0.5 },
+                  }}
+                  className={`absolute w-full text-center font-bold tracking-tight transition-colors duration-500 ${
+                    isActive
+                      ? "text-3xl sm:text-4xl text-white"
+                      : "text-xl sm:text-2xl text-slate-400"
+                  }`}
+                >
+                  {problem}
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
       </div>
     </section>
@@ -169,276 +200,298 @@ function ProblemSection() {
 }
 
 function ComparisonTable() {
+  const [expandedRow, setExpandedRow] = useState(null);
+
   const features = [
     {
-      name: "⭐ Autopilot Routing",
+      name: "Cost optimizations",
+      cognitude: "Autopilot, multi-vendor",
+      helicone: "Limited",
+      langsmith: "No",
+      arize: "No",
+      details:
+        "Cognitude automatically routes to the cheapest model that meets quality requirements.",
+    },
+    {
+      name: "Smart routing",
+      cognitude: "Provider + model aware",
+      helicone: "Rules only",
+      langsmith: "No",
+      arize: "No",
+      details:
+        "Intelligent routing based on real-time latency, error rates, and cost.",
+    },
+    {
+      name: "Budget enforcement",
+      cognitude: "Hard caps + alerts",
+      helicone: "Usage alerts",
+      langsmith: "No",
+      arize: "No",
+      details: "Set strict budget limits to prevent unexpected bills.",
+    },
+    {
+      name: "Audit-grade billing",
+      cognitude: "Variance + invoices",
+      helicone: "No",
+      langsmith: "No",
+      arize: "No",
+      details: "Detailed financial reporting and invoice reconciliation.",
+    },
+    {
+      name: "Autopilot caching",
       cognitude: true,
       helicone: false,
       langsmith: false,
       arize: false,
-      note: "Auto saves 30-40%",
+      details: "Smart caching strategies to reduce latency and costs.",
     },
     {
-      name: "⭐ Budget Enforcement",
+      name: "Schema enforcement",
       cognitude: true,
       helicone: false,
       langsmith: false,
       arize: false,
-      note: "Prevents bill shock",
+      details: "Ensure all responses adhere to your defined JSON schemas.",
     },
     {
-      name: "⭐ Audit-Grade Billing",
+      name: "Multi-provider",
+      cognitude: true,
+      helicone: false,
+      langsmith: true,
+      arize: true,
+      details: "Seamlessly switch between OpenAI, Anthropic, and others.",
+    },
+    {
+      name: "Real-Time Benchmarks",
+      cognitude: true,
+      helicone: false,
+      langsmith: false,
+      arize: "Limited",
+      details: "Live performance benchmarking across models and providers.",
+    },
+    {
+      name: "Response Validator",
       cognitude: true,
       helicone: false,
       langsmith: false,
       arize: false,
-      note: "Trust your invoices",
+      details: "Validate model outputs against predefined rules.",
     },
     {
-      name: "⭐ Public Benchmarks",
+      name: "Enterprise SSO",
       cognitude: true,
       helicone: false,
-      langsmith: false,
-      arize: false,
-      note: "Real production data",
+      langsmith: true,
+      arize: true,
+      details: "Single Sign-On integration for enterprise security.",
     },
     {
-      name: "⭐ Schema Enforcement",
-      cognitude: true,
-      helicone: false,
-      langsmith: false,
-      arize: false,
-      note: "No parsing errors",
-    },
-    {
-      name: "Basic Monitoring",
+      name: "API Monitoring",
       cognitude: true,
       helicone: true,
       langsmith: true,
       arize: true,
-      note: "",
+      details: "Comprehensive monitoring of API usage and performance.",
     },
     {
-      name: "Usage Analytics",
-      cognitude: true,
-      helicone: true,
-      langsmith: true,
-      arize: true,
-      note: "",
-    },
-    {
-      name: "Request Logging",
-      cognitude: true,
-      helicone: true,
-      langsmith: true,
-      arize: false,
-      note: "",
-    },
-    {
-      name: "Multi-Provider",
-      cognitude: true,
-      helicone: false,
-      langsmith: false,
-      arize: false,
-      note: "",
-    },
-    {
-      name: "Intelligent Caching",
-      cognitude: true,
-      helicone: false,
-      langsmith: false,
-      arize: false,
-      note: "",
-    },
-    {
-      name: "Response Validation",
-      cognitude: true,
-      helicone: false,
-      langsmith: false,
-      arize: false,
-      note: "",
-    },
-    {
-      name: "Rate Limiting",
-      cognitude: true,
-      helicone: true,
-      langsmith: false,
-      arize: false,
-      note: "",
+      name: "Setup Time",
+      cognitude: { text: "60 sec", color: "text-emerald-400" },
+      helicone: { text: "60 sec", color: "text-emerald-400" },
+      langsmith: { text: "10 min", color: "text-amber-300" },
+      arize: { text: "30 min", color: "text-orange-400" },
+      details: "Time required to integrate and start seeing value.",
     },
   ];
 
+  const renderCell = (value) => {
+    if (typeof value === "boolean") {
+      return value ? (
+        <CheckCircle
+          className="w-5 h-5 text-emerald-400 mx-auto"
+          weight="bold"
+        />
+      ) : (
+        <X className="w-5 h-5 text-rose-500/40 mx-auto" weight="bold" />
+      );
+    }
+    if (value === "Limited") {
+      return (
+        <div className="group relative inline-flex items-center justify-center cursor-help w-full">
+          <WarningCircle
+            className="w-5 h-5 text-amber-400 mx-auto"
+            weight="bold"
+          />
+          <span className="absolute bottom-full mb-2 hidden group-hover:block w-max px-2 py-1 bg-slate-800 text-xs text-white rounded shadow-lg z-10">
+            Limited functionality
+          </span>
+        </div>
+      );
+    }
+    if (typeof value === "object" && value.text) {
+      return (
+        <span className={`font-medium ${value.color} block text-center`}>
+          {value.text}
+        </span>
+      );
+    }
+    return (
+      <span className="text-slate-300 font-medium block text-center">
+        {value}
+      </span>
+    );
+  };
+
   return (
-    <section id="comparison" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Why Engineering Teams Choose Cognitude
+    <section
+      id="comparison"
+      className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24"
+    >
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
+        <div>
+          <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+            Comparison
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+            Cognitude vs DIY & other tools
           </h2>
-          <p className="text-xl text-gray-600">
-            We're the optimization + prevention + transparency layer, not just
-            monitoring.
+          <p className="mt-3 text-base text-slate-200/80 max-w-2xl">
+            Don’t duct-tape spreadsheets, homegrown proxies, and dashboards.
+            Replace them with a single autopilot designed for production
+            workloads.
           </p>
         </div>
+      </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b-2 border-gray-200">
-                <th className="text-left py-4 px-4 font-semibold">Feature</th>
-                <th className="text-center py-4 px-4 bg-purple-50 font-semibold text-purple-600">
-                  Cognitude
-                </th>
-                <th className="text-center py-4 px-4 font-semibold">
-                  Helicone
-                </th>
-                <th className="text-center py-4 px-4 font-semibold">
-                  LangSmith
-                </th>
-                <th className="text-center py-4 px-4 font-semibold">Arize</th>
-              </tr>
-            </thead>
-            <tbody>
-              {features.map((feature, index) => (
+      <div className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur">
+        <table className="min-w-full text-xs sm:text-sm">
+          <thead className="border-b border-white/10 bg-white/5 text-slate-200">
+            <tr>
+              <th className="text-left py-4 pl-6 pr-3 font-medium w-1/3">
+                Capability
+              </th>
+              <th className="text-center py-4 px-3 text-indigo-300 font-semibold bg-indigo-500/5 w-1/6">
+                Cognitude
+              </th>
+              <th className="text-center py-4 px-3 text-slate-400 w-1/6">
+                Helicone
+              </th>
+              <th className="text-center py-4 px-3 text-slate-400 w-1/6">
+                LangSmith
+              </th>
+              <th className="text-center py-4 px-3 text-slate-400 w-1/6">
+                Arize
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-white/5">
+            {features.map((feature, idx) => (
+              <>
                 <tr
-                  key={index}
-                  className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${
-                    feature.name.startsWith("⭐") ? "bg-purple-50/30" : ""
-                  }`}
+                  key={feature.name}
+                  onClick={() =>
+                    setExpandedRow(expandedRow === idx ? null : idx)
+                  }
+                  className="group cursor-pointer hover:bg-white/5 transition-colors"
                 >
-                  <td className="py-3 px-4">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium">{feature.name}</span>
-                      {feature.note && (
-                        <span className="text-xs text-purple-600 ml-2">
-                          {feature.note}
-                        </span>
-                      )}
-                    </div>
+                  <td className="py-4 pl-6 pr-3 text-slate-200 font-medium flex items-center gap-2">
+                    <CaretDown
+                      className={`w-3 h-3 text-slate-500 transition-transform ${
+                        expandedRow === idx ? "rotate-180" : ""
+                      }`}
+                      weight="bold"
+                    />
+                    {feature.name}
                   </td>
-                  <td className="text-center py-3 px-4 bg-purple-50/50">
-                    {feature.cognitude ? (
-                      <span className="text-green-500 text-2xl">✅</span>
-                    ) : (
-                      <span className="text-red-500 text-2xl">❌</span>
-                    )}
+                  <td className="py-4 px-3 text-center bg-indigo-500/5 shadow-[inset_0_0_20px_rgba(99,102,241,0.03)]">
+                    {renderCell(feature.cognitude)}
                   </td>
-                  <td className="text-center py-3 px-4">
-                    {feature.helicone ? (
-                      <span className="text-green-500 text-2xl">✅</span>
-                    ) : (
-                      <span className="text-red-500 text-2xl">❌</span>
-                    )}
+                  <td className="py-4 px-3 text-center">
+                    {renderCell(feature.helicone)}
                   </td>
-                  <td className="text-center py-3 px-4">
-                    {feature.langsmith ? (
-                      <span className="text-green-500 text-2xl">✅</span>
-                    ) : (
-                      <span className="text-red-500 text-2xl">❌</span>
-                    )}
+                  <td className="py-4 px-3 text-center">
+                    {renderCell(feature.langsmith)}
                   </td>
-                  <td className="text-center py-3 px-4">
-                    {feature.arize ? (
-                      <span className="text-green-500 text-2xl">✅</span>
-                    ) : (
-                      <span className="text-red-500 text-2xl">❌</span>
-                    )}
+                  <td className="py-4 px-3 text-center">
+                    {renderCell(feature.arize)}
                   </td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="mt-8 text-center bg-purple-100 rounded-xl p-6">
-          <p className="text-lg text-gray-700">
-            <span className="font-semibold">Helicone = monitoring.</span> We
-            built optimization + prevention. Use both for maximum results.
-          </p>
-        </div>
+                {expandedRow === idx && (
+                  <tr className="bg-white/[0.02]">
+                    <td
+                      colSpan="5"
+                      className="py-3 px-6 text-slate-400 text-xs leading-relaxed border-t border-white/5 shadow-inner"
+                    >
+                      <span className="font-semibold text-indigo-300">
+                        Detail:
+                      </span>{" "}
+                      {feature.details}
+                    </td>
+                  </tr>
+                )}
+              </>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );
 }
 
 function Testimonials() {
-  const testimonials = [
+  const cards = [
     {
       quote:
-        "Cut OpenAI bill by $1,200 first week. Autopilot just works. Best ROI tool this year.",
-      author: "Sarah Chen",
-      role: "CTO, TechFlow AI",
+        "Cognitude shaved ~42% off our OpenAI bill in under a week. We didn’t touch application code—just pointed our SDKs at their proxy.",
+      name: "Lena Hoff",
+      role: "Staff ML Engineer, QX Labs",
+      score: "5.0",
     },
     {
       quote:
-        "PREVENTS overspending vs just showing damage. Budget caps saved us from $3K bug bill. Instant ROI.",
-      author: "Marcus Rodriguez",
-      role: "Founder, DataStream Analytics",
-    },
-    {
-      quote:
-        "Schema enforcement = game-changer. Used to lose 15% responses to parsing. Now zero. Auto-fixes everything.",
-      author: "Priya Patel",
-      role: "VP Engineering, InsightBot",
+        "We plugged Cognitude in front of Anthropic and immediately saw latency drop while costs fell by ~35%. It’s now part of every new service we ship.",
+      name: "Diego Ramos",
+      role: "Head of Platform, LambdaFlow",
+      score: "4.9",
     },
   ];
 
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Loved by AI Engineering Teams
-          </h2>
-        </div>
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24">
+      <div className="text-center mb-10">
+        <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+          Featured reviews
+        </p>
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+          Engineers saving real money
+        </h2>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow"
-            >
-              <div className="text-gray-600 text-lg mb-6 leading-relaxed">
-                "{testimonial.quote}"
+      <div className="relative flex flex-col items-center gap-8 sm:flex-row sm:justify-center">
+        {cards.map((card, idx) => (
+          <div
+            key={card.name}
+            className={`relative w-full sm:w-72 rounded-2xl border border-white/20 bg-slate-950/90 p-6 shadow-2xl backdrop-blur ${
+              idx === 0 ? "sm:-rotate-6" : "sm:rotate-6"
+            }`}
+          >
+            <p className="text-sm text-slate-100 leading-relaxed mb-4">
+              {card.quote}
+            </p>
+            <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <p className="text-xs font-medium text-slate-100">
+                  {card.name}
+                </p>
+                <p className="text-xs text-slate-400">{card.role}</p>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"></div>
-                <div>
-                  <div className="font-semibold text-gray-900">
-                    {testimonial.author}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    {testimonial.role}
-                  </div>
-                </div>
+              <div className="flex items-center gap-1 text-amber-300 text-xs">
+                ★ {card.score}
               </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <div className="flex justify-center gap-8 mb-8">
-            {[...Array(8)].map((_, i) => (
-              <div
-                key={i}
-                className="w-24 h-12 bg-gray-200 rounded opacity-50 hover:opacity-100 transition-opacity"
-              ></div>
-            ))}
-          </div>
-          <div className="flex justify-center gap-12 text-gray-600">
-            <div>
-              <span className="text-3xl font-bold text-gray-900">847</span>{" "}
-              teams
-            </div>
-            <div>
-              <span className="text-3xl font-bold text-gray-900">$2.4M</span>{" "}
-              saved
-            </div>
-            <div>
-              <span className="text-3xl font-bold text-gray-900">4.9/5</span>{" "}
-              rating
             </div>
           </div>
+        ))}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <div className="h-48 w-48 rounded-full bg-indigo-500/20 blur-3xl opacity-60"></div>
         </div>
       </div>
     </section>
@@ -447,50 +500,38 @@ function Testimonials() {
 
 function FinalCTA() {
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-          Start Saving in 60 Seconds
-        </h2>
-        <p className="text-xl text-gray-300 mb-12">
-          Join 847 teams cutting LLM costs 30-50% automatically
-        </p>
-
-        <div className="flex flex-col md:flex-row gap-8 justify-center mb-12">
-          <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm border border-white/20">
-            <div className="text-3xl mb-4">👤</div>
-            <h3 className="text-white font-semibold mb-2">1. Sign Up</h3>
-            <p className="text-gray-300">
-              Get API key instantly. No card required.
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24" id="cta">
+      <div className="relative overflow-hidden rounded-3xl border border-indigo-400/40 bg-gradient-to-r from-indigo-600/40 via-slate-950 to-fuchsia-600/40 p-6 sm:p-8 shadow-xl shadow-indigo-500/40">
+        <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-500/40 blur-3xl opacity-70"></div>
+        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-fuchsia-500/40 blur-3xl opacity-70"></div>
+        <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-indigo-100/90 mb-2">
+              Get started
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-2">
+              Drop-in cost optimization for your LLM stack
+            </h2>
+            <p className="text-sm sm:text-base text-slate-100/90 max-w-xl">
+              Point your SDKs at Cognitude, set your guardrails, and watch your
+              LLM bill shrink. No prompt rewrites, no vendor lock-in, no big
+              migration.
             </p>
           </div>
-          <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm border border-white/20">
-            <div className="text-3xl mb-4">💻</div>
-            <h3 className="text-white font-semibold mb-2">2. Replace URL</h3>
-            <p className="text-gray-300">One line change. 60 seconds.</p>
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <a
+              href="#pricing"
+              className="inline-flex items-center justify-center flex-1 sm:flex-none rounded-full bg-white text-slate-900 text-xs sm:text-sm font-medium px-5 py-2.5 shadow-lg shadow-slate-900/40 hover:bg-slate-100 transition"
+            >
+              Start Free in 2 Minutes
+            </a>
+            <a
+              href="#product"
+              className="inline-flex items-center justify-center flex-1 sm:flex-none rounded-full border border-white/20 bg-white/5 text-xs sm:text-sm text-slate-50 px-5 py-2.5 hover:bg-white/10 transition"
+            >
+              <PlayCircle size={18} className="mr-1.5" /> Talk with an engineer
+            </a>
           </div>
-          <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm border border-white/20">
-            <div className="text-3xl mb-4">📉</div>
-            <h3 className="text-white font-semibold mb-2">3. Save Money</h3>
-            <p className="text-gray-300">Watch costs drop automatically.</p>
-          </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 text-lg">
-            Start Free Trial →
-          </button>
-          <button className="px-8 py-4 border-2 border-purple-500 text-white font-semibold rounded-lg hover:bg-purple-500/10 transition-all duration-300 text-lg">
-            Book a Demo
-          </button>
-        </div>
-
-        <div className="text-gray-400">
-          No credit card • Cancel anytime • 14-day guarantee
-        </div>
-        <div className="mt-4 text-gray-300">
-          <span className="inline-block mr-6">⚡ Avg setup: 2 min</span>
-          <span className="inline-block">💰 Avg savings: $1,847/mo</span>
         </div>
       </div>
     </section>
@@ -499,167 +540,75 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer className="bg-slate-900 border-t border-white/10 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-1">
-            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-4">
+    <footer className="border-t border-white/10 bg-slate-950/70 backdrop-blur">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-2">
+            <div className="flex items-center justify-center h-8 w-8 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 ring-1 ring-indigo-300/40">
+              <span className="text-sm font-semibold tracking-tight">Cg</span>
+            </div>
+            <span className="text-sm font-medium tracking-tight text-slate-100">
               Cognitude
-            </div>
-            <p className="text-gray-400 mb-4">
-              LLM Cost Automation & FinOps Platform
-            </p>
-            <div className="flex gap-4">
-              <a
-                href="#"
-                className="text-gray-500 hover:text-purple-400 transition-colors"
-              >
-                Twitter
-              </a>
-              <a
-                href="#"
-                className="text-gray-500 hover:text-purple-400 transition-colors"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="#"
-                className="text-gray-500 hover:text-purple-400 transition-colors"
-              >
-                GitHub
-              </a>
-            </div>
+            </span>
           </div>
-
-          <div>
-            <h3 className="text-white font-semibold mb-4">Product</h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Features
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Docs
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  API Reference
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-white font-semibold mb-4">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Documentation
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  System Status
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Support
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Public Benchmarks
-                </a>
-              </li>
-            </ul>
-          </div>
+          <p className="text-xs text-slate-400 max-w-xs">
+            The LLM cost-optimization autopilot for teams that ship to
+            production.
+          </p>
+          <p className="text-[0.7rem] text-slate-500">
+            © {new Date().getFullYear()} Cognitude, Inc.
+          </p>
         </div>
-
-        <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-400">
-          <p>© 2025 Cognitude. Built to save you money on LLMs.</p>
-          <div className="mt-4 flex justify-center gap-6">
-            <a href="#" className="hover:text-white transition-colors">
+        <div className="flex flex-wrap gap-8 text-[0.75rem] text-slate-300/85">
+          <div className="space-y-2">
+            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em]">
+              Product
+            </p>
+            <a
+              href="#features"
+              className="block hover:text-white transition-colors"
+            >
+              Features
+            </a>
+            <a
+              href="#pricing"
+              className="block hover:text-white transition-colors"
+            >
+              Pricing
+            </a>
+            <a
+              href="#infrastructure"
+              className="block hover:text-white transition-colors"
+            >
+              Security
+            </a>
+          </div>
+          <div className="space-y-2">
+            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em]">
+              Company
+            </p>
+            <a href="#" className="block hover:text-white transition-colors">
+              Blog
+            </a>
+            <a href="#" className="block hover:text-white transition-colors">
+              Changelog
+            </a>
+            <a href="#" className="block hover:text-white transition-colors">
+              Careers
+            </a>
+          </div>
+          <div className="space-y-2">
+            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em]">
+              Legal
+            </p>
+            <a href="#" className="block hover:text-white transition-colors">
               Privacy
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="block hover:text-white transition-colors">
               Terms
             </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Cookies
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Sitemap
+            <a href="#" className="block hover:text-white transition-colors">
+              DPA
             </a>
           </div>
         </div>
@@ -670,13 +619,27 @@ function Footer() {
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="relative min-h-screen bg-[#020617] text-white font-sans">
+      <div className="absolute inset-0 -z-20 bg-gradient-to-br from-[#020617] via-slate-950 to-[#020617]"></div>
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, rgba(148,163,184,0.5) 1px, transparent 0)",
+          backgroundSize: "24px 24px",
+        }}
+      ></div>
+      <div className="pointer-events-none absolute -top-64 -right-32 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.5),_transparent_60%)] blur-3xl"></div>
+      <div className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 h-[20rem] w-[30rem] rounded-full bg-[radial-gradient(circle,_rgba(236,72,153,0.35),_transparent_60%)] blur-3xl"></div>
+
       <Header />
-      <main>
+      <main className="relative z-10">
         <Hero />
-        <SocialProof />
+        <LogoStrip />
         <ProblemSection />
         <Features />
+        <SocialProof />
+        <HowItWorks />
         <ComparisonTable />
         <SavingsCalculator />
         <Pricing />

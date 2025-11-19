@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, ChatCircleDots } from "@phosphor-icons/react";
 
 const faqs = [
   {
@@ -60,78 +60,141 @@ const faqs = [
   {
     question: "Are you SOC 2 compliant?",
     answer:
-      "In progress (Q2 2025). We currently follow all SOC 2 controls and security best practices.",
+      "SOC 2 Type II in progress (Q2 2025). Today we enforce SOC 2 controls: private VPC, encrypted logs, SSO + SCIM, and audit trails.",
+  },
+  {
+    question: "What's the latency overhead?",
+    answer:
+      "Cache hits add <80ms p95. When routing between providers we keep additional latency under 120ms with regional edges and connection pooling.",
+  },
+  {
+    question: "Can we self-host Cognitude?",
+    answer:
+      "Enterprise tier includes private VPC or on-prem install with dedicated support, terraform modules, and 24/7 pager rotation.",
+  },
+  {
+    question: "How does Cognitude handle prompt data?",
+    answer:
+      "We store metadata (timestamps, model, tokens). Full prompts/responses are optional and encrypted if caching is enabled. You can set TTL to 0 for zero retention.",
   },
 ];
 
 function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const visibleFaqs = showAll ? faqs : faqs.slice(0, 5);
+
   return (
-    <section id="faq" className="py-24 bg-slate-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Frequently Asked Questions
+    <section
+      id="faq"
+      className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-24"
+    >
+      <div className="grid lg:grid-cols-3 gap-12 items-start">
+        {/* Left Column: Header & Support */}
+        <div className="lg:col-span-1 lg:sticky lg:top-24">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-200/80">
+            FAQ
+          </div>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">
+            Answers for engineering teams
           </h2>
-          <p className="text-xl text-gray-600">
-            Everything you need to know about optimizing LLM costs with
-            Cognitude
+          <p className="mt-4 text-sm text-slate-400 leading-relaxed">
+            If you’re building on OpenAI, Anthropic, Groq, or Mistral today,
+            Cognitude can usually be added in under an hour.
           </p>
+
+          <div className="mt-8 rounded-2xl border border-white/10 bg-slate-900/50 p-5 backdrop-blur-sm">
+            <div className="flex items-start gap-4">
+              <div className="h-10 w-10 shrink-0 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
+                <ChatCircleDots
+                  className="w-5 h-5 text-emerald-400"
+                  weight="fill"
+                />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-white mb-1">
+                  Still unsure?
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed mb-3">
+                  Drop us a line and we’ll walk through your architecture and
+                  estimate savings for your exact workload.
+                </p>
+                <a
+                  href="#contact"
+                  className="text-xs font-medium text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1"
+                >
+                  Contact Support &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
+        {/* Right Column: Accordion List */}
+        <div className="lg:col-span-2 space-y-3">
+          {visibleFaqs.map((faq, index) => (
             <div
-              key={index}
-              className={`bg-white rounded-lg border-2 transition-all duration-300 ${
+              key={faq.question}
+              className={`group rounded-xl border transition-all duration-200 ${
                 openIndex === index
-                  ? "border-purple-500 shadow-lg"
-                  : "border-gray-200"
+                  ? "bg-slate-900 border-white/10 shadow-lg shadow-indigo-500/5"
+                  : "bg-slate-950/30 border-white/5 hover:border-white/10 hover:bg-slate-900/50"
               }`}
             >
               <button
+                type="button"
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-purple-50 transition-colors"
+                className="w-full text-left px-6 py-4 flex items-center justify-between gap-4"
               >
-                <span className="font-semibold text-gray-900 pr-4">
+                <span
+                  className={`text-sm font-medium transition-colors ${
+                    openIndex === index
+                      ? "text-white"
+                      : "text-slate-300 group-hover:text-white"
+                  }`}
+                >
                   {faq.question}
                 </span>
-                {openIndex === index ? (
-                  <Minus className="w-5 h-5 text-purple-600 flex-shrink-0" />
-                ) : (
-                  <Plus className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                )}
+                <span
+                  className={`shrink-0 transition-transform duration-200 ${
+                    openIndex === index ? "rotate-45" : ""
+                  }`}
+                >
+                  <Plus
+                    className={`w-4 h-4 ${
+                      openIndex === index
+                        ? "text-indigo-400"
+                        : "text-slate-500 group-hover:text-slate-400"
+                    }`}
+                  />
+                </span>
               </button>
-
-              {openIndex === index && (
-                <div className="px-6 pb-4">
-                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+              <div
+                className={`grid transition-[grid-template-rows] duration-200 ease-out ${
+                  openIndex === index
+                    ? "grid-rows-[1fr] opacity-100"
+                    : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="px-6 pb-5 pt-0 text-sm text-slate-400 leading-relaxed">
+                    {faq.answer}
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-12 bg-purple-100 rounded-xl p-8 text-center">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
-            Still have questions?
-          </h3>
-          <p className="text-gray-600 mb-6">
-            Our team is here to help you optimize your LLM costs
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors">
-              Book a Demo
-            </button>
-            <button className="px-6 py-3 border-2 border-purple-600 text-purple-600 font-semibold rounded-lg hover:bg-purple-50 transition-colors">
-              Email Support
-            </button>
-          </div>
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="w-full mt-4 py-3 text-sm font-medium text-slate-400 hover:text-white transition-colors border border-white/5 hover:border-white/10 rounded-xl bg-slate-950/30 hover:bg-slate-900/50"
+          >
+            {showAll ? "Show less" : `Show ${faqs.length - 5} more questions`}
+          </button>
         </div>
       </div>
     </section>

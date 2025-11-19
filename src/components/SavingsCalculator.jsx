@@ -1,274 +1,263 @@
-import { useState, useEffect } from "react";
-import { DollarSign, TrendingDown, BarChart } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import {
+  Calculator,
+  CurrencyDollarSimple,
+  ChartLineUp,
+  Lightning,
+} from "@phosphor-icons/react";
 
 function SavingsCalculator() {
-  const [monthlySpend, setMonthlySpend] = useState(5000);
-  const [primaryModel, setPrimaryModel] = useState("gpt-4");
-  const [simpleTasks, setSimpleTasks] = useState(40);
-  const [mediumTasks, setMediumTasks] = useState(40);
-  const [complexTasks, setComplexTasks] = useState(20);
+  const [tokensPerMonth, setTokensPerMonth] = useState(200_000_000);
+  const [callsPerMonth, setCallsPerMonth] = useState("250000");
+  const [promptSize, setPromptSize] = useState("1500");
+  const [projectedSavings, setProjectedSavings] = useState(0);
+  const [projectedRate, setProjectedRate] = useState(0);
+  const [currentCost, setCurrentCost] = useState(0);
+  const [optimizedCost, setOptimizedCost] = useState(0);
 
-  const [monthlySavings, setMonthlySavings] = useState(0);
-  const [annualSavings, setAnnualSavings] = useState(0);
-  const [roi, setRoi] = useState(0);
+  const formatTokens = (n) => {
+    if (n >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1)}B`;
+    if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(0)}M`;
+    if (n >= 1_000) return `${(n / 1_000).toFixed(0)}k`;
+    return n.toString();
+  };
 
-  // Ensure percentages always add up to 100
-  const adjustPercentages = (type, value) => {
-    const newValue = Math.max(0, Math.min(100, value));
+  const setStartupMode = () => {
+    const tokens = 200_000_000;
+    const prompt = 1500;
+    const calls = Math.round(tokens / prompt);
 
-    if (type === "simple") {
-      setSimpleTasks(newValue);
-      const remaining = 100 - newValue;
-      const ratio = mediumTasks / (mediumTasks + complexTasks);
-      setMediumTasks(Math.round(remaining * ratio));
-      setComplexTasks(remaining - Math.round(remaining * ratio));
-    } else if (type === "medium") {
-      setMediumTasks(newValue);
-      const remaining = 100 - newValue;
-      const ratio = simpleTasks / (simpleTasks + complexTasks);
-      setSimpleTasks(Math.round(remaining * ratio));
-      setComplexTasks(remaining - Math.round(remaining * ratio));
-    } else if (type === "complex") {
-      setComplexTasks(newValue);
-      const remaining = 100 - newValue;
-      const ratio = simpleTasks / (simpleTasks + mediumTasks);
-      setSimpleTasks(Math.round(remaining * ratio));
-      setMediumTasks(remaining - Math.round(remaining * ratio));
+    setTokensPerMonth(tokens);
+    setPromptSize(prompt.toString());
+    setCallsPerMonth(calls.toString());
+  };
+
+  const setEnterpriseMode = () => {
+    const tokens = 10_000_000_000;
+    const prompt = 2000;
+    const calls = Math.round(tokens / prompt);
+
+    setTokensPerMonth(tokens);
+    setPromptSize(prompt.toString());
+    setCallsPerMonth(calls.toString());
+  };
+
+  const handleTokenChange = (e) => {
+    const newTokens = Number(e.target.value);
+    setTokensPerMonth(newTokens);
+    const prompt = Number(promptSize) || 1500;
+    setCallsPerMonth(Math.round(newTokens / prompt).toString());
+  };
+
+  const handleCallsChange = (e) => {
+    const newCalls = e.target.value;
+    setCallsPerMonth(newCalls);
+    const prompt = Number(promptSize) || 0;
+    if (newCalls && prompt) {
+      setTokensPerMonth(Number(newCalls) * prompt);
     }
   };
 
+  const handlePromptChange = (e) => {
+    const newPrompt = e.target.value;
+    setPromptSize(newPrompt);
+    const calls = Number(callsPerMonth) || 0;
+    if (calls && newPrompt) {
+      setTokensPerMonth(calls * Number(newPrompt));
+    }
+  };
+
+  const calculate = useCallback(() => {
+    const tokens = Number(tokensPerMonth) || 0;
+
+    // More realistic cost per 1k tokens (blended rate of GPT-4o, Claude 3.5, etc.)
+    // Assuming average blended input/output cost around $5.00 / 1M tokens ($0.005 / 1k)
+    const costPer1k = 0.005;
+    const current = (tokens / 1000) * costPer1k;
+
+    let rate = 0.35;
+    if (tokens > 1_000_000_000) rate = 0.5;
+    else if (tokens > 500_000_000) rate = 0.45;
+    else if (tokens > 100_000_000) rate = 0.4;
+
+    const savings = current * rate;
+    const optimized = Math.max(current - savings, 0);
+
+    setCurrentCost(current);
+    setOptimizedCost(optimized);
+    setProjectedSavings(savings);
+    setProjectedRate(Math.round(rate * 100));
+  }, [tokensPerMonth]);
+
   useEffect(() => {
-    const simpleSavings = monthlySpend * (simpleTasks / 100) * 0.7;
-    const mediumSavings = monthlySpend * (mediumTasks / 100) * 0.4;
-    const complexSavings = monthlySpend * (complexTasks / 100) * 0.1;
-    const totalMonthlySavings = simpleSavings + mediumSavings + complexSavings;
-
-    setMonthlySavings(totalMonthlySavings);
-    setAnnualSavings(totalMonthlySavings * 12);
-    setRoi(Math.round((totalMonthlySavings / 29) * 100) / 100);
-  }, [monthlySpend, simpleTasks, mediumTasks, complexTasks]);
-
-  const presets = {
-    seed: { spend: 2000, simple: 50, medium: 35, complex: 15 },
-    growth: { spend: 10000, simple: 40, medium: 40, complex: 20 },
-    enterprise: { spend: 50000, simple: 30, medium: 45, complex: 25 },
-  };
-
-  const applyPreset = (preset) => {
-    setMonthlySpend(preset.spend);
-    setSimpleTasks(preset.simple);
-    setMediumTasks(preset.medium);
-    setComplexTasks(preset.complex);
-  };
+    calculate();
+  }, [calculate]);
 
   return (
     <section
       id="calculator"
-      className="py-24 bg-gradient-to-br from-purple-900 via-slate-900 to-slate-900"
+      className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Calculate Your Savings in 30 Seconds
-          </h2>
-          <p className="text-xl text-gray-300">
-            See how much you could save with Cognitude's intelligent routing
-          </p>
+      <div className="text-center mb-10">
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
+          <Calculator className="w-4 h-4 text-indigo-300" />
+          <span className="text-xs text-indigo-100">Savings simulator</span>
         </div>
+        <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
+          Model what Cognitude would save you
+        </h2>
+        <p className="mt-3 max-w-2xl mx-auto text-base text-slate-200/80">
+          Drop in your current traffic mix and see projected savings from
+          routing, caching, and budget enforcement.
+        </p>
+      </div>
 
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
-          {/* Preset Buttons */}
-          <div className="flex justify-center gap-4 mb-8">
+      <div className="grid lg:grid-cols-2 gap-8">
+        <div className="rounded-3xl border border-white/10 bg-slate-950/80 backdrop-blur p-6 sm:p-8 shadow-lg shadow-indigo-500/20">
+          <div className="flex gap-4 mb-8">
             <button
-              onClick={() => applyPreset(presets.seed)}
-              className="px-4 py-2 border border-purple-200 rounded-lg hover:bg-purple-50 transition-colors"
+              onClick={setStartupMode}
+              className="flex-1 py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-medium text-slate-200 transition-colors"
             >
-              Seed Startup
+              Startup
             </button>
             <button
-              onClick={() => applyPreset(presets.growth)}
-              className="px-4 py-2 border border-purple-200 rounded-lg hover:bg-purple-50 transition-colors"
-            >
-              Growth Stage
-            </button>
-            <button
-              onClick={() => applyPreset(presets.enterprise)}
-              className="px-4 py-2 border border-purple-200 rounded-lg hover:bg-purple-50 transition-colors"
+              onClick={setEnterpriseMode}
+              className="flex-1 py-2 px-4 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 text-sm font-medium text-indigo-200 transition-colors"
             >
               Enterprise
             </button>
           </div>
 
-          {/* Inputs */}
-          <div className="space-y-8">
+          <div className="mb-6">
+            <label className="flex items-center justify-between text-xs text-slate-200/80 mb-2">
+              <span>Monthly tokens</span>
+              <span className="text-slate-400">
+                {formatTokens(tokensPerMonth)}
+              </span>
+            </label>
+            <input
+              type="range"
+              min={5_000_000}
+              max={20_000_000_000}
+              step={5_000_000}
+              value={tokensPerMonth}
+              onChange={handleTokenChange}
+              className="w-full accent-indigo-500"
+            />
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Monthly LLM Spend: ${monthlySpend.toLocaleString()}
+              <label className="flex items-center justify-between text-xs text-slate-200/80 mb-1.5">
+                <span>Calls per month</span>
               </label>
               <input
-                type="range"
-                min="500"
-                max="50000"
-                step="500"
-                value={monthlySpend}
-                onChange={(e) => setMonthlySpend(parseInt(e.target.value))}
-                className="w-full h-3 bg-purple-200 rounded-lg appearance-none cursor-pointer"
-                style={{
-                  background: `linear-gradient(to right, #9333EA ${
-                    (monthlySpend - 500) / 495
-                  }%, #E5E7EB ${(monthlySpend - 500) / 495}%)`,
-                }}
+                type="number"
+                value={callsPerMonth}
+                onChange={handleCallsChange}
+                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/60"
+                placeholder="e.g. 250000"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-2">
-                <span>$500</span>
-                <span>$50,000</span>
-              </div>
             </div>
-
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Primary Model
+              <label className="flex items-center justify-between text-xs text-slate-200/80 mb-1.5">
+                <span>Avg prompt size (input + output)</span>
               </label>
-              <select
-                value={primaryModel}
-                onChange={(e) => setPrimaryModel(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              >
-                <option value="gpt-4">GPT-4 Codex</option>
-                <option value="claude">Claude Sonnet</option>
-                <option value="gemini">Gemini Pro</option>
-              </select>
-            </div>
-
-            <div className="space-y-4">
-              <div className="text-sm font-semibold text-gray-700">
-                Task Distribution (must = 100%)
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="text-sm text-gray-600">Simple tasks</label>
-                  <span className="text-sm font-bold text-green-600">
-                    {simpleTasks}% - 70% savings
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={simpleTasks}
-                  onChange={(e) =>
-                    adjustPercentages("simple", parseInt(e.target.value))
-                  }
-                  className="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer"
-                />
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="text-sm text-gray-600">Medium tasks</label>
-                  <span className="text-sm font-bold text-yellow-600">
-                    {mediumTasks}% - 40% savings
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={mediumTasks}
-                  onChange={(e) =>
-                    adjustPercentages("medium", parseInt(e.target.value))
-                  }
-                  className="w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer"
-                />
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="text-sm text-gray-600">Complex tasks</label>
-                  <span className="text-sm font-bold text-orange-600">
-                    {complexTasks}% - 10% savings (cache only)
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={complexTasks}
-                  onChange={(e) =>
-                    adjustPercentages("complex", parseInt(e.target.value))
-                  }
-                  className="w-full h-2 bg-orange-200 rounded-lg appearance-none cursor-pointer"
-                />
-              </div>
-
-              <div className="text-center text-sm text-gray-500">
-                Total: {simpleTasks + mediumTasks + complexTasks}%
-              </div>
+              <input
+                type="number"
+                value={promptSize}
+                onChange={handlePromptChange}
+                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/60"
+                placeholder="e.g. 1500"
+              />
             </div>
           </div>
 
-          {/* Results */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-green-50 rounded-xl p-6 text-center">
-              <DollarSign className="w-10 h-10 text-green-600 mx-auto mb-2" />
-              <div className="text-4xl font-bold text-green-600">
-                ${Math.round(monthlySavings).toLocaleString()}
-              </div>
-              <div className="text-sm text-gray-600 mt-1">Monthly Savings</div>
-            </div>
+          <button
+            type="button"
+            onClick={calculate}
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white text-sm font-medium px-5 py-2.5 shadow-lg shadow-indigo-500/40 hover:bg-indigo-400 transition"
+          >
+            <Lightning className="w-4 h-4 mr-2" /> Calculate savings
+          </button>
+        </div>
 
-            <div className="bg-purple-50 rounded-xl p-6 text-center">
-              <TrendingDown className="w-10 h-10 text-purple-600 mx-auto mb-2" />
-              <div className="text-4xl font-bold text-purple-600">
-                ${Math.round(annualSavings).toLocaleString()}
-              </div>
-              <div className="text-sm text-gray-600 mt-1">Annual Savings</div>
+        <div className="rounded-3xl border border-white/10 bg-slate-950/80 backdrop-blur p-6 sm:p-8 shadow-lg shadow-indigo-500/20 flex flex-col">
+          <div className="text-center pt-2 pb-8 border-b border-white/5 mb-6">
+            <p className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-4">
+              Avg. customer saves
+            </p>
+            <div className="flex items-baseline justify-center gap-2 mb-5">
+              <span className="text-5xl sm:text-6xl font-bold text-white tracking-tight">
+                $
+                {Math.floor(projectedSavings).toLocaleString(undefined, {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}
+              </span>
+              <span className="text-xl text-slate-500 font-medium">/mo</span>
             </div>
-
-            <div className="bg-yellow-50 rounded-xl p-6 text-center">
-              <BarChart className="w-10 h-10 text-yellow-600 mx-auto mb-2" />
-              <div className="text-4xl font-bold text-yellow-600">{roi}x</div>
-              <div className="text-sm text-gray-600 mt-1">ROI</div>
-            </div>
-          </div>
-
-          {/* Chart Visualization */}
-          <div className="mt-8 bg-gray-50 rounded-xl p-6">
-            <div className="flex items-end justify-center gap-8">
-              <div className="text-center">
-                <div
-                  className="bg-red-500 w-20 rounded-t"
-                  style={{ height: "200px" }}
-                ></div>
-                <div className="text-sm mt-2">Current</div>
-                <div className="font-bold">
-                  ${monthlySpend.toLocaleString()}
-                </div>
-              </div>
-              <div className="text-center">
-                <div
-                  className="bg-green-500 w-20 rounded-t"
-                  style={{
-                    height: `${200 * (1 - monthlySavings / monthlySpend)}px`,
-                  }}
-                ></div>
-                <div className="text-sm mt-2">With Cognitude</div>
-                <div className="font-bold">
-                  ${Math.round(monthlySpend - monthlySavings).toLocaleString()}
-                </div>
-              </div>
+            <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-bold tracking-wide">
+              <ChartLineUp className="w-4 h-4" weight="bold" />
+              <span>{Math.floor(projectedRate / 4)}x ROI</span>
             </div>
           </div>
 
-          {/* CTAs */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300">
-              Start Saving Now →
-            </button>
-            <button className="px-8 py-3 border-2 border-purple-600 text-purple-600 font-semibold rounded-lg hover:bg-purple-50 transition-all duration-300">
-              Email Me Report
-            </button>
+          <div className="grid grid-cols-2 gap-4 text-xs mb-8">
+            <div className="space-y-1">
+              <p className="text-slate-400">Current cost</p>
+              <p className="text-lg font-medium text-slate-200">
+                $
+                {currentCost.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </p>
+            </div>
+            <div className="space-y-1 text-right">
+              <p className="text-emerald-400">New cost</p>
+              <p className="text-lg font-bold text-emerald-300">
+                $
+                {optimizedCost.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 text-sm text-slate-200/80 mt-auto">
+            <div className="rounded-2xl bg-white/5 border border-white/10 p-3 text-center flex flex-col items-center justify-center gap-2">
+              <CurrencyDollarSimple
+                className="w-5 h-5 text-emerald-300"
+                weight="bold"
+              />
+              <div>
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide">
+                  Budget
+                </p>
+                <p className="text-white font-semibold text-xs">Enforced</p>
+              </div>
+            </div>
+            <div className="rounded-2xl bg-white/5 border border-white/10 p-3 text-center flex flex-col items-center justify-center gap-2">
+              <ChartLineUp className="w-5 h-5 text-sky-300" weight="bold" />
+              <div>
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide">
+                  Routing
+                </p>
+                <p className="text-white font-semibold text-xs">Active</p>
+              </div>
+            </div>
+            <div className="rounded-2xl bg-white/5 border border-white/10 p-3 text-center flex flex-col items-center justify-center gap-2">
+              <Lightning className="w-5 h-5 text-violet-300" weight="fill" />
+              <div>
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide">
+                  Caching
+                </p>
+                <p className="text-white font-semibold text-xs">~38%</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
