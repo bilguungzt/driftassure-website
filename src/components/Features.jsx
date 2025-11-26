@@ -1,18 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
-  Target,
   ShieldCheck,
   Lightning,
-  TrendUp,
-  TrendDown,
-  ChartBar,
+  ChartLineUp,
   Receipt,
   CheckCircle,
-  XCircle,
-  Users,
-  Flask,
-  Sparkle,
-  Cpu,
+  ArrowRight,
+  Fingerprint,
+  Wrench,
+  TrendDown,
+  Database,
 } from "@phosphor-icons/react";
 
 const ChatGPTLogo = (props) => (
@@ -27,14 +24,6 @@ const GeminiLogo = (props) => (
   <img
     src="/logos/gemini.svg"
     alt="Gemini"
-    {...props}
-    className={`${props.className}`}
-  />
-);
-const GrokLogo = (props) => (
-  <img
-    src="/logos/grok.svg"
-    alt="Grok"
     {...props}
     className={`${props.className}`}
   />
@@ -55,599 +44,268 @@ const DeepSeekLogo = (props) => (
     className={`${props.className}`}
   />
 );
-const OpenRouterLogo = (props) => (
-  <img
-    src="/logos/openrouter.svg"
-    alt="OpenRouter"
-    {...props}
-    className={`${props.className}`}
-  />
-);
 
-function NetworkAnimation() {
-  const techIcons = [
-    {
-      Icon: ChatGPTLogo,
-      label: "ChatGPT",
-      url: "https://chatgpt.com",
-      sizeClass: "h-10 w-10",
-    },
-    {
-      Icon: GeminiLogo,
-      label: "Gemini",
-      url: "https://gemini.google.com",
-      sizeClass: "w-20 h-auto",
-    },
-    {
-      Icon: GrokLogo,
-      label: "Grok",
-      url: "https://grok.x.ai",
-      sizeClass: "w-20 h-auto",
-    },
-    {
-      Icon: ClaudeLogo,
-      label: "Claude",
-      url: "https://claude.ai",
-      sizeClass: "w-20 h-auto",
-    },
-    {
-      Icon: DeepSeekLogo,
-      label: "DeepSeek",
-      url: "https://www.deepseek.com",
-      sizeClass: "w-20 h-auto",
-    },
-    {
-      Icon: OpenRouterLogo,
-      label: "OpenRouter",
-      url: "https://openrouter.ai",
-      sizeClass: "h-10 w-10",
-    },
-  ];
+function Features({ onBookDemo = () => {} }) {
+  const [activeFeature, setActiveFeature] = useState(0);
 
   const features = [
     {
-      Icon: TrendDown,
-      label: "Automatic Cost Reduction",
-      colorClass: "text-emerald-600",
+      id: "stability",
+      icon: ShieldCheck,
+      badge: "LAYER 1",
+      badgeColor: "indigo",
+      title: "Stability Insurance",
+      subtitle: "Never suffer an outage due to provider updates",
+      description:
+        "We fingerprint your 'working' state and lock it in. When a provider silently degrades, we auto-failover to a stable alternative in under 15 seconds.",
+      stats: [
+        { label: "Detection Time", value: "<500ms" },
+        { label: "Failover Time", value: "15 sec" },
+        { label: "Uptime SLA", value: "99.9%" },
+      ],
+      visual: (
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 p-4 rounded-xl bg-indigo-50 border border-indigo-200">
+            <Fingerprint className="w-8 h-8 text-indigo-600" />
+            <div>
+              <p className="text-sm font-semibold text-slate-900">Baseline Fingerprinted</p>
+              <p className="text-xs text-slate-600">GPT-4o @ June 10, 2024 • 847 test cases passed</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="p-3 rounded-lg bg-red-50 border border-red-200">
+              <p className="text-xs text-red-600 font-medium mb-1">Drift Detected</p>
+              <p className="text-lg font-bold text-red-700">-18% logic score</p>
+            </div>
+            <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200">
+              <p className="text-xs text-emerald-600 font-medium mb-1">Auto-Failover</p>
+              <p className="text-lg font-bold text-emerald-700">→ Claude 3.5</p>
+            </div>
+          </div>
+        </div>
+      ),
     },
     {
-      Icon: ShieldCheck,
-      label: "Schema Enforcement",
-      colorClass: "text-indigo-600",
+      id: "repair",
+      icon: Wrench,
+      badge: "LAYER 2",
+      badgeColor: "amber",
+      title: "Semantic Repair",
+      subtitle: "We fix 99% of broken JSON and tool calls in <200ms",
+      description:
+        "Don't let fragile agents crash. Our semantic repair engine validates, fixes, and retries malformed responses before they reach your application.",
+      stats: [
+        { label: "Repair Rate", value: "99.2%" },
+        { label: "Repair Time", value: "<200ms" },
+        { label: "False Positives", value: "0.01%" },
+      ],
+      visual: (
+        <div className="space-y-3">
+          <div className="p-3 rounded-xl bg-red-50 border border-red-200">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs font-medium text-red-600">MALFORMED RESPONSE</span>
+            </div>
+            <pre className="text-xs font-mono text-red-700 overflow-x-auto">
+{`{ "action": "book_flight",
+  "params": { city: "NYC"   // missing quote
+  "date": "2024-03-15" }`}
+            </pre>
+          </div>
+          <div className="flex items-center justify-center">
+            <ArrowRight className="w-5 h-5 text-slate-400" />
+          </div>
+          <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+            <div className="flex items-center gap-2 mb-2">
+              <CheckCircle className="w-4 h-4 text-emerald-600" />
+              <span className="text-xs font-medium text-emerald-600">REPAIRED IN 47ms</span>
+            </div>
+            <pre className="text-xs font-mono text-emerald-700 overflow-x-auto">
+{`{ "action": "book_flight",
+  "params": { "city": "NYC" },
+  "date": "2024-03-15" }`}
+            </pre>
+          </div>
+        </div>
+      ),
     },
     {
-      Icon: ChartBar,
-      label: "Real-Time Benchmarks",
-      colorClass: "text-sky-600",
+      id: "efficiency",
+      icon: ChartLineUp,
+      badge: "LAYER 3",
+      badgeColor: "sky",
+      title: "Token Efficiency",
+      subtitle: "Stop the hidden 10-20% tax of token drift",
+      description:
+        "We audit your providers with z-score statistical confidence. Detect silent verbosity increases, model degradation, and billing anomalies in real-time.",
+      stats: [
+        { label: "Avg Savings", value: "18.4%" },
+        { label: "Detection", value: "Real-time" },
+        { label: "Confidence", value: "σ ≥ 2.5" },
+      ],
+      visual: (
+        <div className="space-y-4">
+          <div className="p-4 rounded-xl bg-white border border-slate-200">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-medium text-slate-600">Token Usage Trend</span>
+              <span className="text-xs text-red-500 font-medium">+23% drift detected</span>
+            </div>
+            <div className="h-16 flex items-end gap-1">
+              {[40, 42, 41, 45, 52, 58, 65, 72].map((h, i) => (
+                <div
+                  key={i}
+                  className={`flex-1 rounded-t ${i >= 5 ? "bg-red-400" : "bg-sky-400"}`}
+                  style={{ height: `${h}%` }}
+                />
+              ))}
+            </div>
+            <div className="flex justify-between mt-2 text-[10px] text-slate-500">
+              <span>June 1</span>
+              <span className="text-red-500 font-medium">← Silent Update</span>
+              <span>June 15</span>
+            </div>
+          </div>
+        </div>
+      ),
     },
     {
-      Icon: Receipt,
-      label: "Audit-Grade FinOps",
-      colorClass: "text-amber-600",
+      id: "attribution",
+      icon: Receipt,
+      badge: "LAYER 4",
+      badgeColor: "emerald",
+      title: "Cost Attribution",
+      subtitle: "Know exactly which feature is burning your budget",
+      description:
+        "Tag every API call by feature, team, or customer. Get audit-grade billing breakdowns that make your CFO happy and your budget meetings short.",
+      stats: [
+        { label: "Granularity", value: "Per-request" },
+        { label: "Export", value: "CSV/API" },
+        { label: "Retention", value: "Unlimited" },
+      ],
+      visual: (
+        <div className="space-y-3">
+          <div className="p-4 rounded-xl bg-white border border-slate-200">
+            <p className="text-xs font-medium text-slate-600 mb-3">Cost by Feature (March 2024)</p>
+            <div className="space-y-2">
+              {[
+                { feature: "Customer Support Agent", cost: "$12,340", pct: 45, color: "bg-indigo-500" },
+                { feature: "Document Processing", cost: "$8,120", pct: 30, color: "bg-sky-500" },
+                { feature: "Code Review Bot", cost: "$4,200", pct: 15, color: "bg-amber-500" },
+                { feature: "Email Classifier", cost: "$2,740", pct: 10, color: "bg-emerald-500" },
+              ].map((item) => (
+                <div key={item.feature} className="flex items-center gap-3">
+                  <div className="w-24 text-xs text-slate-600 truncate">{item.feature}</div>
+                  <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div className={`h-full ${item.color} rounded-full`} style={{ width: `${item.pct}%` }} />
+                  </div>
+                  <div className="w-16 text-xs font-medium text-slate-900 text-right">{item.cost}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ),
     },
-  ];
-
-  const connectionPoints = [150, 270, 390, 510, 630, 750];
-  const paths = [
-    { d: "M150 95 C 300 130, 450 200, 450 275", delay: "0s", length: 600 },
-    { d: "M270 95 C 360 140, 450 210, 450 275", delay: "0.2s", length: 520 },
-    { d: "M390 95 C 420 140, 450 200, 450 275", delay: "0.4s", length: 450 },
-    { d: "M510 95 C 480 140, 450 200, 450 275", delay: "0.6s", length: 450 },
-    { d: "M630 95 C 540 140, 450 210, 450 275", delay: "0.8s", length: 520 },
-    { d: "M750 95 C 600 130, 450 200, 450 275", delay: "1s", length: 600 },
   ];
 
   return (
-    <div className="w-full bg-white">
-      {/* Mobile View */}
-      <div className="flex flex-col items-center gap-8 py-8 md:hidden">
-        {/* Top Icons Grid */}
-        <div className="grid grid-cols-3 gap-6">
-          {techIcons.map(({ Icon: IconComponent, label, url, sizeClass }) => {
-            const IconRender = IconComponent;
-            return (
-              <a
-                key={label}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-2 group"
-              >
-                <div className="flex h-16 w-full items-center justify-center">
-                  <IconRender
-                    className={`${sizeClass.replace(
-                      "h-10 w-10",
-                      "h-8 w-8"
-                    )} object-contain`}
-                  />
-                </div>
-                <span className="text-xs text-slate-500 font-medium">{label}</span>
-              </a>
-            );
-          })}
-        </div>
-
-        {/* Connector Arrow */}
-        <div className="flex flex-col items-center text-indigo-300">
-          <div className="h-8 w-px bg-gradient-to-b from-transparent via-indigo-300 to-indigo-300"></div>
-          <div className="h-2 w-2 border-r border-b border-indigo-300 rotate-45 -mt-1"></div>
-        </div>
-
-        {/* Cognitude Core */}
-        <div className="relative">
-          <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-200 ring-2 ring-indigo-400/40 shadow-[0_0_20px_rgba(99,102,241,0.6)]">
-            <img
-              src="/logos/cognitude_logo.png"
-              alt="Cognitude core"
-              className="h-10 w-10 rounded-full object-cover"
-            />
-          </span>
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
-            <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100">
-              Cognitude Core
+    <section id="features" className="py-20 sm:py-28 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 mb-6">
+            <Database className="w-4 h-4 text-indigo-600" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-indigo-700">
+              Four-Layer Platform
             </span>
           </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            Complete AI Infrastructure Protection
+          </h2>
+          <p className="text-lg text-slate-600">
+            From real-time stability monitoring to granular cost attribution—everything 
+            you need to run mission-critical AI in production.
+          </p>
         </div>
 
-        {/* Connector Arrow */}
-        <div className="flex flex-col items-center text-indigo-300 mt-4">
-          <div className="h-8 w-px bg-gradient-to-b from-indigo-300 via-indigo-300 to-transparent"></div>
+        {/* Provider Logos */}
+        <div className="flex items-center justify-center gap-8 mb-16 opacity-60">
+          <ChatGPTLogo className="h-8 w-auto" />
+          <ClaudeLogo className="h-6 w-auto" />
+          <GeminiLogo className="h-8 w-auto" />
+          <DeepSeekLogo className="h-8 w-auto" />
         </div>
 
-        {/* Features List */}
-        <div className="flex flex-col gap-4 w-full max-w-xs px-4">
-          {features.map(({ Icon: FeatureIcon, label, colorClass }) => {
-            const FeatureRender = FeatureIcon;
-            return (
-              <div
-                key={label}
-                className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100"
+        {/* Feature Tabs */}
+        <div className="grid lg:grid-cols-[300px_1fr] gap-8">
+          {/* Tab Navigation */}
+          <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0">
+            {features.map((feature, index) => (
+              <button
+                key={feature.id}
+                onClick={() => setActiveFeature(index)}
+                className={`flex items-start gap-3 p-4 rounded-xl text-left transition-all min-w-[200px] lg:min-w-0 ${
+                  activeFeature === index
+                    ? "bg-slate-900 text-white shadow-lg"
+                    : "bg-slate-50 text-slate-600 hover:bg-slate-100"
+                }`}
               >
-                <div className={`p-2 rounded-lg bg-white shadow-sm ${colorClass.replace('text-', 'bg-').replace('600', '50')}`}>
-                  <FeatureRender className={`h-5 w-5 ${colorClass}`} />
-                </div>
-                <span className={`text-sm font-medium ${colorClass}`}>
-                  {label}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Desktop View */}
-      <div className="relative hidden md:block h-96 w-full">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 flex gap-6">
-          {techIcons.map(({ Icon: IconComponent, label, url, sizeClass }) => {
-            const IconRender = IconComponent;
-            return (
-              <a
-                key={label}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-3 group"
-              >
-                <div className="flex h-24 w-24 items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <IconRender
-                    className={`${sizeClass} opacity-90 transition-opacity group-hover:opacity-100`}
-                  />
-                </div>
-              </a>
-            );
-          })}
-        </div>
-
-        <svg
-          viewBox="0 0 900 360"
-          className="absolute inset-0 h-full w-full"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {connectionPoints.map((cx) => (
-            <circle
-              key={cx}
-              cx={cx}
-              cy="95"
-              r="3"
-              fill="#a855f7"
-              filter="url(#glow)"
-              opacity="0.8"
-            />
-          ))}
-
-          {paths.map((path) => (
-            <path
-              key={path.d}
-              d={path.d}
-              stroke="#a855f7"
-              strokeWidth="2"
-              strokeLinecap="round"
-              fill="none"
-              strokeDasharray={path.length}
-              strokeDashoffset={path.length}
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                values={`${path.length};0;${path.length}`}
-                dur="3s"
-                begin={path.delay}
-                repeatCount="indefinite"
-              />
-            </path>
-          ))}
-        </svg>
-
-        <div className="absolute bottom-16 left-1/2 -translate-x-1/2">
-          <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-200 ring-2 ring-indigo-400/40 shadow-[0_0_20px_rgba(99,102,241,0.6)]">
-            <img
-              src="/logos/cognitude_logo.png"
-              alt="Cognitude core"
-              className="h-8 w-8 rounded-full object-cover"
-            />
-          </span>
-        </div>
-
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-nowrap items-center justify-center gap-4 whitespace-nowrap">
-          {features.map(({ Icon: FeatureIcon, label, colorClass }, idx) => {
-            const FeatureRender = FeatureIcon;
-            const sepColor = colorClass.replace("600", "200");
-            return (
-              <div key={label} className="flex items-center gap-2 text-sm">
-                <FeatureRender className={`h-4 w-4 ${colorClass}`} />
-                <span className={`${colorClass} font-medium`}>{label}</span>
-                {idx < features.length - 1 && (
-                  <svg width="60" height="2" className={sepColor}>
-                    <line
-                      x1="0"
-                      y1="1"
-                      x2="60"
-                      y2="1"
-                      stroke="currentColor"
-                      strokeWidth="1"
-                      strokeDasharray="4 4"
-                    />
-                  </svg>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Features() {
-  const [liveMetrics, setLiveMetrics] = useState({
-    cost: 34.6,
-    cache: 32.1,
-    latency: 17,
-    savings: 35.6,
-  });
-
-  useEffect(() => {
-    const jitter = (value, min, max, decimals = 1) => {
-      const delta = (Math.random() - 0.5) * 4;
-      const next = Math.min(max, Math.max(min, value + delta));
-      return Number(next.toFixed(decimals));
-    };
-
-    const interval = setInterval(() => {
-      setLiveMetrics((prev) => ({
-        cost: jitter(prev.cost, 30, 55),
-        cache: jitter(prev.cache, 24, 52),
-        latency: jitter(prev.latency, 8, 28, 0),
-        savings: jitter(prev.savings, 30, 50),
-      }));
-    }, 2600);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <section
-      id="features"
-      className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24"
-    >
-      <div className="flex flex-col items-center text-center mb-10">
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 backdrop-blur shadow-sm">
-          <ShieldCheck className="w-4 h-4 text-sky-600" />
-          <span className="text-xs text-sky-700">Autopilot Engine</span>
-        </div>
-        <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
-          Turn your LLM stack into a self-optimizing system
-        </h2>
-        <p className="mt-3 max-w-2xl text-base text-slate-600">
-          Cognitude sits as a smart proxy in front of OpenAI, Anthropic, Groq,
-          and Mistral, continuously routing, caching, and fine-tuning calls for
-          cost, latency, and quality.
-        </p>
-      </div>
-
-      <div className="mt-6 mb-12">
-        <div className="text-center text-sm text-slate-600 max-w-3xl mx-auto">
-          <NetworkAnimation />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 pb-10 sm:pb-14">
-        {/* Card 1: Schema Enforcement */}
-        <section className="group relative overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200 p-5 md:p-6 shadow-sm">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-transparent pointer-events-none"></div>
-          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-indigo-500/5 blur-3xl"></div>
-
-          <div className="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200 backdrop-blur">
-            <div className="flex items-center gap-2 text-slate-700 text-sm mb-3">
-              <ShieldCheck className="w-4 h-4 text-indigo-600" />
-              <span className="font-medium">Guaranteed Valid Responses</span>
-              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-indigo-600">
-                Only on Cognitude
-              </span>
-            </div>
-            <div className="space-y-3 text-[0.75rem] text-slate-600">
-              {/* Before Panel */}
-              <div className="rounded-xl bg-white border border-rose-200 p-3 relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-1.5">
-                  <XCircle className="w-4 h-4 text-rose-500" />
-                </div>
-                <p className="text-slate-400 mb-1 text-xs uppercase tracking-wider">
-                  Before
-                </p>
-                <div className="space-y-1 font-mono text-[0.7rem]">
-                  <p className="text-slate-700">
-                    <span className="text-blue-600">User:</span> "Extract
-                    invoice..."
-                  </p>
-                  <p className="text-slate-700">
-                    <span className="text-green-600">GPT-4:</span> "Sure! Here
-                    is JSON: ```json..."
-                  </p>
-                  <p className="text-rose-600">Error: JSONDecodeError ❌</p>
-                </div>
-              </div>
-
-              {/* After Panel */}
-              <div className="rounded-xl bg-white border border-emerald-200 p-3 relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-1.5">
-                  <CheckCircle className="w-4 h-4 text-emerald-500" />
-                </div>
-                <p className="text-slate-400 mb-1 text-xs uppercase tracking-wider">
-                  With Cognitude
-                </p>
-                <div className="space-y-1 font-mono text-[0.7rem]">
-                  <p className="text-slate-700">
-                    <span className="text-purple-600">Cognitude:</span>
-                  </p>
-                  <ul className="list-none pl-2 space-y-0.5">
-                    <li className="flex items-center gap-1.5 text-emerald-600">
-                      ✓ Injects schema
-                    </li>
-                    <li className="flex items-center gap-1.5 text-emerald-600">
-                      ✓ Validates response
-                    </li>
-                    <li className="flex items-center gap-1.5 text-emerald-600">
-                      ✓ Auto-retries if invalid
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight text-slate-900">
-            Schema Enforcement
-          </h3>
-          <p className="mt-1.5 text-sm text-slate-600">
-            Guaranteed valid JSON outputs. Cognitude validates, fixes, and
-            retries responses automatically before they hit your code.
-          </p>
-        </section>
-
-        {/* Card 2: Smart Model Routing */}
-        <section className="group relative overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200 p-5 md:p-6 shadow-sm">
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-transparent to-transparent pointer-events-none"></div>
-          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-sky-500/5 blur-3xl"></div>
-
-          <div className="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200 backdrop-blur">
-            <div className="flex items-center gap-2 text-slate-700 text-sm mb-3">
-              <Target className="w-4 h-4 text-sky-600" />
-              <span className="font-medium">Smart Model Routing</span>
-              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-sky-600">
-                Multi-vendor
-              </span>
-            </div>
-            <div className="space-y-3 text-[0.75rem] text-slate-600">
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                <span>Cost-optimized</span>
-                <span className="h-[1px] flex-1 bg-slate-300 mx-2"></span>
-                <span className="text-emerald-600 font-medium">
-                  -67% savings
-                </span>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-xl bg-white border border-slate-200 p-3">
-                  <p className="text-slate-400 mb-1 text-xs">Before</p>
-                  <p className="text-sm text-slate-900">Model: gpt-5.1-codex</p>
-                  <p className="text-xs text-slate-500">Task: Classify email</p>
-                  <p className="text-sm text-rose-500 mt-1">$0.00350/req</p>
-                </div>
-                <div className="rounded-xl bg-white border border-emerald-200 p-3">
-                  <p className="text-slate-400 mb-1 text-xs">After</p>
-                  <p className="text-sm text-slate-900">
-                    Model: gemini-2.5-flash
-                  </p>
-                  <p className="text-xs text-emerald-600">Same quality ✓</p>
-                  <p className="text-sm text-emerald-600 mt-1">$0.00040/req</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight text-slate-900">
-            Smart Model Routing
-          </h3>
-          <p className="mt-1.5 text-sm text-slate-600">
-            Auto-route each request to the cheapest model that still hits your
-            quality and latency SLOs across OpenAI, Anthropic, Google, and
-            DeepSeek.
-          </p>
-        </section>
-
-        {/* Card 3: Intelligent Team Caching */}
-        <section className="group relative overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200 p-5 md:p-6 shadow-sm">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent pointer-events-none"></div>
-          <div className="absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-emerald-500/5 blur-3xl"></div>
-
-          <div className="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200 backdrop-blur">
-            <div className="flex items-center gap-2 text-slate-700 text-sm mb-3">
-              <Lightning className="w-4 h-4 text-emerald-500" />
-              <span className="font-medium">Intelligent Team Caching</span>
-              <span className="ml-auto text-[0.65rem] uppercase tracking-[0.15em] text-emerald-600">
-                Deduped
-              </span>
-            </div>
-
-            <div className="space-y-2.5 text-[0.75rem]">
-              {/* Alice */}
-              <div className="rounded-lg bg-white p-2.5 border border-slate-200">
-                <div className="flex justify-between items-start mb-1">
-                  <div className="flex items-center gap-1.5">
-                    <Users className="w-3 h-3 text-blue-500" />
-                    <span className="text-slate-900">Alice (10am)</span>
-                  </div>
-                  <span className="text-slate-500 text-[0.65rem]">$0.003</span>
-                </div>
-                <p className="text-slate-500 italic">"Translate 'Hello'..."</p>
-              </div>
-
-              {/* Bob */}
-              <div className="rounded-lg bg-emerald-50 p-2.5 border border-emerald-200">
-                <div className="flex justify-between items-start mb-1">
-                  <div className="flex items-center gap-1.5">
-                    <Users className="w-3 h-3 text-emerald-500" />
-                    <span className="text-slate-900">Bob (11am)</span>
-                  </div>
-                  <span className="text-emerald-600 font-bold text-[0.65rem]">
-                    $0.00 ✨
+                <feature.icon
+                  className={`w-6 h-6 flex-shrink-0 ${
+                    activeFeature === index ? "text-white" : "text-slate-400"
+                  }`}
+                  weight="bold"
+                />
+                <div>
+                  <span
+                    className={`text-[10px] font-bold tracking-wider ${
+                      activeFeature === index ? "text-slate-400" : "text-slate-400"
+                    }`}
+                  >
+                    {feature.badge}
                   </span>
+                  <p className={`font-semibold ${activeFeature === index ? "text-white" : "text-slate-900"}`}>
+                    {feature.title}
+                  </p>
                 </div>
-                <p className="text-emerald-700 italic">
-                  Gets Alice's cached result
-                </p>
-              </div>
-
-              {/* Carol */}
-              <div className="rounded-lg bg-emerald-50 p-2.5 border border-emerald-200">
-                <div className="flex justify-between items-start mb-1">
-                  <div className="flex items-center gap-1.5">
-                    <Users className="w-3 h-3 text-emerald-500" />
-                    <span className="text-slate-900">Carol (2pm)</span>
-                  </div>
-                  <span className="text-emerald-600 font-bold text-[0.65rem]">
-                    $0.00 ✨
-                  </span>
-                </div>
-                <p className="text-emerald-700 italic">
-                  "Traducir 'Hello'..." (Semantic Match)
-                </p>
-              </div>
-            </div>
+              </button>
+            ))}
           </div>
 
-          <h3 className="mt-5 text-xl md:text-2xl font-semibold tracking-tight text-slate-900">
-            Intelligent Team Caching
-          </h3>
-          <p className="mt-1.5 text-sm text-slate-600">
-            Share a semantic cache across your entire team. If one person
-            requests it, everyone else gets the result instantly for free.
-          </p>
-        </section>
-
-        {/* Card 4: Automatic Optimization */}
-        <div className="relative">
-          <div className="relative rounded-3xl border border-slate-200 bg-white p-5 shadow-xl shadow-indigo-200/30">
-            <div className="flex items-center justify-between text-[0.7rem] text-slate-500 mb-3">
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 border border-slate-200 px-2 py-1">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Autopilot on
-              </div>
-              <div className="flex items-center gap-1 text-slate-500">
-                {"OpenAI • Anthropic • Groq • Mistral"}
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 overflow-hidden">
-              <div className="flex items-center justify-between px-3 py-2 border-b border-slate-200 text-[0.7rem] text-slate-600">
-                <div className="flex items-center gap-2">
-                  <div className="flex gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-rose-400/80"></span>
-                    <span className="h-2 w-2 rounded-full bg-amber-400/80"></span>
-                    <span className="h-2 w-2 rounded-full bg-emerald-400/80"></span>
-                  </div>
-                  <span className="ml-1">index.ts · zero code change</span>
+          {/* Feature Content */}
+          <div className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Left: Description */}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+                    {features[activeFeature].title}
+                  </h3>
+                  <p className="text-lg text-indigo-600 font-medium">
+                    {features[activeFeature].subtitle}
+                  </p>
                 </div>
-                <span className="text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-full px-2 py-0.5">
-                  Savings simulation
-                </span>
-              </div>
-              <div className="p-4 space-y-3 font-mono text-xs">
-                <pre className="text-slate-500">{`// Point your SDKs to Cognitude`}</pre>
-                <pre className="text-indigo-600">{`const openai = new OpenAI({
-  baseURL: "https://api.cognitude.io/v1",
-  defaultHeaders: { "X-API-Key": "cog_..." }
-})`}</pre>
-                <pre className="text-slate-500">{`// Existing code stays the same`}</pre>
-                <pre className="text-emerald-600">{`const completion = await openai.chat.completions.create({
-  model: "gpt-5.1-codex",
-  messages: [{ role: "user", content: "Classify this email" }]
-})`}</pre>
-                <pre className="text-slate-500">{`// Autopilot routing + budget protection automatic + validation`}</pre>
-                <pre className="text-slate-700">{`/* smartRoute → gpt-5.1-mini | cacheHit ${liveMetrics.cache.toFixed(
-                  1
-                )}% | totalSavings -${liveMetrics.cost.toFixed(1)}% */`}</pre>
-              </div>
-            </div>
-
-            <div className="mt-4 grid grid-cols-3 gap-3 text-[0.75rem]">
-              <div className="rounded-xl bg-emerald-50 border border-emerald-200 px-3 py-2">
-                <div className="flex items-center justify-between text-slate-600 mb-1">
-                  <span>Cost</span>
-                  <TrendDown className="w-4 h-4 text-emerald-500" />
-                </div>
-                <p className="text-lg font-semibold text-emerald-600">
-                  -{liveMetrics.cost.toFixed(1)}%
+                <p className="text-slate-600 leading-relaxed">
+                  {features[activeFeature].description}
                 </p>
-              </div>
-              <div className="rounded-xl bg-sky-50 border border-sky-200 px-3 py-2">
-                <div className="flex items-center justify-between text-slate-600 mb-1">
-                  <span>Cache hit</span>
-                  <Sparkle className="w-4 h-4 text-sky-500" />
+                <div className="grid grid-cols-3 gap-4">
+                  {features[activeFeature].stats.map((stat) => (
+                    <div key={stat.label} className="text-center p-3 rounded-xl bg-white border border-slate-200">
+                      <p className="text-xl font-bold text-slate-900">{stat.value}</p>
+                      <p className="text-xs text-slate-500">{stat.label}</p>
+                    </div>
+                  ))}
                 </div>
-                <p className="text-lg font-semibold text-sky-600">
-                  {liveMetrics.cache.toFixed(1)}%
-                </p>
+                <button
+                  onClick={onBookDemo}
+                  className="inline-flex items-center gap-2 text-indigo-600 font-semibold hover:text-indigo-700 transition-colors group"
+                >
+                  See it in action
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
-              <div className="rounded-xl bg-violet-50 border border-violet-200 px-3 py-2">
-                <div className="flex items-center justify-between text-slate-600 mb-1">
-                  <span>Latency</span>
-                  <Cpu className="w-4 h-4 text-violet-500" />
-                </div>
-                <p className="text-lg font-semibold text-violet-600">
-                  +{liveMetrics.latency.toFixed(0)}ms
-                </p>
-              </div>
+
+              {/* Right: Visual */}
+              <div>{features[activeFeature].visual}</div>
             </div>
           </div>
         </div>
