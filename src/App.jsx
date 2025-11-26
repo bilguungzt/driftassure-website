@@ -10,23 +10,22 @@ import {
 
 // Import all components
 import Hero from "./components/Hero";
-import ThreatSection from "./components/ThreatSection";
+import AgitationSection from "./components/AgitationSection";
+import DefenseArchitecture from "./components/DefenseArchitecture";
+import FireDrillProof from "./components/FireDrillProof";
 import TrustBadges from "./components/TrustBadges";
-import SchemaEnforcer from "./components/SchemaEnforcer";
 import SocialProof from "./components/SocialProof";
 import Features from "./components/Features";
-import SavingsCalculator from "./components/SavingsCalculator";
-import Pricing from "./components/Pricing";
+import Pricing from "./components/PricingNew";
 import TechnicalFeatures from "./components/TechnicalFeatures";
-import FAQ from "./components/FAQ";
-import HowItWorks from "./components/HowItWorks";
+import FAQ from "./components/FAQNew";
 import ContactModal from "./components/ContactModal";
 
 // Navigation Links
 const navLinks = [
-  { href: "#features", label: "Platform" },
+  { href: "#how-it-works", label: "How It Works" },
+  { href: "#proof", label: "The Proof" },
   { href: "#pricing", label: "Pricing" },
-  { href: "#infrastructure", label: "Security" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -120,42 +119,39 @@ function Header({ onBookDemo = () => {} }) {
     </header>
   );
 }
+
 function FinalCTA({ onTalkWithEngineer = () => {} }) {
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24" id="cta">
-      <div className="relative overflow-hidden rounded-3xl border border-indigo-200 bg-gradient-to-r from-indigo-50 via-white to-purple-50 p-6 sm:p-8 shadow-xl shadow-indigo-200/40">
-        <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-200/40 blur-3xl opacity-70"></div>
-        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-purple-200/40 blur-3xl opacity-70"></div>
-        <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-indigo-600 mb-2 font-medium">
-              Get started
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-2 text-slate-900">
-              Drop-in cost optimization for your LLM stack
-            </h2>
-            <p className="text-sm sm:text-base text-slate-600 max-w-xl">
-              Point your SDKs at Cognitude, set your guardrails, and watch your
-              LLM bill shrink. No prompt rewrites, no vendor lock-in, no big
-              migration.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <a
-              href="#pricing"
-              className="inline-flex items-center justify-center flex-1 sm:flex-none rounded-full bg-slate-900 text-white text-xs sm:text-sm font-medium px-5 py-2.5 shadow-lg hover:bg-slate-800 transition"
-            >
-              Start Free in 2 Minutes
-            </a>
-            <button
-              type="button"
-              onClick={onTalkWithEngineer}
-              className="inline-flex items-center justify-center flex-1 sm:flex-none rounded-full border border-slate-200 bg-white text-xs sm:text-sm text-slate-700 px-5 py-2.5 hover:bg-slate-50 transition"
-            >
-              <PlayCircle size={18} className="mr-1.5" /> Talk with an engineer
-            </button>
+    <section className="py-20 sm:py-28 bg-slate-950" id="cta">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        {/* Warning pulse */}
+        <div className="flex justify-center mb-8">
+          <div className="relative">
+            <div className="absolute inset-0 rounded-full bg-red-500/20 animate-ping"></div>
+            <div className="relative w-4 h-4 rounded-full bg-red-500"></div>
           </div>
         </div>
+
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
+          The next silent model update is coming.
+        </h2>
+        <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10">
+          Will you spend 2 weeks rewriting prompts, or will you let us fix it in 15 seconds?
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onClick={onTalkWithEngineer}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold text-lg px-8 py-4 shadow-lg shadow-emerald-500/25 transition-all hover:shadow-emerald-400/30"
+          >
+            <PlayCircle size={22} weight="fill" />
+            Book Your Fire Drill Simulation
+          </button>
+        </div>
+
+        <p className="text-sm text-slate-500 mt-6">
+          See your protection in action. No commitment required.
+        </p>
       </div>
     </section>
   );
@@ -163,93 +159,92 @@ function FinalCTA({ onTalkWithEngineer = () => {} }) {
 
 function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-white">
+    <footer className="border-t border-slate-800 bg-slate-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2">
             <img
               src="/logos/cognitude_logo.png"
               alt="Cognitude logo"
-              className="h-8 w-8 rounded-full ring-1 ring-slate-200 object-cover"
+              className="h-8 w-8 rounded-full ring-1 ring-slate-700 object-cover"
             />
-            <span className="text-sm font-medium tracking-tight text-slate-900">
+            <span className="text-sm font-medium tracking-tight text-white">
               Cognitude
             </span>
           </div>
-          <p className="text-xs text-slate-500 max-w-xs">
-            The LLM cost-optimization autopilot for teams that ship to
-            production.
+          <p className="text-xs text-slate-400 max-w-xs">
+            Stability Insurance for AI Infrastructure.
           </p>
-          <p className="text-[0.7rem] text-slate-400">
+          <p className="text-[0.7rem] text-slate-500">
             © {new Date().getFullYear()} Cognitude, Inc.
           </p>
         </div>
-        <div className="flex flex-wrap gap-8 text-[0.75rem] text-slate-600">
+        <div className="flex flex-wrap gap-8 text-[0.75rem] text-slate-400">
           <div className="space-y-2">
-            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
+            <p className="text-slate-500 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
               Product
             </p>
             <a
-              href="#features"
-              className="block hover:text-indigo-600 transition-colors"
+              href="#how-it-works"
+              className="block hover:text-white transition-colors"
             >
-              Features
+              How It Works
             </a>
             <a
               href="#pricing"
-              className="block hover:text-indigo-600 transition-colors"
+              className="block hover:text-white transition-colors"
             >
               Pricing
             </a>
             <a
-              href="#infrastructure"
-              className="block hover:text-indigo-600 transition-colors"
+              href="#proof"
+              className="block hover:text-white transition-colors"
             >
-              Security
+              The Proof
             </a>
           </div>
           <div className="space-y-2">
-            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
+            <p className="text-slate-500 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
               Company
             </p>
             <a
               href="#"
-              className="block hover:text-indigo-600 transition-colors"
+              className="block hover:text-white transition-colors"
             >
               Blog
             </a>
             <a
               href="#"
-              className="block hover:text-indigo-600 transition-colors"
+              className="block hover:text-white transition-colors"
             >
               Changelog
             </a>
             <a
               href="#"
-              className="block hover:text-indigo-600 transition-colors"
+              className="block hover:text-white transition-colors"
             >
               Careers
             </a>
           </div>
           <div className="space-y-2">
-            <p className="text-slate-400 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
+            <p className="text-slate-500 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
               Legal
             </p>
             <a
               href="#"
-              className="block hover:text-indigo-600 transition-colors"
+              className="block hover:text-white transition-colors"
             >
               Privacy
             </a>
             <a
               href="#"
-              className="block hover:text-indigo-600 transition-colors"
+              className="block hover:text-white transition-colors"
             >
               Terms
             </a>
             <a
               href="#"
-              className="block hover:text-indigo-600 transition-colors"
+              className="block hover:text-white transition-colors"
             >
               DPA
             </a>
@@ -274,20 +269,21 @@ function App() {
         {/* Hero: New "Stability Insurance" positioning */}
         <Hero onBookDemo={() => openContactModal("engineer")} />
         
-        {/* Trust badges immediately after hero */}
-        <TrustBadges />
+        {/* Section 2: Agitation - "The Era of Set and Forget AI is Over" */}
+        <AgitationSection />
         
-        {/* The Threat: June 13 narrative to agitate pain */}
-        <ThreatSection onBookDemo={() => openContactModal("engineer")} />
+        {/* Section 3: Defense Architecture - "Active Protection. Zero Latency Impact." */}
+        <DefenseArchitecture />
+        
+        {/* Section 4: Fire Drill Proof - "Don't Trust Promises. Trust the Fire Drill." */}
+        <FireDrillProof onBookDemo={() => openContactModal("engineer")} />
+        
+        {/* Trust badges / Social Proof */}
+        <TrustBadges />
+        <SocialProof />
         
         {/* Features: Reordered Four-Layer Platform */}
         <Features onBookDemo={() => openContactModal("engineer")} />
-        
-        {/* Social Proof */}
-        <SocialProof />
-        
-        {/* How It Works */}
-        <HowItWorks />
         
         {/* Pricing: Enterprise-focused with bifurcated CTAs */}
         <Pricing onBookDemo={() => openContactModal("engineer")} />
