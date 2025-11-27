@@ -107,24 +107,26 @@ const colorClasses = {
   indigo: {
     bg: "bg-indigo-500/10",
     border: "border-indigo-500/30",
-    icon: "text-indigo-500",
-    badge: "bg-indigo-100 text-indigo-700",
-    button: "border-indigo-600 text-indigo-600 hover:bg-indigo-50",
-    check: "text-indigo-600",
+    icon: "text-indigo-400",
+    badge: "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30",
+    button:
+      "border-slate-600 text-white hover:bg-slate-800 hover:border-slate-500",
+    check: "text-indigo-400",
   },
   emerald: {
     bg: "bg-emerald-500/10",
     border: "border-emerald-500/30",
-    icon: "text-emerald-500",
-    badge: "bg-emerald-100 text-emerald-700",
-    button: "bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-600/25",
-    check: "text-emerald-600",
+    icon: "text-emerald-400",
+    badge: "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30",
+    button:
+      "bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-600/25",
+    check: "text-emerald-400",
   },
 };
 
 export default function Pricing({ onBookDemo = () => {} }) {
   return (
-    <section id="pricing" className="py-20 sm:py-28 bg-white">
+    <section id="pricing" className="py-20 sm:py-28 bg-slate-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
@@ -134,17 +136,17 @@ export default function Pricing({ onBookDemo = () => {} }) {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 mb-6">
-            <ShieldCheck size={16} weight="fill" className="text-slate-600" />
-            <span className="text-xs font-medium tracking-wide text-slate-600 uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800 border border-slate-700 mb-6">
+            <ShieldCheck size={16} weight="fill" className="text-indigo-400" />
+            <span className="text-xs font-medium tracking-wide text-slate-300 uppercase">
               Pricing & Plans
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
             Scale with Confidence. Insure against Chaos.
           </h2>
-          <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
             Whether you're debugging your first agent or protecting $10M in ARR,
             we have the reliability layer you need.
           </p>
@@ -165,18 +167,25 @@ export default function Pricing({ onBookDemo = () => {} }) {
                 transition={{ duration: 0.5, delay: index * 0.15 }}
                 className={`relative rounded-3xl p-8 transition-all ${
                   tier.popular
-                    ? "border-2 border-emerald-400/50 bg-gradient-to-b from-slate-900 via-slate-900 to-emerald-950/30 shadow-2xl shadow-emerald-500/20 ring-1 ring-emerald-500/20"
-                    : "border-2 border-slate-200 bg-white hover:border-slate-300 hover:shadow-lg"
+                    ? "border-2 border-emerald-400/50 bg-gradient-to-b from-slate-800 via-slate-800 to-emerald-950/30 shadow-2xl shadow-emerald-500/20 ring-1 ring-emerald-500/20"
+                    : "border border-slate-700 bg-slate-900 hover:border-slate-600"
                 }`}
-                style={tier.popular ? {
-                  backgroundImage: 'linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 50%, rgba(16, 185, 129, 0.02) 100%)',
-                } : {}}
+                style={
+                  tier.popular
+                    ? {
+                        backgroundImage:
+                          "linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 50%, rgba(16, 185, 129, 0.02) 100%)",
+                      }
+                    : {}
+                }
               >
                 {/* Premium metallic shine effect for Insurance tier */}
                 {tier.popular && (
                   <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent animate-shimmer" 
-                         style={{ animationDuration: '3s' }} />
+                    <div
+                      className="absolute -inset-1 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent animate-shimmer"
+                      style={{ animationDuration: "3s" }}
+                    />
                   </div>
                 )}
 
@@ -192,34 +201,84 @@ export default function Pricing({ onBookDemo = () => {} }) {
                 {/* Header */}
                 <div className="mb-8">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-12 h-12 rounded-xl ${tier.popular ? 'bg-emerald-500/10 border border-emerald-500/30' : colors.bg + ' border ' + colors.border} flex items-center justify-center`}>
-                      <Icon size={24} weight="duotone" className={tier.popular ? 'text-emerald-400' : colors.icon} />
+                    <div
+                      className={`w-12 h-12 rounded-xl ${
+                        tier.popular
+                          ? "bg-emerald-500/10 border border-emerald-500/30"
+                          : colors.bg + " border " + colors.border
+                      } flex items-center justify-center`}
+                    >
+                      <Icon
+                        size={24}
+                        weight="duotone"
+                        className={
+                          tier.popular ? "text-emerald-400" : colors.icon
+                        }
+                      />
                     </div>
                     <div>
-                      <h3 className={`text-xl font-bold ${tier.popular ? 'text-white' : 'text-slate-900'}`}>{tier.name}</h3>
-                      <p className={`text-sm ${tier.popular ? 'text-slate-400' : 'text-slate-500'}`}>{tier.tagline}</p>
+                      <h3
+                        className={`text-xl font-bold ${
+                          tier.popular ? "text-white" : "text-white"
+                        }`}
+                      >
+                        {tier.name}
+                      </h3>
+                      <p
+                        className={`text-sm ${
+                          tier.popular ? "text-slate-400" : "text-slate-400"
+                        }`}
+                      >
+                        {tier.tagline}
+                      </p>
                     </div>
                   </div>
 
                   {tier.qualifier && (
-                    <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${tier.popular ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : colors.badge} mb-4`}>
+                    <div
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                        tier.popular
+                          ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                          : colors.badge
+                      } mb-4`}
+                    >
                       {tier.qualifier}
                     </div>
                   )}
 
                   {/* Price */}
                   <div className="flex items-baseline gap-1 mb-2">
-                    <span className={`text-4xl sm:text-5xl font-bold ${tier.popular ? 'text-white' : 'text-slate-900'}`}>
+                    <span
+                      className={`text-4xl sm:text-5xl font-bold ${
+                        tier.popular ? "text-white" : "text-white"
+                      }`}
+                    >
                       {tier.price}
                     </span>
-                    <span className={`text-lg ${tier.popular ? 'text-slate-400' : 'text-slate-500'}`}>{tier.period}</span>
+                    <span
+                      className={`text-lg ${
+                        tier.popular ? "text-slate-400" : "text-slate-400"
+                      }`}
+                    >
+                      {tier.period}
+                    </span>
                   </div>
-                  
+
                   {tier.pricingNote && (
-                    <p className={`text-sm italic ${tier.popular ? 'text-emerald-400/80' : 'text-slate-500'}`}>{tier.pricingNote}</p>
+                    <p
+                      className={`text-sm italic ${
+                        tier.popular ? "text-emerald-400/80" : "text-slate-400"
+                      }`}
+                    >
+                      {tier.pricingNote}
+                    </p>
                   )}
 
-                  <p className={`mt-3 font-medium ${tier.popular ? 'text-slate-300' : 'text-slate-600'}`}>
+                  <p
+                    className={`mt-3 font-medium ${
+                      tier.popular ? "text-slate-300" : "text-slate-300"
+                    }`}
+                  >
                     {tier.valueStatement}
                   </p>
                 </div>
@@ -231,17 +290,29 @@ export default function Pricing({ onBookDemo = () => {} }) {
                       <CheckCircle
                         size={20}
                         weight="fill"
-                        className={`flex-shrink-0 mt-0.5 ${tier.popular ? 'text-emerald-400' : colors.check}`}
+                        className={`flex-shrink-0 mt-0.5 ${
+                          tier.popular ? "text-emerald-400" : colors.check
+                        }`}
                       />
                       <div>
-                        <span className={`block text-sm ${
-                          tier.popular 
-                            ? (feature.highlight ? 'font-bold text-white' : 'text-slate-300') 
-                            : (feature.highlight ? 'font-bold text-slate-900' : 'text-slate-700')
-                        }`}>
+                        <span
+                          className={`block text-sm ${
+                            tier.popular
+                              ? feature.highlight
+                                ? "font-bold text-white"
+                                : "text-slate-300"
+                              : feature.highlight
+                              ? "font-bold text-white"
+                              : "text-slate-300"
+                          }`}
+                        >
                           {feature.text}
                         </span>
-                        <span className={`text-xs ${tier.popular ? 'text-slate-500' : 'text-slate-500'}`}>
+                        <span
+                          className={`text-xs ${
+                            tier.popular ? "text-slate-500" : "text-slate-500"
+                          }`}
+                        >
                           {feature.description}
                         </span>
                       </div>
@@ -253,8 +324,8 @@ export default function Pricing({ onBookDemo = () => {} }) {
                 <button
                   onClick={onBookDemo}
                   className={`w-full inline-flex items-center justify-center gap-2 rounded-full font-semibold px-6 py-3.5 transition-all ${
-                    tier.popular 
-                      ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30 hover:from-emerald-400 hover:to-emerald-500'
+                    tier.popular
+                      ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30 hover:from-emerald-400 hover:to-emerald-500"
                       : `border-2 ${colors.button}`
                   }`}
                 >
@@ -284,8 +355,9 @@ export default function Pricing({ onBookDemo = () => {} }) {
                   Enterprise & Regulated Industries
                 </h3>
                 <p className="text-slate-400 text-sm max-w-xl">
-                  Volume discounts, SOC 2 + HIPAA + PCI compliance, on-prem/VPC deployment,
-                  SSO/SCIM, custom SLAs up to 99.99%, and dedicated account team.
+                  Volume discounts, SOC 2 + HIPAA + PCI compliance, on-prem/VPC
+                  deployment, SSO/SCIM, custom SLAs up to 99.99%, and dedicated
+                  account team.
                 </p>
               </div>
             </div>
@@ -308,25 +380,33 @@ export default function Pricing({ onBookDemo = () => {} }) {
           className="mt-12 grid sm:grid-cols-3 gap-6 text-center"
         >
           <div className="p-6">
-            <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-3">
-              <Code size={20} className="text-indigo-600" />
+            <div className="w-10 h-10 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center mx-auto mb-3">
+              <Code size={20} className="text-indigo-400" />
             </div>
-            <h4 className="font-semibold text-slate-900 mb-1">5-Minute Setup</h4>
-            <p className="text-sm text-slate-500">Change one line of code. We handle the rest.</p>
+            <h4 className="font-semibold text-white mb-1">5-Minute Setup</h4>
+            <p className="text-sm text-slate-400">
+              Change one line of code. We handle the rest.
+            </p>
           </div>
           <div className="p-6">
-            <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-3">
-              <Clock size={20} className="text-emerald-600" />
+            <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mx-auto mb-3">
+              <Clock size={20} className="text-emerald-400" />
             </div>
-            <h4 className="font-semibold text-slate-900 mb-1">14-Day Free Trial</h4>
-            <p className="text-sm text-slate-500">No credit card required. Full feature access.</p>
+            <h4 className="font-semibold text-white mb-1">14-Day Free Trial</h4>
+            <p className="text-sm text-slate-400">
+              No credit card required. Full feature access.
+            </p>
           </div>
           <div className="p-6">
-            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-3">
-              <Handshake size={20} className="text-amber-600" />
+            <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center mx-auto mb-3">
+              <Handshake size={20} className="text-amber-400" />
             </div>
-            <h4 className="font-semibold text-slate-900 mb-1">Money-Back Guarantee</h4>
-            <p className="text-sm text-slate-500">If we don't save you money, you don't pay.</p>
+            <h4 className="font-semibold text-white mb-1">
+              Money-Back Guarantee
+            </h4>
+            <p className="text-sm text-slate-400">
+              If we don't save you money, you don't pay.
+            </p>
           </div>
         </motion.div>
       </div>

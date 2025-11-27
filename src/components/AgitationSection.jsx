@@ -1,15 +1,11 @@
 import { motion } from "framer-motion";
-import {
-  Warning,
-  CurrencyDollar,
-  Robot,
-} from "@phosphor-icons/react";
+import { Warning, CurrencyDollar, Robot } from "@phosphor-icons/react";
 
 const risks = [
   {
     id: 1,
     icon: Warning,
-    title: 'The Silent Update Crisis',
+    title: "The Silent Update Crisis",
     subtitle: 'The "June 13" Problem',
     color: "red",
     points: [
@@ -77,28 +73,28 @@ const risks = [
 
 const colorClasses = {
   red: {
-    bg: "bg-red-500/15",
-    border: "border-red-500/40",
+    bg: "bg-red-950/80",
+    border: "border-red-500/50",
     icon: "text-red-400",
-    badge: "bg-red-500/30 text-red-200",
-    highlight: "text-red-300",
-    title: "text-red-200",
+    badge: "bg-red-500/40 text-red-100",
+    highlight: "text-red-200",
+    title: "text-white",
   },
   amber: {
-    bg: "bg-amber-500/15",
-    border: "border-amber-500/40",
+    bg: "bg-amber-950/80",
+    border: "border-amber-500/50",
     icon: "text-amber-400",
-    badge: "bg-amber-500/30 text-amber-200",
-    highlight: "text-amber-300",
-    title: "text-amber-200",
+    badge: "bg-amber-500/40 text-amber-100",
+    highlight: "text-amber-200",
+    title: "text-white",
   },
   purple: {
-    bg: "bg-purple-500/15",
-    border: "border-purple-500/40",
+    bg: "bg-purple-950/80",
+    border: "border-purple-500/50",
     icon: "text-purple-400",
-    badge: "bg-purple-500/30 text-purple-200",
-    highlight: "text-purple-300",
-    title: "text-purple-200",
+    badge: "bg-purple-500/40 text-purple-100",
+    highlight: "text-purple-200",
+    title: "text-white",
   },
 };
 
@@ -107,7 +103,7 @@ export default function AgitationSection() {
     <section className="relative bg-slate-950 py-20 sm:py-28 overflow-hidden">
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
-      
+
       {/* Gradient overlays */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-500/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
@@ -127,13 +123,16 @@ export default function AgitationSection() {
               Critical Infrastructure Risk
             </span>
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
             The Era of "Set and Forget" AI is Over.
           </h2>
           <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-            On June 13, 2024, a silent model update broke thousands of products overnight.{" "}
-            <span className="text-slate-300">It wasn't a bug. It's the new normal.</span>
+            On June 13, 2024, a silent model update broke thousands of products
+            overnight.{" "}
+            <span className="text-slate-300">
+              It wasn't a bug. It's the new normal.
+            </span>
           </p>
         </motion.div>
 
@@ -155,7 +154,7 @@ export default function AgitationSection() {
           {risks.map((risk, index) => {
             const colors = colorClasses[risk.color];
             const Icon = risk.icon;
-            
+
             return (
               <motion.div
                 key={risk.id}
@@ -167,31 +166,53 @@ export default function AgitationSection() {
               >
                 {/* Risk Number Badge */}
                 <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center">
-                  <span className="text-sm font-bold text-white">{risk.id}</span>
+                  <span className="text-sm font-bold text-white">
+                    {risk.id}
+                  </span>
                 </div>
 
                 <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                   {/* Icon and Title */}
                   <div className="flex-shrink-0 lg:w-64">
-                    <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${colors.bg} border ${colors.border} mb-4`}>
-                      <Icon size={24} weight="duotone" className={colors.icon} />
+                    <div
+                      className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${colors.bg} border ${colors.border} mb-4`}
+                    >
+                      <Icon
+                        size={24}
+                        weight="duotone"
+                        className={colors.icon}
+                      />
                     </div>
-                    <h4 className={`text-xl font-bold mb-1 ${colors.title}`}>{risk.title}</h4>
-                    <p className={`text-sm font-semibold ${colors.highlight}`}>{risk.subtitle}</p>
+                    <h4 className={`text-2xl font-bold mb-1 ${colors.title}`}>
+                      {risk.title}
+                    </h4>
+                    <p
+                      className={`text-base font-semibold ${colors.highlight}`}
+                    >
+                      {risk.subtitle}
+                    </p>
                   </div>
 
                   {/* Points */}
                   <div className="flex-1 grid gap-4 sm:grid-cols-3">
                     {risk.points.map((point, pointIndex) => (
                       <div key={pointIndex} className="space-y-2">
-                        <div className={`inline-block px-2.5 py-1 rounded-md text-xs font-bold ${colors.badge}`}>
+                        <div
+                          className={`inline-block px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wide ${colors.badge}`}
+                        >
                           {point.label}
                         </div>
-                        <p className={`text-sm leading-relaxed ${point.highlight ? 'text-white font-semibold' : 'text-slate-300'}`}>
+                        <p
+                          className={`text-base leading-relaxed ${
+                            point.highlight
+                              ? "text-white font-semibold"
+                              : "text-slate-200"
+                          }`}
+                        >
                           {point.text}
                         </p>
                         {point.math && (
-                          <code className="inline-block mt-1 px-2 py-1 rounded bg-slate-800 text-purple-300 text-xs font-mono">
+                          <code className="inline-block mt-1 px-3 py-1.5 rounded bg-slate-800 text-purple-300 text-sm font-mono">
                             {point.math}
                           </code>
                         )}
@@ -220,7 +241,8 @@ export default function AgitationSection() {
               </span>
             </div>
             <p className="text-sm text-slate-300">
-              <span className="font-semibold text-white">Right now,</span> your LLM stack is one silent update away from breaking.
+              <span className="font-semibold text-white">Right now,</span> your
+              LLM stack is one silent update away from breaking.
             </p>
           </div>
         </motion.div>

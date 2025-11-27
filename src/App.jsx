@@ -136,7 +136,8 @@ function FinalCTA({ onTalkWithEngineer = () => {} }) {
           The next silent model update is coming.
         </h2>
         <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10">
-          Will you spend 2 weeks rewriting prompts, or will you let us fix it in 15 seconds?
+          Will you spend 2 weeks rewriting prompts, or will you let us fix it in
+          15 seconds?
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -145,7 +146,7 @@ function FinalCTA({ onTalkWithEngineer = () => {} }) {
             className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold text-lg px-8 py-4 shadow-lg shadow-emerald-500/25 transition-all hover:shadow-emerald-400/30"
           >
             <PlayCircle size={22} weight="fill" />
-            Book Your Fire Drill Simulation
+            Get Protected Now
           </button>
         </div>
 
@@ -207,22 +208,13 @@ function Footer() {
             <p className="text-slate-500 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
               Company
             </p>
-            <a
-              href="#"
-              className="block hover:text-white transition-colors"
-            >
+            <a href="#" className="block hover:text-white transition-colors">
               Blog
             </a>
-            <a
-              href="#"
-              className="block hover:text-white transition-colors"
-            >
+            <a href="#" className="block hover:text-white transition-colors">
               Changelog
             </a>
-            <a
-              href="#"
-              className="block hover:text-white transition-colors"
-            >
+            <a href="#" className="block hover:text-white transition-colors">
               Careers
             </a>
           </div>
@@ -230,22 +222,13 @@ function Footer() {
             <p className="text-slate-500 text-[0.7rem] uppercase tracking-[0.18em] font-medium">
               Legal
             </p>
-            <a
-              href="#"
-              className="block hover:text-white transition-colors"
-            >
+            <a href="#" className="block hover:text-white transition-colors">
               Privacy
             </a>
-            <a
-              href="#"
-              className="block hover:text-white transition-colors"
-            >
+            <a href="#" className="block hover:text-white transition-colors">
               Terms
             </a>
-            <a
-              href="#"
-              className="block hover:text-white transition-colors"
-            >
+            <a href="#" className="block hover:text-white transition-colors">
               DPA
             </a>
           </div>
@@ -268,32 +251,32 @@ function App() {
       <main className="relative z-10">
         {/* Hero: New "Stability Insurance" positioning */}
         <Hero onBookDemo={() => openContactModal("engineer")} />
-        
+
         {/* Section 2: Agitation - "The Era of Set and Forget AI is Over" */}
         <AgitationSection />
-        
+
         {/* Section 3: Defense Architecture - "Active Protection. Zero Latency Impact." */}
         <DefenseArchitecture />
-        
+
         {/* Section 4: Fire Drill Proof - "Don't Trust Promises. Trust the Fire Drill." */}
         <FireDrillProof onBookDemo={() => openContactModal("engineer")} />
-        
+
         {/* Trust badges / Social Proof */}
         <TrustBadges />
         <SocialProof />
-        
+
         {/* Features: Reordered Four-Layer Platform */}
         <Features onBookDemo={() => openContactModal("engineer")} />
-        
+
         {/* Pricing: Enterprise-focused with bifurcated CTAs */}
         <Pricing onBookDemo={() => openContactModal("engineer")} />
-        
+
         {/* Technical Features / Security */}
         <TechnicalFeatures />
-        
+
         {/* FAQ */}
         <FAQ onContactSupport={() => openContactModal("support")} />
-        
+
         {/* Final CTA */}
         <FinalCTA onTalkWithEngineer={() => openContactModal("engineer")} />
       </main>

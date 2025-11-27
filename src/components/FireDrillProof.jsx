@@ -42,7 +42,8 @@ const timelineEvents = [
   {
     time: "14:05:15",
     label: "The Failover",
-    event: "AUTO-FAILOVER EXECUTED. Traffic rerouted from gpt-4-turbo → claude-3-5-sonnet.",
+    event:
+      "AUTO-FAILOVER EXECUTED. Traffic rerouted from gpt-4-turbo → claude-3-5-sonnet.",
     mitigationTime: "15 Seconds",
     userImpact: "Zero. Requests were queued and served successfully.",
     status: "success",
@@ -118,12 +119,15 @@ const colorClasses = {
 
 export default function FireDrillProof({ onBookDemo = () => {} }) {
   return (
-    <section className="relative bg-slate-950 py-20 sm:py-28 overflow-hidden" id="proof">
+    <section
+      className="relative bg-slate-950 py-20 sm:py-28 overflow-hidden"
+      id="proof"
+    >
       {/* Background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.06),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(99,102,241,0.06),transparent_50%)]" />
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -150,7 +154,7 @@ export default function FireDrillProof({ onBookDemo = () => {} }) {
           </p>
         </motion.div>
 
-        {/* Timeline */}
+        {/* Timeline - ZOOMED IN */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -160,23 +164,23 @@ export default function FireDrillProof({ onBookDemo = () => {} }) {
         >
           <div className="relative rounded-2xl bg-slate-900/80 border border-slate-700 overflow-hidden">
             {/* Terminal header */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-slate-900 border-b border-slate-700">
-              <div className="w-3 h-3 rounded-full bg-red-500/70" />
-              <div className="w-3 h-3 rounded-full bg-amber-500/70" />
-              <div className="w-3 h-3 rounded-full bg-emerald-500/70" />
-              <span className="ml-3 text-xs text-slate-500 font-mono">
-                cognitude-fire-drill.log
+            <div className="flex items-center gap-2 px-6 py-4 bg-slate-900 border-b border-slate-700">
+              <div className="w-3.5 h-3.5 rounded-full bg-red-500/70" />
+              <div className="w-3.5 h-3.5 rounded-full bg-amber-500/70" />
+              <div className="w-3.5 h-3.5 rounded-full bg-emerald-500/70" />
+              <span className="ml-4 text-sm text-slate-400 font-mono">
+                cognitude-fire-drill.log — Live Chaos Simulation
               </span>
             </div>
 
-            {/* Timeline content */}
-            <div className="p-6 sm:p-8">
+            {/* Timeline content - LARGER */}
+            <div className="p-8 sm:p-10 lg:p-12">
               <div className="relative">
                 {/* Vertical line */}
-                <div className="absolute left-[88px] sm:left-[100px] top-0 bottom-0 w-px bg-gradient-to-b from-red-500 via-amber-500 to-emerald-500 hidden sm:block" />
+                <div className="absolute left-[110px] sm:left-[130px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-red-500 via-amber-500 to-emerald-500 hidden sm:block" />
 
                 {/* Events */}
-                <div className="space-y-6">
+                <div className="space-y-8">
                   {timelineEvents.map((event, index) => {
                     const colors = statusClasses[event.status];
                     const Icon = event.icon;
@@ -188,41 +192,82 @@ export default function FireDrillProof({ onBookDemo = () => {} }) {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: index * 0.15 }}
-                        className={`relative flex gap-4 sm:gap-6 ${event.isMoneyShot ? 'z-20' : ''}`}
+                        className={`relative flex gap-5 sm:gap-8 ${
+                          event.isMoneyShot ? "z-20" : ""
+                        }`}
                       >
-                        {/* Timestamp */}
-                        <div className="flex-shrink-0 w-20 sm:w-24 text-right">
-                          <code className={`text-sm font-mono ${event.isMoneyShot ? 'text-emerald-400 font-bold' : 'text-slate-400'}`}>
+                        {/* Timestamp - LARGER */}
+                        <div className="flex-shrink-0 w-24 sm:w-32 text-right">
+                          <code
+                            className={`text-lg sm:text-xl font-mono font-bold ${
+                              event.isMoneyShot
+                                ? "text-emerald-400"
+                                : "text-slate-300"
+                            }`}
+                          >
                             {event.time}
                           </code>
                         </div>
 
                         {/* Dot indicator - desktop */}
-                        <div className="hidden sm:flex flex-shrink-0 w-3 items-start justify-center pt-1.5 relative z-10">
-                          <div className={`w-3 h-3 rounded-full ${colors.dot} ring-4 ring-slate-900 ${event.isMoneyShot ? 'animate-pulse' : ''}`} />
+                        <div className="hidden sm:flex flex-shrink-0 w-4 items-start justify-center pt-2 relative z-10">
+                          <div
+                            className={`w-4 h-4 rounded-full ${
+                              colors.dot
+                            } ring-4 ring-slate-900 ${
+                              event.isMoneyShot ? "animate-pulse w-5 h-5" : ""
+                            }`}
+                          />
                         </div>
 
-                        {/* Content */}
-                        <div className={`flex-1 rounded-xl ${colors.bg} border ${colors.border} p-4 sm:p-5 ${
-                          event.isMoneyShot 
-                            ? 'ring-2 ring-emerald-500/50 shadow-lg shadow-emerald-500/20' 
-                            : ''
-                        }`}>
-                          <div className="flex items-start gap-3 mb-3">
-                            <div className={`flex-shrink-0 w-8 h-8 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center ${
-                              event.isMoneyShot ? 'animate-pulse' : ''
-                            }`}>
-                              <Icon size={18} weight="fill" className={colors.icon} />
+                        {/* Content - LARGER */}
+                        <div
+                          className={`flex-1 rounded-xl ${colors.bg} border ${
+                            colors.border
+                          } p-5 sm:p-6 lg:p-8 ${
+                            event.isMoneyShot
+                              ? "ring-2 ring-emerald-500/50 shadow-xl shadow-emerald-500/30"
+                              : ""
+                          }`}
+                        >
+                          <div className="flex items-start gap-4 mb-4">
+                            <div
+                              className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg ${
+                                colors.bg
+                              } border ${
+                                colors.border
+                              } flex items-center justify-center ${
+                                event.isMoneyShot ? "animate-pulse" : ""
+                              }`}
+                            >
+                              <Icon
+                                size={24}
+                                weight="fill"
+                                className={colors.icon}
+                              />
                             </div>
                             <div>
-                              <h4 className={`font-bold ${event.isMoneyShot ? 'text-emerald-400' : 'text-white'}`}>
-                                {event.isMoneyShot ? '✓ ' : ''}{event.label}
+                              <h4
+                                className={`text-lg sm:text-xl font-bold ${
+                                  event.isMoneyShot
+                                    ? "text-emerald-400"
+                                    : "text-white"
+                                }`}
+                              >
+                                {event.isMoneyShot ? "✓ " : ""}
+                                {event.label}
                               </h4>
                               {event.statusText && (
-                                <span className={`inline-flex items-center gap-1.5 text-xs font-medium ${colors.text}`}>
-                                  <span className="relative flex h-2 w-2">
-                                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${colors.dot} opacity-75`}></span>
-                                    <span className={`relative inline-flex rounded-full h-2 w-2 ${colors.dot}`}></span>
+                                <span
+                                  className={`inline-flex items-center gap-1.5 text-sm font-medium ${colors.text}`}
+                                >
+                                  <span className="relative flex h-2.5 w-2.5">
+                                    <span
+                                      className={`animate-ping absolute inline-flex h-full w-full rounded-full ${colors.dot} opacity-75`}
+                                    ></span>
+                                    <span
+                                      className={`relative inline-flex rounded-full h-2.5 w-2.5 ${colors.dot}`}
+                                    ></span>
                                   </span>
                                   {event.statusText}
                                 </span>
@@ -230,32 +275,62 @@ export default function FireDrillProof({ onBookDemo = () => {} }) {
                             </div>
                           </div>
 
-                          <div className="space-y-2">
-                            <p className={`text-sm leading-relaxed ${event.isMoneyShot ? 'text-emerald-100 font-medium' : 'text-slate-300'}`}>
-                              <span className={`font-medium ${event.isMoneyShot ? 'text-emerald-300' : 'text-slate-500'}`}>Event: </span>
+                          <div className="space-y-3">
+                            <p
+                              className={`text-base leading-relaxed ${
+                                event.isMoneyShot
+                                  ? "text-emerald-100 font-medium"
+                                  : "text-slate-200"
+                              }`}
+                            >
+                              <span
+                                className={`font-medium ${
+                                  event.isMoneyShot
+                                    ? "text-emerald-300"
+                                    : "text-slate-400"
+                                }`}
+                              >
+                                Event:{" "}
+                              </span>
                               {event.event}
                             </p>
 
                             {event.latency && (
-                              <p className="text-sm">
-                                <span className="text-slate-500 font-medium">Latency: </span>
-                                <span className="text-amber-300 font-mono">{event.latency}</span>
+                              <p className="text-base">
+                                <span className="text-slate-400 font-medium">
+                                  Latency:{" "}
+                                </span>
+                                <span className="text-amber-300 font-mono text-lg font-bold">
+                                  {event.latency}
+                                </span>
                               </p>
                             )}
 
                             {event.mitigationTime && (
-                              <p className="text-sm">
-                                <span className="text-slate-500 font-medium">Total Mitigation Time: </span>
-                                <span className="text-emerald-300 font-bold">{event.mitigationTime}</span>
+                              <p className="text-base">
+                                <span className="text-slate-400 font-medium">
+                                  Total Mitigation Time:{" "}
+                                </span>
+                                <span className="text-emerald-300 font-bold text-xl">
+                                  {event.mitigationTime}
+                                </span>
                               </p>
                             )}
 
                             {event.userImpact && (
-                              <div className="flex items-center gap-2 pt-1">
-                                <CheckCircle size={16} weight="fill" className="text-emerald-400" />
-                                <p className="text-sm">
-                                  <span className="text-slate-500 font-medium">User Impact: </span>
-                                  <span className="text-emerald-300 font-semibold">{event.userImpact}</span>
+                              <div className="flex items-center gap-2 pt-2">
+                                <CheckCircle
+                                  size={20}
+                                  weight="fill"
+                                  className="text-emerald-400"
+                                />
+                                <p className="text-base">
+                                  <span className="text-slate-400 font-medium">
+                                    User Impact:{" "}
+                                  </span>
+                                  <span className="text-emerald-300 font-semibold">
+                                    {event.userImpact}
+                                  </span>
                                 </p>
                               </div>
                             )}
@@ -300,7 +375,9 @@ export default function FireDrillProof({ onBookDemo = () => {} }) {
                   transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
                   className="relative rounded-2xl bg-slate-900/80 border border-slate-700 p-5 sm:p-6 text-center hover:border-slate-600 transition-colors"
                 >
-                  <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${colors} border mb-4`}>
+                  <div
+                    className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${colors} border mb-4`}
+                  >
                     <Icon size={20} weight="duotone" />
                   </div>
                   <div className="text-2xl sm:text-3xl font-bold text-white mb-1">
@@ -309,9 +386,7 @@ export default function FireDrillProof({ onBookDemo = () => {} }) {
                   <div className="text-sm font-medium text-slate-300 mb-0.5">
                     {stat.label}
                   </div>
-                  <div className="text-xs text-slate-500">
-                    {stat.sublabel}
-                  </div>
+                  <div className="text-xs text-slate-500">{stat.sublabel}</div>
                 </motion.div>
               );
             })}

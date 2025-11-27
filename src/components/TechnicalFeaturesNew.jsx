@@ -75,8 +75,8 @@ export default function TechnicalFeatures() {
             Enterprise-grade by Default
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Cognitude is built for teams who ship to highly regulated environments.
-            Keep your data safe while optimizing cost.
+            Cognitude is built for teams who ship to highly regulated
+            environments. Keep your data safe while optimizing cost.
           </p>
         </motion.div>
 
@@ -118,13 +118,21 @@ export default function TechnicalFeatures() {
                         key={stat.label}
                         className="rounded-xl bg-slate-800/50 border border-slate-700 p-3 text-center"
                       >
-                        <p className={`text-[10px] font-bold tracking-wider uppercase mb-1 ${
-                          stat.status === "certified" ? "text-emerald-400" : "text-indigo-400"
-                        }`}>
+                        <p
+                          className={`text-[10px] font-bold tracking-wider uppercase mb-1 ${
+                            stat.status === "certified"
+                              ? "text-emerald-400"
+                              : "text-indigo-400"
+                          }`}
+                        >
                           {stat.status === "certified" ? "Certified" : "Active"}
                         </p>
-                        <p className="text-lg font-semibold text-white">{stat.label}</p>
-                        <p className="text-[10px] text-slate-500">{stat.sublabel}</p>
+                        <p className="text-lg font-semibold text-white">
+                          {stat.label}
+                        </p>
+                        <p className="text-[10px] text-slate-500">
+                          {stat.sublabel}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -138,12 +146,18 @@ export default function TechnicalFeatures() {
                         <feature.highlight.icon size={20} weight="fill" />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-slate-300">Data Logging</p>
-                        <p className="text-[10px] text-slate-500">Encryption active</p>
+                        <p className="text-sm font-medium text-slate-300">
+                          Data Logging
+                        </p>
+                        <p className="text-[10px] text-slate-500">
+                          Encryption active
+                        </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-bold text-emerald-400">{feature.highlight.value}</p>
+                      <p className="text-lg font-bold text-emerald-400">
+                        {feature.highlight.value}
+                      </p>
                       <p className="text-[10px] text-slate-500 uppercase tracking-wider">
                         {feature.highlight.label}
                       </p>
@@ -159,8 +173,12 @@ export default function TechnicalFeatures() {
                         key={metric.label}
                         className="rounded-xl bg-slate-800/50 border border-slate-700 p-3"
                       >
-                        <p className="text-[10px] text-slate-500 mb-1">{metric.label}</p>
-                        <p className="text-xl font-bold text-emerald-400">{metric.value}</p>
+                        <p className="text-[10px] text-slate-500 mb-1">
+                          {metric.label}
+                        </p>
+                        <p className="text-xl font-bold text-emerald-400">
+                          {metric.value}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -178,8 +196,12 @@ export default function TechnicalFeatures() {
                           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                         )}
                         <div>
-                          <p className="text-sm font-medium text-white">{badge.label}</p>
-                          <p className="text-[10px] text-slate-500">{badge.sublabel}</p>
+                          <p className="text-sm font-medium text-white">
+                            {badge.label}
+                          </p>
+                          <p className="text-[10px] text-slate-500">
+                            {badge.sublabel}
+                          </p>
                         </div>
                       </div>
                     ))}

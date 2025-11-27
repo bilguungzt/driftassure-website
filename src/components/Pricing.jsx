@@ -1,4 +1,10 @@
-import { CheckCircle, Sparkle, ShieldCheck, Play, ArrowRight } from "@phosphor-icons/react";
+import {
+  CheckCircle,
+  Sparkle,
+  ShieldCheck,
+  Play,
+  ArrowRight,
+} from "@phosphor-icons/react";
 import { useState } from "react";
 
 function Pricing({ onBookDemo = () => {} }) {
@@ -95,10 +101,7 @@ function Pricing({ onBookDemo = () => {} }) {
   ];
 
   return (
-    <section
-      id="pricing"
-      className="py-20 sm:py-28 bg-slate-50"
-    >
+    <section id="pricing" className="py-20 sm:py-28 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-12">
@@ -112,10 +115,10 @@ function Pricing({ onBookDemo = () => {} }) {
             Insurance for Your AI Infrastructure
           </h2>
           <p className="max-w-2xl text-lg text-slate-600 mb-8">
-            Choose the level of protection your mission-critical AI needs. 
-            Every plan includes our core stability platform.
+            Choose the level of protection your mission-critical AI needs. Every
+            plan includes our core stability platform.
           </p>
-          
+
           {/* Billing Toggle */}
           <div className="inline-flex items-center gap-1 p-1 bg-white rounded-full border border-slate-200 shadow-sm text-sm">
             <button
@@ -257,14 +260,18 @@ function Pricing({ onBookDemo = () => {} }) {
                 </a>
               ) : (
                 <button
-                  onClick={plan.target === "enterprise" ? onBookDemo : undefined}
+                  onClick={
+                    plan.target === "enterprise" ? onBookDemo : undefined
+                  }
                   className={`w-full inline-flex justify-center items-center gap-2 rounded-full py-3 text-sm font-semibold transition-all ${
                     plan.buttonStyle === "solid"
                       ? "bg-indigo-600 text-white hover:bg-indigo-500 shadow-lg shadow-indigo-200"
                       : "bg-slate-100 text-slate-900 border border-slate-200 hover:bg-slate-200"
                   }`}
                 >
-                  {plan.target === "enterprise" && <Play className="w-4 h-4" weight="fill" />}
+                  {plan.target === "enterprise" && (
+                    <Play className="w-4 h-4" weight="fill" />
+                  )}
                   {plan.cta}
                 </button>
               )}
@@ -275,15 +282,16 @@ function Pricing({ onBookDemo = () => {} }) {
         {/* Bottom CTA Section */}
         <div className="relative bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-8 sm:p-12 overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:2rem_2rem]" />
-          
+
           <div className="relative grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                 See Stability Insurance in Action
               </h3>
               <p className="text-slate-300 text-lg mb-6">
-                We'll simulate a provider outage on your staging environment and show you 
-                how Cognitude auto-failovers in under 15 seconds. No risk, pure proof.
+                We'll simulate a provider outage on your staging environment and
+                show you how Cognitude auto-failovers in under 15 seconds. No
+                risk, pure proof.
               </p>
               <div className="flex flex-wrap gap-4">
                 <button
@@ -306,7 +314,9 @@ function Pricing({ onBookDemo = () => {} }) {
             </div>
             <div className="text-center md:text-right">
               <div className="inline-block bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                <p className="text-slate-400 text-sm mb-2">Trusted by teams protecting</p>
+                <p className="text-slate-400 text-sm mb-2">
+                  Trusted by teams protecting
+                </p>
                 <p className="text-4xl font-bold text-white mb-2">$10M+</p>
                 <p className="text-slate-400 text-sm">in annual AI spend</p>
               </div>

@@ -17,7 +17,7 @@ const steps = [
     subtitle: "The Insurance Policy",
     color: "indigo",
     howItWorks:
-      'We don\'t just pass traffic. We create "Stateful Fingerprints" of your application\'s ideal behavior—analyzing semantic texture, JSON structure, and response patterns.',
+      "We don't just pass traffic. We create \"Stateful Fingerprints\" of your application's ideal behavior—analyzing semantic texture, JSON structure, and response patterns.",
     benefit:
       'You define what "working" looks like. We lock that baseline. If a provider\'s update deviates from your fingerprint, our hybrid detection system triggers an alert in 1-15 seconds.',
   },
@@ -77,10 +77,13 @@ const colorClasses = {
 
 export default function DefenseArchitecture() {
   return (
-    <section className="relative bg-slate-950 py-20 sm:py-28 overflow-hidden" id="how-it-works">
+    <section
+      className="relative bg-slate-950 py-20 sm:py-28 overflow-hidden"
+      id="how-it-works"
+    >
       {/* Background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.08),transparent_70%)]" />
-      
+
       {/* Connecting line for desktop */}
       <div className="hidden lg:block absolute left-1/2 top-64 bottom-48 w-px bg-gradient-to-b from-indigo-500/50 via-emerald-500/50 to-amber-500/50" />
 
@@ -99,13 +102,15 @@ export default function DefenseArchitecture() {
               The Intelligent Stability Layer
             </span>
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
             Active Protection. Zero Latency Impact.
           </h2>
           <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
             Cognitude sits between your application and your LLM providers.{" "}
-            <span className="text-slate-300">We don't just log errors; we intercept and fix them in real-time.</span>
+            <span className="text-slate-300">
+              We don't just log errors; we intercept and fix them in real-time.
+            </span>
           </p>
         </motion.div>
 
@@ -136,39 +141,65 @@ export default function DefenseArchitecture() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
-                className={`relative lg:w-[calc(50%-2rem)] ${isEven ? "lg:ml-auto" : ""}`}
+                className={`relative lg:w-[calc(50%-2rem)] ${
+                  isEven ? "lg:ml-auto" : ""
+                }`}
               >
                 {/* Step Number - Desktop only, on the connecting line */}
-                <div className={`hidden lg:flex absolute ${isEven ? "-left-12" : "-right-12"} top-8 w-8 h-8 rounded-full ${colors.number} items-center justify-center font-bold text-sm shadow-lg z-10`}>
+                <div
+                  className={`hidden lg:flex absolute ${
+                    isEven ? "-left-12" : "-right-12"
+                  } top-8 w-8 h-8 rounded-full ${
+                    colors.number
+                  } items-center justify-center font-bold text-sm shadow-lg z-10`}
+                >
                   {step.id}
                 </div>
 
                 {/* Card */}
-                <div className={`relative rounded-2xl ${colors.bg} border ${colors.border} p-6 sm:p-8 overflow-hidden`}>
+                <div
+                  className={`relative rounded-2xl ${colors.bg} border ${colors.border} p-6 sm:p-8 overflow-hidden`}
+                >
                   {/* Gradient accent */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} opacity-50`} />
-                  
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} opacity-50`}
+                  />
+
                   <div className="relative">
                     {/* Mobile step number */}
-                    <div className={`lg:hidden absolute -top-2 -left-2 w-7 h-7 rounded-full ${colors.number} flex items-center justify-center font-bold text-xs shadow-lg`}>
+                    <div
+                      className={`lg:hidden absolute -top-2 -left-2 w-7 h-7 rounded-full ${colors.number} flex items-center justify-center font-bold text-xs shadow-lg`}
+                    >
                       {step.id}
                     </div>
 
                     {/* Header */}
                     <div className="flex items-start gap-4 mb-6 ml-6 lg:ml-0">
-                      <div className={`flex-shrink-0 w-12 h-12 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center`}>
-                        <Icon size={24} weight="duotone" className={colors.icon} />
+                      <div
+                        className={`flex-shrink-0 w-12 h-12 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center`}
+                      >
+                        <Icon
+                          size={24}
+                          weight="duotone"
+                          className={colors.icon}
+                        />
                       </div>
                       <div>
-                        <h4 className="text-xl font-bold text-white">{step.title}</h4>
-                        <p className={`text-sm font-medium ${colors.icon}`}>{step.subtitle}</p>
+                        <h4 className="text-xl font-bold text-white">
+                          {step.title}
+                        </h4>
+                        <p className={`text-sm font-medium ${colors.icon}`}>
+                          {step.subtitle}
+                        </p>
                       </div>
                     </div>
 
                     {/* Content */}
                     <div className="space-y-4">
                       <div>
-                        <span className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge} mb-2`}>
+                        <span
+                          className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge} mb-2`}
+                        >
                           How it works
                         </span>
                         <p className="text-slate-300 text-sm leading-relaxed">
@@ -178,7 +209,9 @@ export default function DefenseArchitecture() {
 
                       {step.benefit && (
                         <div>
-                          <span className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge} mb-2`}>
+                          <span
+                            className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge} mb-2`}
+                          >
                             The Benefit
                           </span>
                           <p className="text-slate-300 text-sm leading-relaxed">
@@ -189,7 +222,9 @@ export default function DefenseArchitecture() {
 
                       {step.mechanics && (
                         <div>
-                          <span className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge} mb-2`}>
+                          <span
+                            className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge} mb-2`}
+                          >
                             The Mechanics
                           </span>
                           <p className="text-slate-300 text-sm leading-relaxed">
@@ -200,7 +235,11 @@ export default function DefenseArchitecture() {
 
                       {step.result && (
                         <div className="flex items-start gap-2 pt-2">
-                          <CheckCircle size={18} weight="fill" className={`flex-shrink-0 mt-0.5 ${colors.icon}`} />
+                          <CheckCircle
+                            size={18}
+                            weight="fill"
+                            className={`flex-shrink-0 mt-0.5 ${colors.icon}`}
+                          />
                           <p className="text-white font-medium text-sm">
                             {step.result}
                           </p>
@@ -227,7 +266,9 @@ export default function DefenseArchitecture() {
             <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
               <div className="absolute top-4 right-4 text-xs font-mono text-slate-400 leading-relaxed">
                 <div>client = OpenAI(</div>
-                <div className="pl-4 text-emerald-400">base_url="https://api.cognitude.io"</div>
+                <div className="pl-4 text-emerald-400">
+                  base_url="https://api.cognitude.io"
+                </div>
                 <div>)</div>
               </div>
             </div>
@@ -238,10 +279,16 @@ export default function DefenseArchitecture() {
                   <div className="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
                     <Code size={20} className="text-emerald-400" />
                   </div>
-                  <h4 className="text-2xl font-bold text-white">Zero Code Rewrites.</h4>
+                  <h4 className="text-2xl font-bold text-white">
+                    Zero Code Rewrites.
+                  </h4>
                 </div>
                 <p className="text-slate-300 mb-6">
-                  Cognitude works as a drop-in middleware. Point your <code className="px-1.5 py-0.5 rounded bg-slate-700 text-emerald-300 text-sm font-mono">base_url</code> to us, and we handle the rest using smart feature detection.
+                  Cognitude works as a drop-in middleware. Point your{" "}
+                  <code className="px-1.5 py-0.5 rounded bg-slate-700 text-emerald-300 text-sm font-mono">
+                    base_url
+                  </code>{" "}
+                  to us, and we handle the rest using smart feature detection.
                 </p>
 
                 <div className="flex flex-wrap gap-6">
@@ -250,8 +297,12 @@ export default function DefenseArchitecture() {
                       <Timer size={16} className="text-indigo-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 uppercase tracking-wide">Setup Time</p>
-                      <p className="text-lg font-bold text-white">&lt; 5 Minutes</p>
+                      <p className="text-xs text-slate-500 uppercase tracking-wide">
+                        Setup Time
+                      </p>
+                      <p className="text-lg font-bold text-white">
+                        &lt; 5 Minutes
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -259,9 +310,13 @@ export default function DefenseArchitecture() {
                       <Lightning size={16} className="text-emerald-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 uppercase tracking-wide">Latency Impact</p>
+                      <p className="text-xs text-slate-500 uppercase tracking-wide">
+                        Latency Impact
+                      </p>
                       <p className="text-lg font-bold text-white">&lt; 0.1ms</p>
-                      <p className="text-xs text-slate-500">Redis-backed caching</p>
+                      <p className="text-xs text-slate-500">
+                        Redis-backed caching
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -278,12 +333,19 @@ export default function DefenseArchitecture() {
                   </div>
                   <pre className="p-4 text-sm font-mono overflow-x-auto">
                     <code>
-                      <span className="text-slate-500"># Before</span>{"\n"}
-                      <span className="text-slate-400">client = OpenAI()</span>{"\n\n"}
-                      <span className="text-slate-500"># After</span>{"\n"}
-                      <span className="text-slate-400">client = OpenAI(</span>{"\n"}
-                      <span className="text-emerald-400">  base_url=</span>
-                      <span className="text-amber-300">"https://api.cognitude.io"</span>{"\n"}
+                      <span className="text-slate-500"># Before</span>
+                      {"\n"}
+                      <span className="text-slate-400">client = OpenAI()</span>
+                      {"\n\n"}
+                      <span className="text-slate-500"># After</span>
+                      {"\n"}
+                      <span className="text-slate-400">client = OpenAI(</span>
+                      {"\n"}
+                      <span className="text-emerald-400"> base_url=</span>
+                      <span className="text-amber-300">
+                        "https://api.cognitude.io"
+                      </span>
+                      {"\n"}
                       <span className="text-slate-400">)</span>
                     </code>
                   </pre>

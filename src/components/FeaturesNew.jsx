@@ -18,7 +18,7 @@ const ChatGPTLogo = (props) => (
     src="/logos/chatgpt.svg"
     alt="ChatGPT"
     {...props}
-    style={{ filter: 'brightness(0) invert(1)', opacity: 0.6 }}
+    style={{ filter: "brightness(0) invert(1)", opacity: 0.6 }}
   />
 );
 const GeminiLogo = (props) => (
@@ -26,7 +26,7 @@ const GeminiLogo = (props) => (
     src="/logos/gemini.svg"
     alt="Gemini"
     {...props}
-    style={{ filter: 'brightness(0) invert(1)', opacity: 0.6 }}
+    style={{ filter: "brightness(0) invert(1)", opacity: 0.6 }}
   />
 );
 const ClaudeLogo = (props) => (
@@ -34,7 +34,7 @@ const ClaudeLogo = (props) => (
     src="/logos/claude.svg"
     alt="Claude"
     {...props}
-    style={{ filter: 'brightness(0) invert(1)', opacity: 0.6 }}
+    style={{ filter: "brightness(0) invert(1)", opacity: 0.6 }}
   />
 );
 const DeepSeekLogo = (props) => (
@@ -42,7 +42,7 @@ const DeepSeekLogo = (props) => (
     src="/logos/deepseek.svg"
     alt="DeepSeek"
     {...props}
-    style={{ filter: 'brightness(0) invert(1)', opacity: 0.6 }}
+    style={{ filter: "brightness(0) invert(1)", opacity: 0.6 }}
   />
 );
 
@@ -68,7 +68,9 @@ function Features({ onBookDemo = () => {} }) {
         <div className="space-y-3">
           <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-medium text-slate-400">Primary Provider</span>
+              <span className="text-xs font-medium text-slate-400">
+                Primary Provider
+              </span>
               <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-red-500/20 border border-red-500/30 text-xs font-medium text-red-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                 Drift Detected
@@ -86,12 +88,16 @@ function Features({ onBookDemo = () => {} }) {
           </div>
           <div className="flex items-center justify-center">
             <div className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30">
-              <span className="text-xs font-bold text-emerald-400">AUTO-FAILOVER</span>
+              <span className="text-xs font-bold text-emerald-400">
+                AUTO-FAILOVER
+              </span>
             </div>
           </div>
           <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-medium text-slate-400">Fallback Provider</span>
+              <span className="text-xs font-medium text-slate-400">
+                Fallback Provider
+              </span>
               <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-xs font-medium text-emerald-400">
                 <CheckCircle size={12} weight="fill" />
                 Active
@@ -102,8 +108,12 @@ function Features({ onBookDemo = () => {} }) {
                 <span className="text-lg">🟣</span>
               </div>
               <div>
-                <p className="text-sm font-medium text-white">claude-3-5-sonnet</p>
-                <p className="text-xs text-emerald-400">3.2% drift (within baseline)</p>
+                <p className="text-sm font-medium text-white">
+                  claude-3-5-sonnet
+                </p>
+                <p className="text-xs text-emerald-400">
+                  3.2% drift (within baseline)
+                </p>
               </div>
             </div>
           </div>
@@ -128,10 +138,12 @@ function Features({ onBookDemo = () => {} }) {
         <div className="space-y-3">
           <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-medium text-red-400">MALFORMED RESPONSE</span>
+              <span className="text-xs font-medium text-red-400">
+                MALFORMED RESPONSE
+              </span>
             </div>
             <pre className="text-xs font-mono text-red-300 overflow-x-auto">
-{`{ "action": "book_flight",
+              {`{ "action": "book_flight",
   "params": { city: "NYC"   // missing quote
   "date": "2024-03-15" }`}
             </pre>
@@ -142,10 +154,12 @@ function Features({ onBookDemo = () => {} }) {
           <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
             <div className="flex items-center gap-2 mb-2">
               <CheckCircle className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-medium text-emerald-400">REPAIRED IN 47ms</span>
+              <span className="text-xs font-medium text-emerald-400">
+                REPAIRED IN 47ms
+              </span>
             </div>
             <pre className="text-xs font-mono text-emerald-300 overflow-x-auto">
-{`{ "action": "book_flight",
+              {`{ "action": "book_flight",
   "params": { "city": "NYC" },
   "date": "2024-03-15" }`}
             </pre>
@@ -171,14 +185,20 @@ function Features({ onBookDemo = () => {} }) {
         <div className="space-y-4">
           <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-medium text-slate-400">Token Usage Trend</span>
-              <span className="text-xs text-red-400 font-medium">+23% drift detected</span>
+              <span className="text-xs font-medium text-slate-400">
+                Token Usage Trend
+              </span>
+              <span className="text-xs text-red-400 font-medium">
+                +23% drift detected
+              </span>
             </div>
             <div className="h-24 flex items-end gap-1">
               {[40, 42, 45, 48, 52, 58, 65, 72, 78, 85, 92, 98].map((h, i) => (
                 <div
                   key={i}
-                  className={`flex-1 rounded-t ${i >= 8 ? 'bg-red-500/60' : 'bg-indigo-500/60'}`}
+                  className={`flex-1 rounded-t ${
+                    i >= 8 ? "bg-red-500/60" : "bg-indigo-500/60"
+                  }`}
                   style={{ height: `${h}%` }}
                 />
               ))}
@@ -190,7 +210,9 @@ function Features({ onBookDemo = () => {} }) {
           </div>
           <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/30">
             <TrendDown className="w-4 h-4 text-amber-400" />
-            <span className="text-xs text-amber-300">Alert: Verbosity spike detected on gpt-4-turbo</span>
+            <span className="text-xs text-amber-300">
+              Alert: Verbosity spike detected on gpt-4-turbo
+            </span>
           </div>
         </div>
       ),
@@ -212,20 +234,49 @@ function Features({ onBookDemo = () => {} }) {
       visual: (
         <div className="space-y-3">
           <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
-            <p className="text-xs font-medium text-slate-400 mb-3">Cost by Feature (March 2024)</p>
+            <p className="text-xs font-medium text-slate-400 mb-3">
+              Cost by Feature (March 2024)
+            </p>
             <div className="space-y-2">
               {[
-                { feature: "Customer Support", cost: "$12,340", pct: 45, color: "bg-indigo-500" },
-                { feature: "Doc Processing", cost: "$8,120", pct: 30, color: "bg-sky-500" },
-                { feature: "Code Review", cost: "$4,200", pct: 15, color: "bg-amber-500" },
-                { feature: "Email Classifier", cost: "$2,740", pct: 10, color: "bg-emerald-500" },
+                {
+                  feature: "Customer Support",
+                  cost: "$12,340",
+                  pct: 45,
+                  color: "bg-indigo-500",
+                },
+                {
+                  feature: "Doc Processing",
+                  cost: "$8,120",
+                  pct: 30,
+                  color: "bg-sky-500",
+                },
+                {
+                  feature: "Code Review",
+                  cost: "$4,200",
+                  pct: 15,
+                  color: "bg-amber-500",
+                },
+                {
+                  feature: "Email Classifier",
+                  cost: "$2,740",
+                  pct: 10,
+                  color: "bg-emerald-500",
+                },
               ].map((item) => (
                 <div key={item.feature} className="flex items-center gap-3">
-                  <div className="w-24 text-xs text-slate-400 truncate">{item.feature}</div>
-                  <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
-                    <div className={`h-full ${item.color} rounded-full`} style={{ width: `${item.pct}%` }} />
+                  <div className="w-24 text-xs text-slate-400 truncate">
+                    {item.feature}
                   </div>
-                  <div className="w-16 text-xs font-medium text-white text-right">{item.cost}</div>
+                  <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full ${item.color} rounded-full`}
+                      style={{ width: `${item.pct}%` }}
+                    />
+                  </div>
+                  <div className="w-16 text-xs font-medium text-white text-right">
+                    {item.cost}
+                  </div>
                 </div>
               ))}
             </div>
@@ -256,8 +307,9 @@ function Features({ onBookDemo = () => {} }) {
             Complete AI Infrastructure Protection
           </h2>
           <p className="text-lg text-slate-400">
-            From real-time stability monitoring to granular cost attribution—everything 
-            you need to run mission-critical AI in production.
+            From real-time stability monitoring to granular cost
+            attribution—everything you need to run mission-critical AI in
+            production.
           </p>
         </motion.div>
 
@@ -285,19 +337,27 @@ function Features({ onBookDemo = () => {} }) {
               >
                 <feature.icon
                   className={`w-6 h-6 flex-shrink-0 ${
-                    activeFeature === index ? "text-indigo-400" : "text-slate-500"
+                    activeFeature === index
+                      ? "text-indigo-400"
+                      : "text-slate-500"
                   }`}
                   weight="bold"
                 />
                 <div>
                   <span
                     className={`text-[10px] font-bold tracking-wider ${
-                      activeFeature === index ? "text-indigo-400" : "text-slate-600"
+                      activeFeature === index
+                        ? "text-indigo-400"
+                        : "text-slate-600"
                     }`}
                   >
                     {feature.badge}
                   </span>
-                  <p className={`font-semibold ${activeFeature === index ? "text-white" : "text-slate-300"}`}>
+                  <p
+                    className={`font-semibold ${
+                      activeFeature === index ? "text-white" : "text-slate-300"
+                    }`}
+                  >
                     {feature.title}
                   </p>
                 </div>
@@ -329,8 +389,13 @@ function Features({ onBookDemo = () => {} }) {
                 </p>
                 <div className="grid grid-cols-3 gap-4">
                   {features[activeFeature].stats.map((stat) => (
-                    <div key={stat.label} className="text-center p-3 rounded-xl bg-slate-800/50 border border-slate-700">
-                      <p className="text-xl font-bold text-white">{stat.value}</p>
+                    <div
+                      key={stat.label}
+                      className="text-center p-3 rounded-xl bg-slate-800/50 border border-slate-700"
+                    >
+                      <p className="text-xl font-bold text-white">
+                        {stat.value}
+                      </p>
                       <p className="text-xs text-slate-500">{stat.label}</p>
                     </div>
                   ))}

@@ -68,17 +68,25 @@ function Features({ onBookDemo = () => {} }) {
           <div className="flex items-center gap-3 p-4 rounded-xl bg-indigo-50 border border-indigo-200">
             <Fingerprint className="w-8 h-8 text-indigo-600" />
             <div>
-              <p className="text-sm font-semibold text-slate-900">Baseline Fingerprinted</p>
-              <p className="text-xs text-slate-600">GPT-4o @ June 10, 2024 • 847 test cases passed</p>
+              <p className="text-sm font-semibold text-slate-900">
+                Baseline Fingerprinted
+              </p>
+              <p className="text-xs text-slate-600">
+                GPT-4o @ June 10, 2024 • 847 test cases passed
+              </p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="p-3 rounded-lg bg-red-50 border border-red-200">
-              <p className="text-xs text-red-600 font-medium mb-1">Drift Detected</p>
+              <p className="text-xs text-red-600 font-medium mb-1">
+                Drift Detected
+              </p>
               <p className="text-lg font-bold text-red-700">-18% logic score</p>
             </div>
             <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200">
-              <p className="text-xs text-emerald-600 font-medium mb-1">Auto-Failover</p>
+              <p className="text-xs text-emerald-600 font-medium mb-1">
+                Auto-Failover
+              </p>
               <p className="text-lg font-bold text-emerald-700">→ Claude 3.5</p>
             </div>
           </div>
@@ -103,10 +111,12 @@ function Features({ onBookDemo = () => {} }) {
         <div className="space-y-3">
           <div className="p-3 rounded-xl bg-red-50 border border-red-200">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-medium text-red-600">MALFORMED RESPONSE</span>
+              <span className="text-xs font-medium text-red-600">
+                MALFORMED RESPONSE
+              </span>
             </div>
             <pre className="text-xs font-mono text-red-700 overflow-x-auto">
-{`{ "action": "book_flight",
+              {`{ "action": "book_flight",
   "params": { city: "NYC"   // missing quote
   "date": "2024-03-15" }`}
             </pre>
@@ -117,10 +127,12 @@ function Features({ onBookDemo = () => {} }) {
           <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
             <div className="flex items-center gap-2 mb-2">
               <CheckCircle className="w-4 h-4 text-emerald-600" />
-              <span className="text-xs font-medium text-emerald-600">REPAIRED IN 47ms</span>
+              <span className="text-xs font-medium text-emerald-600">
+                REPAIRED IN 47ms
+              </span>
             </div>
             <pre className="text-xs font-mono text-emerald-700 overflow-x-auto">
-{`{ "action": "book_flight",
+              {`{ "action": "book_flight",
   "params": { "city": "NYC" },
   "date": "2024-03-15" }`}
             </pre>
@@ -146,14 +158,20 @@ function Features({ onBookDemo = () => {} }) {
         <div className="space-y-4">
           <div className="p-4 rounded-xl bg-white border border-slate-200">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-medium text-slate-600">Token Usage Trend</span>
-              <span className="text-xs text-red-500 font-medium">+23% drift detected</span>
+              <span className="text-xs font-medium text-slate-600">
+                Token Usage Trend
+              </span>
+              <span className="text-xs text-red-500 font-medium">
+                +23% drift detected
+              </span>
             </div>
             <div className="h-16 flex items-end gap-1">
               {[40, 42, 41, 45, 52, 58, 65, 72].map((h, i) => (
                 <div
                   key={i}
-                  className={`flex-1 rounded-t ${i >= 5 ? "bg-red-400" : "bg-sky-400"}`}
+                  className={`flex-1 rounded-t ${
+                    i >= 5 ? "bg-red-400" : "bg-sky-400"
+                  }`}
                   style={{ height: `${h}%` }}
                 />
               ))}
@@ -184,20 +202,49 @@ function Features({ onBookDemo = () => {} }) {
       visual: (
         <div className="space-y-3">
           <div className="p-4 rounded-xl bg-white border border-slate-200">
-            <p className="text-xs font-medium text-slate-600 mb-3">Cost by Feature (March 2024)</p>
+            <p className="text-xs font-medium text-slate-600 mb-3">
+              Cost by Feature (March 2024)
+            </p>
             <div className="space-y-2">
               {[
-                { feature: "Customer Support Agent", cost: "$12,340", pct: 45, color: "bg-indigo-500" },
-                { feature: "Document Processing", cost: "$8,120", pct: 30, color: "bg-sky-500" },
-                { feature: "Code Review Bot", cost: "$4,200", pct: 15, color: "bg-amber-500" },
-                { feature: "Email Classifier", cost: "$2,740", pct: 10, color: "bg-emerald-500" },
+                {
+                  feature: "Customer Support Agent",
+                  cost: "$12,340",
+                  pct: 45,
+                  color: "bg-indigo-500",
+                },
+                {
+                  feature: "Document Processing",
+                  cost: "$8,120",
+                  pct: 30,
+                  color: "bg-sky-500",
+                },
+                {
+                  feature: "Code Review Bot",
+                  cost: "$4,200",
+                  pct: 15,
+                  color: "bg-amber-500",
+                },
+                {
+                  feature: "Email Classifier",
+                  cost: "$2,740",
+                  pct: 10,
+                  color: "bg-emerald-500",
+                },
               ].map((item) => (
                 <div key={item.feature} className="flex items-center gap-3">
-                  <div className="w-24 text-xs text-slate-600 truncate">{item.feature}</div>
-                  <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div className={`h-full ${item.color} rounded-full`} style={{ width: `${item.pct}%` }} />
+                  <div className="w-24 text-xs text-slate-600 truncate">
+                    {item.feature}
                   </div>
-                  <div className="w-16 text-xs font-medium text-slate-900 text-right">{item.cost}</div>
+                  <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full ${item.color} rounded-full`}
+                      style={{ width: `${item.pct}%` }}
+                    />
+                  </div>
+                  <div className="w-16 text-xs font-medium text-slate-900 text-right">
+                    {item.cost}
+                  </div>
                 </div>
               ))}
             </div>
@@ -222,8 +269,9 @@ function Features({ onBookDemo = () => {} }) {
             Complete AI Infrastructure Protection
           </h2>
           <p className="text-lg text-slate-600">
-            From real-time stability monitoring to granular cost attribution—everything 
-            you need to run mission-critical AI in production.
+            From real-time stability monitoring to granular cost
+            attribution—everything you need to run mission-critical AI in
+            production.
           </p>
         </div>
 
@@ -258,12 +306,18 @@ function Features({ onBookDemo = () => {} }) {
                 <div>
                   <span
                     className={`text-[10px] font-bold tracking-wider ${
-                      activeFeature === index ? "text-slate-400" : "text-slate-400"
+                      activeFeature === index
+                        ? "text-slate-400"
+                        : "text-slate-400"
                     }`}
                   >
                     {feature.badge}
                   </span>
-                  <p className={`font-semibold ${activeFeature === index ? "text-white" : "text-slate-900"}`}>
+                  <p
+                    className={`font-semibold ${
+                      activeFeature === index ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     {feature.title}
                   </p>
                 </div>
@@ -289,8 +343,13 @@ function Features({ onBookDemo = () => {} }) {
                 </p>
                 <div className="grid grid-cols-3 gap-4">
                   {features[activeFeature].stats.map((stat) => (
-                    <div key={stat.label} className="text-center p-3 rounded-xl bg-white border border-slate-200">
-                      <p className="text-xl font-bold text-slate-900">{stat.value}</p>
+                    <div
+                      key={stat.label}
+                      className="text-center p-3 rounded-xl bg-white border border-slate-200"
+                    >
+                      <p className="text-xl font-bold text-slate-900">
+                        {stat.value}
+                      </p>
                       <p className="text-xs text-slate-500">{stat.label}</p>
                     </div>
                   ))}

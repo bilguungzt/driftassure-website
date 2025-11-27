@@ -7,7 +7,7 @@ const faqs = [
     category: "Technical Objections",
     questions: [
       {
-        question: 'Why can\'t I just pin the model version (e.g., gpt-4-0613)?',
+        question: "Why can't I just pin the model version (e.g., gpt-4-0613)?",
         answer:
           'You can, and you should. But providers silently update "pinned" models for safety and speed on the backend without changing the version number. Plus, old versions are deprecated and shutdown with little notice. Version pinning is a seatbelt; Cognitude is the airbag.',
         highlight: true,
@@ -114,7 +114,11 @@ export default function FAQ({ onContactSupport = () => {} }) {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 mb-6 shadow-sm">
-            <ChatCircleDots size={16} weight="fill" className="text-slate-600" />
+            <ChatCircleDots
+              size={16}
+              weight="fill"
+              className="text-slate-600"
+            />
             <span className="text-xs font-medium tracking-wide text-slate-600 uppercase">
               Frequently Asked Questions
             </span>
@@ -162,13 +166,21 @@ export default function FAQ({ onContactSupport = () => {} }) {
                       >
                         <span className="font-medium text-slate-900 flex items-center gap-2">
                           {item.highlight && (
-                            <Warning size={18} weight="fill" className="text-amber-500" />
+                            <Warning
+                              size={18}
+                              weight="fill"
+                              className="text-amber-500"
+                            />
                           )}
                           {item.question}
                         </span>
-                        <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
-                          isOpen ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600"
-                        }`}>
+                        <span
+                          className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
+                            isOpen
+                              ? "bg-slate-900 text-white"
+                              : "bg-slate-100 text-slate-600"
+                          }`}
+                        >
                           {isOpen ? (
                             <Minus size={14} weight="bold" />
                           ) : (
