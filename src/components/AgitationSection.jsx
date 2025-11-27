@@ -77,25 +77,28 @@ const risks = [
 
 const colorClasses = {
   red: {
-    bg: "bg-red-500/10",
-    border: "border-red-500/30",
+    bg: "bg-red-500/15",
+    border: "border-red-500/40",
     icon: "text-red-400",
-    badge: "bg-red-500/20 text-red-300",
-    highlight: "text-red-400",
+    badge: "bg-red-500/30 text-red-200",
+    highlight: "text-red-300",
+    title: "text-red-200",
   },
   amber: {
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/30",
+    bg: "bg-amber-500/15",
+    border: "border-amber-500/40",
     icon: "text-amber-400",
-    badge: "bg-amber-500/20 text-amber-300",
-    highlight: "text-amber-400",
+    badge: "bg-amber-500/30 text-amber-200",
+    highlight: "text-amber-300",
+    title: "text-amber-200",
   },
   purple: {
-    bg: "bg-purple-500/10",
-    border: "border-purple-500/30",
+    bg: "bg-purple-500/15",
+    border: "border-purple-500/40",
     icon: "text-purple-400",
-    badge: "bg-purple-500/20 text-purple-300",
-    highlight: "text-purple-400",
+    badge: "bg-purple-500/30 text-purple-200",
+    highlight: "text-purple-300",
+    title: "text-purple-200",
   },
 };
 
@@ -173,18 +176,18 @@ export default function AgitationSection() {
                     <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${colors.bg} border ${colors.border} mb-4`}>
                       <Icon size={24} weight="duotone" className={colors.icon} />
                     </div>
-                    <h4 className="text-xl font-bold text-white mb-1">{risk.title}</h4>
-                    <p className={`text-sm font-medium ${colors.highlight}`}>{risk.subtitle}</p>
+                    <h4 className={`text-xl font-bold mb-1 ${colors.title}`}>{risk.title}</h4>
+                    <p className={`text-sm font-semibold ${colors.highlight}`}>{risk.subtitle}</p>
                   </div>
 
                   {/* Points */}
                   <div className="flex-1 grid gap-4 sm:grid-cols-3">
                     {risk.points.map((point, pointIndex) => (
                       <div key={pointIndex} className="space-y-2">
-                        <div className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge}`}>
+                        <div className={`inline-block px-2.5 py-1 rounded-md text-xs font-bold ${colors.badge}`}>
                           {point.label}
                         </div>
-                        <p className={`text-sm leading-relaxed ${point.highlight ? 'text-white font-medium' : 'text-slate-400'}`}>
+                        <p className={`text-sm leading-relaxed ${point.highlight ? 'text-white font-semibold' : 'text-slate-300'}`}>
                           {point.text}
                         </p>
                         {point.math && (

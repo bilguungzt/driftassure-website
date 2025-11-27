@@ -163,17 +163,28 @@ export default function Pricing({ onBookDemo = () => {} }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
-                className={`relative rounded-3xl border-2 p-8 transition-all ${
+                className={`relative rounded-3xl p-8 transition-all ${
                   tier.popular
-                    ? "border-emerald-500 bg-gradient-to-b from-emerald-50/50 to-white shadow-xl shadow-emerald-100"
-                    : "border-slate-200 bg-white hover:border-slate-300 hover:shadow-lg"
+                    ? "border-2 border-emerald-400/50 bg-gradient-to-b from-slate-900 via-slate-900 to-emerald-950/30 shadow-2xl shadow-emerald-500/20 ring-1 ring-emerald-500/20"
+                    : "border-2 border-slate-200 bg-white hover:border-slate-300 hover:shadow-lg"
                 }`}
+                style={tier.popular ? {
+                  backgroundImage: 'linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 50%, rgba(16, 185, 129, 0.02) 100%)',
+                } : {}}
               >
+                {/* Premium metallic shine effect for Insurance tier */}
+                {tier.popular && (
+                  <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent animate-shimmer" 
+                         style={{ animationDuration: '3s' }} />
+                  </div>
+                )}
+
                 {tier.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-lg">
+                    <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-lg shadow-emerald-500/30 border border-emerald-400/50">
                       <Lightning size={14} weight="fill" />
-                      Recommended
+                      Enterprise Protection
                     </span>
                   </div>
                 )}
@@ -181,34 +192,34 @@ export default function Pricing({ onBookDemo = () => {} }) {
                 {/* Header */}
                 <div className="mb-8">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-12 h-12 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center`}>
-                      <Icon size={24} weight="duotone" className={colors.icon} />
+                    <div className={`w-12 h-12 rounded-xl ${tier.popular ? 'bg-emerald-500/10 border border-emerald-500/30' : colors.bg + ' border ' + colors.border} flex items-center justify-center`}>
+                      <Icon size={24} weight="duotone" className={tier.popular ? 'text-emerald-400' : colors.icon} />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-slate-900">{tier.name}</h3>
-                      <p className="text-sm text-slate-500">{tier.tagline}</p>
+                      <h3 className={`text-xl font-bold ${tier.popular ? 'text-white' : 'text-slate-900'}`}>{tier.name}</h3>
+                      <p className={`text-sm ${tier.popular ? 'text-slate-400' : 'text-slate-500'}`}>{tier.tagline}</p>
                     </div>
                   </div>
 
                   {tier.qualifier && (
-                    <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${colors.badge} mb-4`}>
+                    <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${tier.popular ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : colors.badge} mb-4`}>
                       {tier.qualifier}
                     </div>
                   )}
 
                   {/* Price */}
                   <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-4xl sm:text-5xl font-bold text-slate-900">
+                    <span className={`text-4xl sm:text-5xl font-bold ${tier.popular ? 'text-white' : 'text-slate-900'}`}>
                       {tier.price}
                     </span>
-                    <span className="text-slate-500 text-lg">{tier.period}</span>
+                    <span className={`text-lg ${tier.popular ? 'text-slate-400' : 'text-slate-500'}`}>{tier.period}</span>
                   </div>
                   
                   {tier.pricingNote && (
-                    <p className="text-sm text-slate-500 italic">{tier.pricingNote}</p>
+                    <p className={`text-sm italic ${tier.popular ? 'text-emerald-400/80' : 'text-slate-500'}`}>{tier.pricingNote}</p>
                   )}
 
-                  <p className="text-slate-600 mt-3 font-medium">
+                  <p className={`mt-3 font-medium ${tier.popular ? 'text-slate-300' : 'text-slate-600'}`}>
                     {tier.valueStatement}
                   </p>
                 </div>
@@ -220,13 +231,17 @@ export default function Pricing({ onBookDemo = () => {} }) {
                       <CheckCircle
                         size={20}
                         weight="fill"
-                        className={`flex-shrink-0 mt-0.5 ${colors.check}`}
+                        className={`flex-shrink-0 mt-0.5 ${tier.popular ? 'text-emerald-400' : colors.check}`}
                       />
                       <div>
-                        <span className={`block text-sm ${feature.highlight ? 'font-bold text-slate-900' : 'text-slate-700'}`}>
+                        <span className={`block text-sm ${
+                          tier.popular 
+                            ? (feature.highlight ? 'font-bold text-white' : 'text-slate-300') 
+                            : (feature.highlight ? 'font-bold text-slate-900' : 'text-slate-700')
+                        }`}>
                           {feature.text}
                         </span>
-                        <span className="text-xs text-slate-500">
+                        <span className={`text-xs ${tier.popular ? 'text-slate-500' : 'text-slate-500'}`}>
                           {feature.description}
                         </span>
                       </div>
@@ -238,8 +253,8 @@ export default function Pricing({ onBookDemo = () => {} }) {
                 <button
                   onClick={onBookDemo}
                   className={`w-full inline-flex items-center justify-center gap-2 rounded-full font-semibold px-6 py-3.5 transition-all ${
-                    tier.ctaStyle === "solid"
-                      ? colors.button
+                    tier.popular 
+                      ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30 hover:from-emerald-400 hover:to-emerald-500'
                       : `border-2 ${colors.button}`
                   }`}
                 >

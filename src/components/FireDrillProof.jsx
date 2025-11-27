@@ -47,6 +47,7 @@ const timelineEvents = [
     userImpact: "Zero. Requests were queued and served successfully.",
     status: "success",
     icon: ArrowsClockwise,
+    isMoneyShot: true,
   },
 ];
 
@@ -187,28 +188,36 @@ export default function FireDrillProof({ onBookDemo = () => {} }) {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: index * 0.15 }}
-                        className="relative flex gap-4 sm:gap-6"
+                        className={`relative flex gap-4 sm:gap-6 ${event.isMoneyShot ? 'z-20' : ''}`}
                       >
                         {/* Timestamp */}
                         <div className="flex-shrink-0 w-20 sm:w-24 text-right">
-                          <code className="text-sm font-mono text-slate-400">
+                          <code className={`text-sm font-mono ${event.isMoneyShot ? 'text-emerald-400 font-bold' : 'text-slate-400'}`}>
                             {event.time}
                           </code>
                         </div>
 
                         {/* Dot indicator - desktop */}
                         <div className="hidden sm:flex flex-shrink-0 w-3 items-start justify-center pt-1.5 relative z-10">
-                          <div className={`w-3 h-3 rounded-full ${colors.dot} ring-4 ring-slate-900`} />
+                          <div className={`w-3 h-3 rounded-full ${colors.dot} ring-4 ring-slate-900 ${event.isMoneyShot ? 'animate-pulse' : ''}`} />
                         </div>
 
                         {/* Content */}
-                        <div className={`flex-1 rounded-xl ${colors.bg} border ${colors.border} p-4 sm:p-5`}>
+                        <div className={`flex-1 rounded-xl ${colors.bg} border ${colors.border} p-4 sm:p-5 ${
+                          event.isMoneyShot 
+                            ? 'ring-2 ring-emerald-500/50 shadow-lg shadow-emerald-500/20' 
+                            : ''
+                        }`}>
                           <div className="flex items-start gap-3 mb-3">
-                            <div className={`flex-shrink-0 w-8 h-8 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center`}>
+                            <div className={`flex-shrink-0 w-8 h-8 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center ${
+                              event.isMoneyShot ? 'animate-pulse' : ''
+                            }`}>
                               <Icon size={18} weight="fill" className={colors.icon} />
                             </div>
                             <div>
-                              <h4 className="font-bold text-white">{event.label}</h4>
+                              <h4 className={`font-bold ${event.isMoneyShot ? 'text-emerald-400' : 'text-white'}`}>
+                                {event.isMoneyShot ? '✓ ' : ''}{event.label}
+                              </h4>
                               {event.statusText && (
                                 <span className={`inline-flex items-center gap-1.5 text-xs font-medium ${colors.text}`}>
                                   <span className="relative flex h-2 w-2">
@@ -222,8 +231,8 @@ export default function FireDrillProof({ onBookDemo = () => {} }) {
                           </div>
 
                           <div className="space-y-2">
-                            <p className="text-sm text-slate-300 leading-relaxed">
-                              <span className="text-slate-500 font-medium">Event: </span>
+                            <p className={`text-sm leading-relaxed ${event.isMoneyShot ? 'text-emerald-100 font-medium' : 'text-slate-300'}`}>
+                              <span className={`font-medium ${event.isMoneyShot ? 'text-emerald-300' : 'text-slate-500'}`}>Event: </span>
                               {event.event}
                             </p>
 

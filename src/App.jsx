@@ -14,11 +14,11 @@ import AgitationSection from "./components/AgitationSection";
 import DefenseArchitecture from "./components/DefenseArchitecture";
 import FireDrillProof from "./components/FireDrillProof";
 import TrustBadges from "./components/TrustBadges";
-import SocialProof from "./components/SocialProof";
-import Features from "./components/Features";
+import SocialProof from "./components/SocialProofNew";
+import Features from "./components/FeaturesNew";
 import Pricing from "./components/PricingNew";
-import TechnicalFeatures from "./components/TechnicalFeatures";
-import FAQ from "./components/FAQNew";
+import TechnicalFeatures from "./components/TechnicalFeaturesNew";
+import FAQ from "./components/FAQDark";
 import ContactModal from "./components/ContactModal";
 
 // Navigation Links
