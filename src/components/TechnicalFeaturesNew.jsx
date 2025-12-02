@@ -29,14 +29,14 @@ const features = [
     highlight: { value: "0 Days", label: "Retention", icon: FileLock },
   },
   {
-    title: "<0.1ms Detection Latency",
+    title: "<1ms Circuit Breaker + Async Analysis",
     description:
-      "Redis-backed fast signals check length and structure in under 0.1ms. Deep semantic analysis runs asynchronously.",
+      "Tier 1: Instantly catches crashes, empty responses, and JSON failures in <1ms. Tier 2: Deep semantic analysis checks vocabulary drift asynchronously without slowing user requests.",
     icon: Lightning,
     tag: "Performance",
     metrics: [
-      { label: "Fast Signal", value: "<0.1ms" },
-      { label: "Deep Scan", value: "Async" },
+      { label: "Circuit Breaker", value: "<1ms" },
+      { label: "Semantic Scan", value: "Async" },
     ],
   },
   {

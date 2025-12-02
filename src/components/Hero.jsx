@@ -118,19 +118,16 @@ function Hero({ onBookDemo = () => {} }) {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
               Your AI Provider Will Break Your Product.{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
-                We Fix It In 15 Seconds.
+                Verify & Switch. 15 Seconds.
               </span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-xl">
-              The first{" "}
               <span className="text-white font-semibold">
-                Stability Insurance Platform
+                Stability Insurance
               </span>{" "}
-              for enterprise AI. We fingerprint your "working" baseline, detect
-              silent model degradation in real-time, and auto-failover to stable
-              providers before your users notice.
+              for enterprise AI. One line of code. Full protection.
             </p>
 
             {/* CTA Row */}

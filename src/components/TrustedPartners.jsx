@@ -587,11 +587,11 @@ function TrustedPartners() {
                   </svg>
                 </div>
                 <h3 className="text-white font-medium mb-2">
-                  Z-Score Detection
+                  Cost Anomaly Detection
                 </h3>
                 <p className="text-sm text-slate-300 max-w-[240px]">
-                  Real-time anomaly detection with 99.7% confidence. Auto-switch
-                  to cheaper models when drift exceeds 3.5σ.
+                  Real-time spend monitoring with 99.7% confidence. Auto-switch
+                  to cheaper models when costs spike unexpectedly.
                 </p>
               </motion.div>
 
@@ -620,10 +620,13 @@ function TrustedPartners() {
                     <path d="M9 12l2 2 4-4" />
                   </svg>
                 </div>
-                <h3 className="text-white font-medium mb-2">Agent Firewall</h3>
+                <h3 className="text-white font-medium mb-2">
+                  Auto-Healing JSON
+                </h3>
                 <p className="text-sm text-slate-300 max-w-[240px]">
-                  3-layer semantic repair catches broken JSON before your app
-                  crashes. Schema registry with no header limits.
+                  We fix malformed tool calls in &lt;200ms so your agent
+                  doesn&apos;t crash. 3-layer semantic repair with schema
+                  registry.
                 </p>
               </motion.div>
 

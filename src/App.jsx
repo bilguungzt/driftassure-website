@@ -259,7 +259,7 @@ function App() {
         {/* Section 2: Agitation - "The Era of Set and Forget AI is Over" */}
         <AgitationSection />
 
-        {/* Section 3: Defense Architecture - "Active Protection. Zero Latency Impact." */}
+        {/* Section 3: Defense Architecture - "Active Protection. Non-Blocking." */}
         <DefenseArchitecture />
 
         {/* Section 4: Fire Drill Proof - "Don't Trust Promises. Trust the Fire Drill." */}

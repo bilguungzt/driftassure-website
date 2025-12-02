@@ -7,44 +7,30 @@ import {
   Timer,
   Code,
   CheckCircle,
+  ArrowRight,
 } from "@phosphor-icons/react";
 
 const steps = [
   {
     id: 1,
     icon: Fingerprint,
-    title: "Baseline Locking",
-    subtitle: "The Insurance Policy",
+    title: "Fingerprint Baseline",
+    result: "Detect drift in 1-15s",
     color: "indigo",
-    howItWorks:
-      "We don't just pass traffic. We create \"Stateful Fingerprints\" of your application's ideal behavior—analyzing semantic texture, JSON structure, and response patterns.",
-    benefit:
-      'You define what "working" looks like. We lock that baseline. If a provider\'s update deviates from your fingerprint, our hybrid detection system triggers an alert in 1-15 seconds.',
   },
   {
     id: 2,
     icon: Wrench,
     title: "Semantic Repair",
-    subtitle: "The Agent Savior",
+    result: "99% JSON fix rate",
     color: "emerald",
-    howItWorks:
-      "When a model hallucinates a malformed tool call or broken JSON, we intercept the error before it reaches your app.",
-    mechanics:
-      "Our 3-tier repair engine (Algorithmic → Groq LPU → Gemini Flash) reconstructs the valid payload in under 200ms.",
-    result: "A 99% repair success rate without a single slow retry loop.",
   },
   {
     id: 3,
     icon: ArrowsClockwise,
-    title: "Auto-Failover",
-    subtitle: "The Drift Killer",
+    title: "Auto-Switch",
+    result: "GPT-4 → Claude instantly",
     color: "amber",
-    howItWorks:
-      "If a provider suffers a critical outage or silent degradation (like the June 13 verbosity spike), we execute an emergency cross-provider failover.",
-    mechanics:
-      "We instantly reroute traffic to your pre-validated fallback model (e.g., GPT-4 → Claude 3.5 Sonnet).",
-    result:
-      'Your users see a working product. You see a Slack notification saying, "We fixed it."',
   },
 ];
 
@@ -53,24 +39,18 @@ const colorClasses = {
     bg: "bg-indigo-500/10",
     border: "border-indigo-500/30",
     icon: "text-indigo-400",
-    badge: "bg-indigo-500/20 text-indigo-300",
-    gradient: "from-indigo-500/20 to-transparent",
     number: "bg-indigo-500 text-white",
   },
   emerald: {
     bg: "bg-emerald-500/10",
     border: "border-emerald-500/30",
     icon: "text-emerald-400",
-    badge: "bg-emerald-500/20 text-emerald-300",
-    gradient: "from-emerald-500/20 to-transparent",
     number: "bg-emerald-500 text-white",
   },
   amber: {
     bg: "bg-amber-500/10",
     border: "border-amber-500/30",
     icon: "text-amber-400",
-    badge: "bg-amber-500/20 text-amber-300",
-    gradient: "from-amber-500/20 to-transparent",
     number: "bg-amber-500 text-white",
   },
 };
@@ -78,273 +58,175 @@ const colorClasses = {
 export default function DefenseArchitecture() {
   return (
     <section
-      className="relative bg-slate-950 py-20 sm:py-28 overflow-hidden"
+      className="relative bg-slate-950 py-16 sm:py-20 overflow-hidden"
       id="how-it-works"
     >
       {/* Background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.08),transparent_70%)]" />
 
-      {/* Connecting line for desktop */}
-      <div className="hidden lg:block absolute left-1/2 top-64 bottom-48 w-px bg-gradient-to-b from-indigo-500/50 via-emerald-500/50 to-amber-500/50" />
-
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Section Header */}
+        {/* Section Header - Left Aligned */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-4">
             <Lightning size={16} weight="fill" className="text-indigo-400" />
             <span className="text-xs font-medium tracking-wide text-indigo-300 uppercase">
-              The Intelligent Stability Layer
+              How It Works
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
-            Active Protection. Zero Latency Impact.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 tracking-tight">
+            Active Protection. Non-Blocking.
           </h2>
-          <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-            Cognitude sits between your application and your LLM providers.{" "}
-            <span className="text-slate-300">
-              We don't just log errors; we intercept and fix them in real-time.
-            </span>
+          <p className="text-lg text-slate-400 max-w-2xl">
+            Intercept and fix errors without adding latency.
           </p>
         </motion.div>
 
-        {/* Subtitle */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-center mb-12"
-        >
-          <h3 className="text-xl sm:text-2xl font-semibold text-slate-200">
-            The 3-Step Defense Architecture
-          </h3>
-        </motion.div>
-
-        {/* Steps */}
-        <div className="space-y-8 lg:space-y-12">
-          {steps.map((step, index) => {
-            const colors = colorClasses[step.color];
-            const Icon = step.icon;
-            const isEven = index % 2 === 1;
-
-            return (
-              <motion.div
-                key={step.id}
-                initial={{ opacity: 0, x: isEven ? 30 : -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className={`relative lg:w-[calc(50%-2rem)] ${
-                  isEven ? "lg:ml-auto" : ""
-                }`}
-              >
-                {/* Step Number - Desktop only, on the connecting line */}
-                <div
-                  className={`hidden lg:flex absolute ${
-                    isEven ? "-left-12" : "-right-12"
-                  } top-8 w-8 h-8 rounded-full ${
-                    colors.number
-                  } items-center justify-center font-bold text-sm shadow-lg z-10`}
-                >
-                  {step.id}
-                </div>
-
-                {/* Card */}
-                <div
-                  className={`relative rounded-2xl ${colors.bg} border ${colors.border} p-6 sm:p-8 overflow-hidden`}
-                >
-                  {/* Gradient accent */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} opacity-50`}
-                  />
-
-                  <div className="relative">
-                    {/* Mobile step number */}
-                    <div
-                      className={`lg:hidden absolute -top-2 -left-2 w-7 h-7 rounded-full ${colors.number} flex items-center justify-center font-bold text-xs shadow-lg`}
-                    >
-                      {step.id}
-                    </div>
-
-                    {/* Header */}
-                    <div className="flex items-start gap-4 mb-6 ml-6 lg:ml-0">
-                      <div
-                        className={`flex-shrink-0 w-12 h-12 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center`}
-                      >
-                        <Icon
-                          size={24}
-                          weight="duotone"
-                          className={colors.icon}
-                        />
-                      </div>
-                      <div>
-                        <h4 className="text-xl font-bold text-white">
-                          {step.title}
-                        </h4>
-                        <p className={`text-sm font-medium ${colors.icon}`}>
-                          {step.subtitle}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="space-y-4">
-                      <div>
-                        <span
-                          className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge} mb-2`}
-                        >
-                          How it works
-                        </span>
-                        <p className="text-slate-300 text-sm leading-relaxed">
-                          {step.howItWorks}
-                        </p>
-                      </div>
-
-                      {step.benefit && (
-                        <div>
-                          <span
-                            className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge} mb-2`}
-                          >
-                            The Benefit
-                          </span>
-                          <p className="text-slate-300 text-sm leading-relaxed">
-                            {step.benefit}
-                          </p>
-                        </div>
-                      )}
-
-                      {step.mechanics && (
-                        <div>
-                          <span
-                            className={`inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${colors.badge} mb-2`}
-                          >
-                            The Mechanics
-                          </span>
-                          <p className="text-slate-300 text-sm leading-relaxed">
-                            {step.mechanics}
-                          </p>
-                        </div>
-                      )}
-
-                      {step.result && (
-                        <div className="flex items-start gap-2 pt-2">
-                          <CheckCircle
-                            size={18}
-                            weight="fill"
-                            className={`flex-shrink-0 mt-0.5 ${colors.icon}`}
-                          />
-                          <p className="text-white font-medium text-sm">
-                            {step.result}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Integration Kicker */}
+        {/* Visual Flow Diagram */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-12"
         >
-          <div className="relative rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700 p-8 sm:p-10 overflow-hidden">
-            {/* Decorative code lines */}
-            <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
-              <div className="absolute top-4 right-4 text-xs font-mono text-slate-400 leading-relaxed">
-                <div>client = OpenAI(</div>
-                <div className="pl-4 text-emerald-400">
-                  base_url="https://api.cognitude.io"
-                </div>
-                <div>)</div>
+          {/* Flow Container */}
+          <div className="relative rounded-2xl bg-slate-900/60 border border-slate-700 p-8 sm:p-10">
+            {/* Flow Steps */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-2">
+              {/* Input */}
+              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-800 border border-slate-600">
+                <Code size={20} className="text-slate-400" />
+                <span className="text-sm font-medium text-slate-300">
+                  Your App
+                </span>
+              </div>
+
+              <ArrowRight
+                size={24}
+                className="text-slate-600 hidden md:block"
+              />
+              <div className="md:hidden text-slate-600">↓</div>
+
+              {/* Steps */}
+              {steps.map((step, index) => {
+                const colors = colorClasses[step.color];
+                const Icon = step.icon;
+
+                return (
+                  <div key={step.id} className="contents">
+                    <div
+                      className={`relative flex flex-col items-center gap-2 px-6 py-4 rounded-xl ${colors.bg} border ${colors.border} min-w-[140px]`}
+                    >
+                      <div
+                        className={`absolute -top-2 -left-2 w-6 h-6 rounded-full ${colors.number} flex items-center justify-center text-xs font-bold`}
+                      >
+                        {step.id}
+                      </div>
+                      <Icon
+                        size={24}
+                        weight="duotone"
+                        className={colors.icon}
+                      />
+                      <span className="text-sm font-semibold text-white text-center">
+                        {step.title}
+                      </span>
+                      <span className="text-xs text-slate-400 text-center">
+                        {step.result}
+                      </span>
+                    </div>
+
+                    {index < steps.length - 1 && (
+                      <>
+                        <ArrowRight
+                          size={24}
+                          className="text-slate-600 hidden md:block"
+                        />
+                        <div className="md:hidden text-slate-600">↓</div>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+
+              <ArrowRight
+                size={24}
+                className="text-slate-600 hidden md:block"
+              />
+              <div className="md:hidden text-slate-600">↓</div>
+
+              {/* Output */}
+              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
+                <CheckCircle
+                  size={20}
+                  weight="fill"
+                  className="text-emerald-400"
+                />
+                <span className="text-sm font-medium text-emerald-300">
+                  Protected
+                </span>
               </div>
             </div>
+          </div>
+        </motion.div>
 
-            <div className="relative flex flex-col lg:flex-row lg:items-center gap-8">
+        {/* Integration Kicker - Compact */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="relative rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700 p-6 sm:p-8 overflow-hidden">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-6">
               <div className="flex-1">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
                     <Code size={20} className="text-emerald-400" />
                   </div>
-                  <h4 className="text-2xl font-bold text-white">
-                    Zero Code Rewrites.
+                  <h4 className="text-xl font-bold text-white">
+                    One Line. Full Protection.
                   </h4>
                 </div>
-                <p className="text-slate-300 mb-6">
-                  Cognitude works as a drop-in middleware. Point your{" "}
-                  <code className="px-1.5 py-0.5 rounded bg-slate-700 text-emerald-300 text-sm font-mono">
-                    base_url
-                  </code>{" "}
-                  to us, and we handle the rest using smart feature detection.
-                </p>
 
                 <div className="flex flex-wrap gap-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center">
-                      <Timer size={16} className="text-indigo-400" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-500 uppercase tracking-wide">
-                        Setup Time
-                      </p>
-                      <p className="text-lg font-bold text-white">
-                        &lt; 5 Minutes
-                      </p>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <Timer size={16} className="text-indigo-400" />
+                    <span className="text-sm text-slate-300">
+                      <span className="font-bold text-white">&lt; 5 min</span>{" "}
+                      setup
+                    </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
-                      <Lightning size={16} className="text-emerald-400" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-500 uppercase tracking-wide">
-                        Latency Impact
-                      </p>
-                      <p className="text-lg font-bold text-white">&lt; 0.1ms</p>
-                      <p className="text-xs text-slate-500">
-                        Redis-backed caching
-                      </p>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <Lightning size={16} className="text-emerald-400" />
+                    <span className="text-sm text-slate-300">
+                      <span className="font-bold text-white">&lt; 1ms</span>{" "}
+                      overhead
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Code snippet */}
-              <div className="lg:w-80 flex-shrink-0">
+              <div className="lg:w-72 flex-shrink-0">
                 <div className="rounded-xl bg-slate-950 border border-slate-700 overflow-hidden">
-                  <div className="flex items-center gap-2 px-4 py-2 bg-slate-900 border-b border-slate-700">
-                    <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                    <div className="w-3 h-3 rounded-full bg-amber-500/50" />
-                    <div className="w-3 h-3 rounded-full bg-emerald-500/50" />
-                    <span className="ml-2 text-xs text-slate-500">python</span>
+                  <div className="flex items-center gap-2 px-3 py-2 bg-slate-900 border-b border-slate-700">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-amber-500/50" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/50" />
                   </div>
-                  <pre className="p-4 text-sm font-mono overflow-x-auto">
+                  <pre className="p-3 text-xs font-mono overflow-x-auto">
                     <code>
-                      <span className="text-slate-500"># Before</span>
-                      {"\n"}
-                      <span className="text-slate-400">client = OpenAI()</span>
-                      {"\n\n"}
-                      <span className="text-slate-500"># After</span>
-                      {"\n"}
                       <span className="text-slate-400">client = OpenAI(</span>
                       {"\n"}
                       <span className="text-emerald-400"> base_url=</span>
-                      <span className="text-amber-300">
-                        "https://api.cognitude.io"
-                      </span>
+                      <span className="text-amber-300">"api.cognitude.io"</span>
                       {"\n"}
                       <span className="text-slate-400">)</span>
                     </code>

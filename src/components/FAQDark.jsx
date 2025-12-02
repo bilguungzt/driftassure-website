@@ -7,9 +7,15 @@ const faqs = [
     category: "Technical Objections",
     questions: [
       {
-        question: 'Why can\'t I just pin the model version (e.g., gpt-4-0613)?',
+        question: "Why can't I just pin the model version (e.g., gpt-4-0613)?",
         answer:
           'You can, and you should. But providers silently update "pinned" models for safety and speed on the backend without changing the version number. Plus, old versions are deprecated and shutdown with little notice. Version pinning is a seatbelt; Cognitude is the airbag.',
+        highlight: true,
+      },
+      {
+        question: "What if the backup model gives the wrong answer?",
+        answer:
+          "We don't just route traffic blindly. We run a 'dry run' comparison against your locked baseline. If the backup model deviates more than 10% from your expected logic pattern, we block the failover and alert you immediately. We never auto-switch to a degraded state.",
         highlight: true,
       },
       {
@@ -114,7 +120,11 @@ export default function FAQ({ onContactSupport = () => {} }) {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-700 mb-6">
-            <ChatCircleDots size={16} weight="fill" className="text-indigo-400" />
+            <ChatCircleDots
+              size={16}
+              weight="fill"
+              className="text-indigo-400"
+            />
             <span className="text-xs font-medium tracking-wide text-slate-300 uppercase">
               Frequently Asked Questions
             </span>
@@ -154,7 +164,11 @@ export default function FAQ({ onContactSupport = () => {} }) {
                         item.highlight
                           ? "border-amber-500/30 bg-amber-500/10"
                           : "border-slate-700 bg-slate-900"
-                      } ${isOpen ? "shadow-lg shadow-black/20" : "hover:border-slate-600"}`}
+                      } ${
+                        isOpen
+                          ? "shadow-lg shadow-black/20"
+                          : "hover:border-slate-600"
+                      }`}
                     >
                       <button
                         onClick={() => toggleItem(categoryIdx, questionIdx)}
@@ -162,13 +176,21 @@ export default function FAQ({ onContactSupport = () => {} }) {
                       >
                         <span className="font-medium text-white flex items-center gap-2">
                           {item.highlight && (
-                            <Warning size={18} weight="fill" className="text-amber-400" />
+                            <Warning
+                              size={18}
+                              weight="fill"
+                              className="text-amber-400"
+                            />
                           )}
                           {item.question}
                         </span>
-                        <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
-                          isOpen ? "bg-indigo-500 text-white" : "bg-slate-800 text-slate-400"
-                        }`}>
+                        <span
+                          className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
+                            isOpen
+                              ? "bg-indigo-500 text-white"
+                              : "bg-slate-800 text-slate-400"
+                          }`}
+                        >
                           {isOpen ? (
                             <Minus size={14} weight="bold" />
                           ) : (

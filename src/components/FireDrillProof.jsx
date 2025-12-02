@@ -15,37 +15,33 @@ import {
 const timelineEvents = [
   {
     time: "14:05:00",
-    label: "The Attack",
-    event:
-      'Simulated "Model Update" injected. Response verbosity increased by 40%. Logic degraded.',
+    label: "ATTACK",
+    event: "Model update injected. Verbosity +40%. Logic degraded.",
     status: "danger",
-    statusText: "User Experience At Risk",
     icon: Warning,
   },
   {
     time: "14:05:01",
-    label: "The Detection",
-    event:
-      "Cognitude Fast Signal detects length_drift and structure_drift. Emergency Scan triggered immediately.",
+    label: "DETECT",
+    event: "Fast Signal: length_drift, structure_drift. Emergency scan.",
     latency: "1.0s",
     status: "warning",
     icon: MagnifyingGlass,
   },
   {
     time: "14:05:12",
-    label: "The Test",
-    event:
-      "System tests fallback models against your locked fingerprint. Claude 3.5 Sonnet matches baseline with only 3.2% drift (vs 18% current).",
+    label: "TEST",
+    event: "Claude 3.5 Sonnet matches baseline.",
     status: "warning",
     icon: Flask,
+    logicScore: "96.8%",
   },
   {
     time: "14:05:15",
-    label: "The Failover",
-    event:
-      "AUTO-FAILOVER EXECUTED. Traffic rerouted from gpt-4-turbo → claude-3-5-sonnet.",
-    mitigationTime: "15 Seconds",
-    userImpact: "Zero. Requests were queued and served successfully.",
+    label: "FAILOVER",
+    event: "Traffic rerouted: gpt-4-turbo → claude-3-5-sonnet",
+    mitigationTime: "15s",
+    userImpact: "Zero",
     status: "success",
     icon: ArrowsClockwise,
     isMoneyShot: true,
@@ -54,30 +50,26 @@ const timelineEvents = [
 
 const roiStats = [
   {
-    value: "10,000+",
-    label: "Agent Crashes Prevented",
-    sublabel: "via Semantic Repair",
+    value: "10K+",
+    label: "Crashes Prevented",
     icon: ShieldCheck,
     color: "emerald",
   },
   {
-    value: "$17,333",
-    label: "Monthly Waste Recovered",
-    sublabel: "per $100k of LLM spend",
+    value: "$17K",
+    label: "Monthly Savings",
     icon: CurrencyDollar,
     color: "indigo",
   },
   {
     value: "593%",
     label: "ROI",
-    sublabel: "on Monitoring Infrastructure",
     icon: ChartLineUp,
     color: "amber",
   },
   {
     value: "100%",
     label: "Peace of Mind",
-    sublabel: "during the next provider update",
     icon: Heart,
     color: "rose",
   },
@@ -120,7 +112,7 @@ const colorClasses = {
 export default function FireDrillProof({ onBookDemo = () => {} }) {
   return (
     <section
-      className="relative bg-slate-950 py-20 sm:py-28 overflow-hidden"
+      className="relative bg-slate-950 py-16 sm:py-20 overflow-hidden"
       id="proof"
     >
       {/* Background effects */}
@@ -128,289 +120,184 @@ export default function FireDrillProof({ onBookDemo = () => {} }) {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(99,102,241,0.06),transparent_50%)]" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Section Header */}
+        {/* Section Header - Left Aligned */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-10"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-4">
             <Lightning size={16} weight="fill" className="text-emerald-400" />
             <span className="text-xs font-medium tracking-wide text-emerald-300 uppercase">
-              The Evidence
+              Live Fire Drill Log
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
-            Don't Trust Promises. Trust the Fire Drill.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 tracking-tight">
+            Don't Trust Promises. Trust the Log.
           </h2>
-          <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-            We run Chaos Monkey simulations in production.{" "}
-            <span className="text-slate-300">
-              Here is the actual log from a simulated OpenAI silent update.
-            </span>
-          </p>
         </motion.div>
 
-        {/* Timeline - ZOOMED IN */}
+        {/* Timeline - LARGE TERMINAL */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-16"
+          className="mb-12"
         >
-          <div className="relative rounded-2xl bg-slate-900/80 border border-slate-700 overflow-hidden">
+          <div className="relative rounded-2xl bg-slate-900/90 border border-slate-700 overflow-hidden shadow-2xl">
             {/* Terminal header */}
-            <div className="flex items-center gap-2 px-6 py-4 bg-slate-900 border-b border-slate-700">
-              <div className="w-3.5 h-3.5 rounded-full bg-red-500/70" />
-              <div className="w-3.5 h-3.5 rounded-full bg-amber-500/70" />
-              <div className="w-3.5 h-3.5 rounded-full bg-emerald-500/70" />
+            <div className="flex items-center gap-2 px-6 py-3 bg-slate-900 border-b border-slate-700">
+              <div className="w-3 h-3 rounded-full bg-red-500/70" />
+              <div className="w-3 h-3 rounded-full bg-amber-500/70" />
+              <div className="w-3 h-3 rounded-full bg-emerald-500/70" />
               <span className="ml-4 text-sm text-slate-400 font-mono">
-                cognitude-fire-drill.log — Live Chaos Simulation
+                cognitude-fire-drill.log
               </span>
             </div>
 
-            {/* Timeline content - LARGER */}
-            <div className="p-8 sm:p-10 lg:p-12">
-              <div className="relative">
-                {/* Vertical line */}
-                <div className="absolute left-[110px] sm:left-[130px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-red-500 via-amber-500 to-emerald-500 hidden sm:block" />
+            {/* Timeline content - COMPACT LOG FORMAT */}
+            <div className="p-6 sm:p-8 font-mono text-sm">
+              <div className="space-y-4">
+                {timelineEvents.map((event, index) => {
+                  const colors = statusClasses[event.status];
+                  const Icon = event.icon;
 
-                {/* Events */}
-                <div className="space-y-8">
-                  {timelineEvents.map((event, index) => {
-                    const colors = statusClasses[event.status];
-                    const Icon = event.icon;
-
-                    return (
-                      <motion.div
-                        key={event.time}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: index * 0.15 }}
-                        className={`relative flex gap-5 sm:gap-8 ${
-                          event.isMoneyShot ? "z-20" : ""
+                  return (
+                    <motion.div
+                      key={event.time}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className={`flex items-start gap-4 p-4 rounded-lg ${
+                        event.isMoneyShot
+                          ? "bg-emerald-500/10 border border-emerald-500/40 ring-1 ring-emerald-500/30"
+                          : colors.bg + " border " + colors.border
+                      }`}
+                    >
+                      {/* Timestamp */}
+                      <code
+                        className={`flex-shrink-0 text-lg font-bold ${
+                          event.isMoneyShot ? "text-emerald-400" : colors.text
                         }`}
                       >
-                        {/* Timestamp - LARGER */}
-                        <div className="flex-shrink-0 w-24 sm:w-32 text-right">
-                          <code
-                            className={`text-lg sm:text-xl font-mono font-bold ${
+                        {event.time}
+                      </code>
+
+                      {/* Icon */}
+                      <div
+                        className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center ${
+                          event.isMoneyShot ? "bg-emerald-500/20" : colors.bg
+                        }`}
+                      >
+                        <Icon
+                          size={18}
+                          weight="fill"
+                          className={
+                            event.isMoneyShot ? "text-emerald-400" : colors.icon
+                          }
+                        />
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-1">
+                          <span
+                            className={`text-xs font-bold uppercase tracking-wider ${
                               event.isMoneyShot
                                 ? "text-emerald-400"
-                                : "text-slate-300"
+                                : colors.text
                             }`}
                           >
-                            {event.time}
-                          </code>
+                            [{event.label}]
+                          </span>
+                          {event.latency && (
+                            <span className="text-xs text-amber-400 font-bold">
+                              {event.latency}
+                            </span>
+                          )}
+                          {event.logicScore && (
+                            <span className="text-xs text-emerald-400 font-bold">
+                              Match: {event.logicScore}
+                            </span>
+                          )}
                         </div>
-
-                        {/* Dot indicator - desktop */}
-                        <div className="hidden sm:flex flex-shrink-0 w-4 items-start justify-center pt-2 relative z-10">
-                          <div
-                            className={`w-4 h-4 rounded-full ${
-                              colors.dot
-                            } ring-4 ring-slate-900 ${
-                              event.isMoneyShot ? "animate-pulse w-5 h-5" : ""
-                            }`}
-                          />
-                        </div>
-
-                        {/* Content - LARGER */}
-                        <div
-                          className={`flex-1 rounded-xl ${colors.bg} border ${
-                            colors.border
-                          } p-5 sm:p-6 lg:p-8 ${
+                        <p
+                          className={`text-sm ${
                             event.isMoneyShot
-                              ? "ring-2 ring-emerald-500/50 shadow-xl shadow-emerald-500/30"
-                              : ""
+                              ? "text-emerald-100"
+                              : "text-slate-300"
                           }`}
                         >
-                          <div className="flex items-start gap-4 mb-4">
-                            <div
-                              className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg ${
-                                colors.bg
-                              } border ${
-                                colors.border
-                              } flex items-center justify-center ${
-                                event.isMoneyShot ? "animate-pulse" : ""
-                              }`}
-                            >
-                              <Icon
-                                size={24}
-                                weight="fill"
-                                className={colors.icon}
-                              />
-                            </div>
-                            <div>
-                              <h4
-                                className={`text-lg sm:text-xl font-bold ${
-                                  event.isMoneyShot
-                                    ? "text-emerald-400"
-                                    : "text-white"
-                                }`}
-                              >
-                                {event.isMoneyShot ? "✓ " : ""}
-                                {event.label}
-                              </h4>
-                              {event.statusText && (
-                                <span
-                                  className={`inline-flex items-center gap-1.5 text-sm font-medium ${colors.text}`}
-                                >
-                                  <span className="relative flex h-2.5 w-2.5">
-                                    <span
-                                      className={`animate-ping absolute inline-flex h-full w-full rounded-full ${colors.dot} opacity-75`}
-                                    ></span>
-                                    <span
-                                      className={`relative inline-flex rounded-full h-2.5 w-2.5 ${colors.dot}`}
-                                    ></span>
-                                  </span>
-                                  {event.statusText}
-                                </span>
-                              )}
-                            </div>
+                          {event.event}
+                        </p>
+                        {event.isMoneyShot && (
+                          <div className="flex items-center gap-4 mt-2">
+                            <span className="text-emerald-300 font-bold">
+                              ✓ Time: {event.mitigationTime}
+                            </span>
+                            <span className="text-emerald-300 font-bold">
+                              ✓ User Impact: {event.userImpact}
+                            </span>
                           </div>
-
-                          <div className="space-y-3">
-                            <p
-                              className={`text-base leading-relaxed ${
-                                event.isMoneyShot
-                                  ? "text-emerald-100 font-medium"
-                                  : "text-slate-200"
-                              }`}
-                            >
-                              <span
-                                className={`font-medium ${
-                                  event.isMoneyShot
-                                    ? "text-emerald-300"
-                                    : "text-slate-400"
-                                }`}
-                              >
-                                Event:{" "}
-                              </span>
-                              {event.event}
-                            </p>
-
-                            {event.latency && (
-                              <p className="text-base">
-                                <span className="text-slate-400 font-medium">
-                                  Latency:{" "}
-                                </span>
-                                <span className="text-amber-300 font-mono text-lg font-bold">
-                                  {event.latency}
-                                </span>
-                              </p>
-                            )}
-
-                            {event.mitigationTime && (
-                              <p className="text-base">
-                                <span className="text-slate-400 font-medium">
-                                  Total Mitigation Time:{" "}
-                                </span>
-                                <span className="text-emerald-300 font-bold text-xl">
-                                  {event.mitigationTime}
-                                </span>
-                              </p>
-                            )}
-
-                            {event.userImpact && (
-                              <div className="flex items-center gap-2 pt-2">
-                                <CheckCircle
-                                  size={20}
-                                  weight="fill"
-                                  className="text-emerald-400"
-                                />
-                                <p className="text-base">
-                                  <span className="text-slate-400 font-medium">
-                                    User Impact:{" "}
-                                  </span>
-                                  <span className="text-emerald-300 font-semibold">
-                                    {event.userImpact}
-                                  </span>
-                                </p>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* ROI Dashboard */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="text-center mb-8">
-            <h3 className="text-xl sm:text-2xl font-semibold text-white">
-              The ROI Dashboard
-            </h3>
-            <p className="text-sm text-slate-400 mt-1">
-              Translating technical uptime into financial wins
-            </p>
-          </div>
+        {/* ROI Stats - Compact */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
+          {roiStats.map((stat, index) => {
+            const Icon = stat.icon;
+            const colors = colorClasses[stat.color];
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {roiStats.map((stat, index) => {
-              const Icon = stat.icon;
-              const colors = colorClasses[stat.color];
-
-              return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                  className="relative rounded-2xl bg-slate-900/80 border border-slate-700 p-5 sm:p-6 text-center hover:border-slate-600 transition-colors"
+            return (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                className="relative rounded-xl bg-slate-900/80 border border-slate-700 p-4 text-center"
+              >
+                <div
+                  className={`inline-flex items-center justify-center w-8 h-8 rounded-lg ${colors} border mb-2`}
                 >
-                  <div
-                    className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${colors} border mb-4`}
-                  >
-                    <Icon size={20} weight="duotone" />
-                  </div>
-                  <div className="text-2xl sm:text-3xl font-bold text-white mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm font-medium text-slate-300 mb-0.5">
-                    {stat.label}
-                  </div>
-                  <div className="text-xs text-slate-500">{stat.sublabel}</div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
+                  <Icon size={16} weight="duotone" />
+                </div>
+                <div className="text-xl sm:text-2xl font-bold text-white">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-slate-400">{stat.label}</div>
+              </motion.div>
+            );
+          })}
+        </div>
 
-        {/* CTA */}
+        {/* CTA - Compact */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-12 text-center"
+          className="text-center"
         >
           <button
             onClick={onBookDemo}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold px-8 py-3.5 shadow-lg shadow-emerald-500/25 transition-all hover:shadow-emerald-400/30"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold px-8 py-3 shadow-lg shadow-emerald-500/25 transition-all"
           >
-            <Lightning size={20} weight="fill" />
-            Book Your Fire Drill Simulation
+            <Lightning size={18} weight="fill" />
+            Book Your Fire Drill
           </button>
-          <p className="text-sm text-slate-500 mt-3">
-            See how we protect your stack in real-time
-          </p>
         </motion.div>
       </div>
     </section>

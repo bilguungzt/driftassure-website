@@ -18,36 +18,18 @@ const tiers = [
   {
     id: "build",
     name: "Build",
-    tagline: "For Startups & Dev Teams",
+    tagline: "Startups & Dev Teams",
     price: "$499",
-    period: "/month",
-    description: "Stop debugging JSON errors. Start shipping features.",
-    valueStatement: "Stop debugging JSON errors.",
+    period: "/mo",
+    valueStatement: "Stop debugging. Start shipping.",
     icon: Rocket,
     color: "indigo",
     features: [
-      {
-        text: "3-Tier Semantic Repair",
-        description: "Fix malformed tool calls automatically",
-        highlight: true,
-      },
-      {
-        text: "Token Drift Detection",
-        description: "Basic alerts when costs spike",
-      },
-      {
-        text: "Shadow Mode",
-        description: "Test changes safely in production",
-        highlight: true,
-      },
-      {
-        text: "Slack Notifications",
-        description: "Real-time alerts to your team",
-      },
-      {
-        text: "7-day baseline history",
-        description: "Track behavioral changes over time",
-      },
+      { text: "Semantic Repair", highlight: true },
+      { text: "Token Drift Alerts" },
+      { text: "Shadow Mode Testing", highlight: true },
+      { text: "Slack Notifications" },
+      { text: "7-day history" },
     ],
     cta: "Start Free Trial",
     ctaStyle: "outline",
@@ -55,50 +37,24 @@ const tiers = [
   {
     id: "insurance",
     name: "Stability Insurance",
-    tagline: "For Mission-Critical AI Products",
+    tagline: "Mission-Critical AI",
     qualifier: "$100k+ LLM Spend",
     price: "$5,000",
-    period: "/month",
-    pricingNote: "Risk-Adjusted Pricing",
-    description: "We guarantee your uptime. You sleep at night.",
-    valueStatement: "We guarantee your uptime.",
+    period: "/mo",
+    valueStatement: "We guarantee uptime.",
     icon: ShieldCheck,
     color: "emerald",
     popular: true,
     features: [
-      {
-        text: "Baseline Locking",
-        description: 'We fingerprint your "working" state and enforce it',
-        highlight: true,
-      },
-      {
-        text: "15-Second Auto-Failover",
-        description: "Cross-provider redundancy (OpenAI ↔ Anthropic)",
-        highlight: true,
-      },
-      {
-        text: "Financial Guarantee",
-        description: "SLA-backed stability performance",
-        highlight: true,
-      },
-      {
-        text: "Dedicated Stability Engineer",
-        description: "We manage the fallback logic for you",
-      },
-      {
-        text: "Quarterly Fire Drills",
-        description: "Chaos testing to validate your protection",
-      },
-      {
-        text: "90-day baseline history",
-        description: "Deep historical analysis",
-      },
-      {
-        text: "4-hour response SLA",
-        description: "Priority support when it matters",
-      },
+      { text: "Baseline Locking", highlight: true },
+      { text: "15s Auto-Failover", highlight: true },
+      { text: "Financial SLA", highlight: true },
+      { text: "Dedicated Engineer" },
+      { text: "Quarterly Fire Drills" },
+      { text: "90-day history" },
+      { text: "4-hour response" },
     ],
-    cta: "Book an Insurance Assessment",
+    cta: "Book Assessment",
     ctaStyle: "solid",
   },
 ];
@@ -126,29 +82,28 @@ const colorClasses = {
 
 export default function Pricing({ onBookDemo = () => {} }) {
   return (
-    <section id="pricing" className="py-20 sm:py-28 bg-slate-950">
+    <section id="pricing" className="py-16 sm:py-20 bg-slate-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Header */}
+        {/* Header - Left Aligned */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800 border border-slate-700 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800 border border-slate-700 mb-4">
             <ShieldCheck size={16} weight="fill" className="text-indigo-400" />
             <span className="text-xs font-medium tracking-wide text-slate-300 uppercase">
-              Pricing & Plans
+              Pricing
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
-            Scale with Confidence. Insure against Chaos.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-3">
+            Scale with Confidence.
           </h2>
-          <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-            Whether you're debugging your first agent or protecting $10M in ARR,
-            we have the reliability layer you need.
+          <p className="text-lg text-slate-400 max-w-2xl">
+            From first agent to enterprise protection.
           </p>
         </motion.div>
 
@@ -284,38 +239,25 @@ export default function Pricing({ onBookDemo = () => {} }) {
                 </div>
 
                 {/* Features */}
-                <ul className="space-y-4 mb-8">
+                <ul className="space-y-3 mb-8">
                   {tier.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
+                    <li key={idx} className="flex items-center gap-3">
                       <CheckCircle
-                        size={20}
+                        size={18}
                         weight="fill"
-                        className={`flex-shrink-0 mt-0.5 ${
+                        className={`flex-shrink-0 ${
                           tier.popular ? "text-emerald-400" : colors.check
                         }`}
                       />
-                      <div>
-                        <span
-                          className={`block text-sm ${
-                            tier.popular
-                              ? feature.highlight
-                                ? "font-bold text-white"
-                                : "text-slate-300"
-                              : feature.highlight
-                              ? "font-bold text-white"
-                              : "text-slate-300"
-                          }`}
-                        >
-                          {feature.text}
-                        </span>
-                        <span
-                          className={`text-xs ${
-                            tier.popular ? "text-slate-500" : "text-slate-500"
-                          }`}
-                        >
-                          {feature.description}
-                        </span>
-                      </div>
+                      <span
+                        className={`text-sm ${
+                          feature.highlight
+                            ? "font-semibold text-white"
+                            : "text-slate-300"
+                        }`}
+                      >
+                        {feature.text}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -337,76 +279,53 @@ export default function Pricing({ onBookDemo = () => {} }) {
           })}
         </div>
 
-        {/* Enterprise Callout */}
+        {/* Enterprise Callout - Compact */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="rounded-2xl bg-slate-900 p-8 sm:p-10"
+          className="rounded-xl bg-slate-900 p-6"
         >
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
-                <Buildings size={24} className="text-white" />
-              </div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <Buildings size={24} className="text-slate-400" />
               <div>
-                <h3 className="text-xl font-bold text-white mb-1">
-                  Enterprise & Regulated Industries
-                </h3>
-                <p className="text-slate-400 text-sm max-w-xl">
-                  Volume discounts, SOC 2 + HIPAA + PCI compliance, on-prem/VPC
-                  deployment, SSO/SCIM, custom SLAs up to 99.99%, and dedicated
-                  account team.
+                <h3 className="font-bold text-white">Enterprise</h3>
+                <p className="text-sm text-slate-400">
+                  SOC 2, HIPAA, on-prem, custom SLAs
                 </p>
               </div>
             </div>
             <button
               onClick={onBookDemo}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-slate-900 font-semibold px-6 py-3 hover:bg-slate-100 transition-colors flex-shrink-0"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-slate-900 font-semibold px-5 py-2.5 text-sm hover:bg-slate-100 transition-colors"
             >
               Contact Sales
-              <ArrowRight size={18} weight="bold" />
+              <ArrowRight size={16} weight="bold" />
             </button>
           </div>
         </motion.div>
 
-        {/* Value Props */}
+        {/* Value Props - Compact */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 grid sm:grid-cols-3 gap-6 text-center"
+          className="mt-8 flex flex-wrap justify-center gap-8 text-center text-sm text-slate-400"
         >
-          <div className="p-6">
-            <div className="w-10 h-10 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center mx-auto mb-3">
-              <Code size={20} className="text-indigo-400" />
-            </div>
-            <h4 className="font-semibold text-white mb-1">5-Minute Setup</h4>
-            <p className="text-sm text-slate-400">
-              Change one line of code. We handle the rest.
-            </p>
+          <div className="flex items-center gap-2">
+            <Code size={16} className="text-indigo-400" />
+            <span>5-min setup</span>
           </div>
-          <div className="p-6">
-            <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mx-auto mb-3">
-              <Clock size={20} className="text-emerald-400" />
-            </div>
-            <h4 className="font-semibold text-white mb-1">14-Day Free Trial</h4>
-            <p className="text-sm text-slate-400">
-              No credit card required. Full feature access.
-            </p>
+          <div className="flex items-center gap-2">
+            <Clock size={16} className="text-emerald-400" />
+            <span>14-day free trial</span>
           </div>
-          <div className="p-6">
-            <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center mx-auto mb-3">
-              <Handshake size={20} className="text-amber-400" />
-            </div>
-            <h4 className="font-semibold text-white mb-1">
-              Money-Back Guarantee
-            </h4>
-            <p className="text-sm text-slate-400">
-              If we don't save you money, you don't pay.
-            </p>
+          <div className="flex items-center gap-2">
+            <Handshake size={16} className="text-amber-400" />
+            <span>Money-back guarantee</span>
           </div>
         </motion.div>
       </div>

@@ -66,6 +66,7 @@ function Features({ onBookDemo = () => {} }) {
       ],
       visual: (
         <div className="space-y-3">
+          {/* Primary Provider - Drifting */}
           <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-medium text-slate-400">
@@ -86,21 +87,48 @@ function Features({ onBookDemo = () => {} }) {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center">
-            <div className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30">
-              <span className="text-xs font-bold text-emerald-400">
-                AUTO-FAILOVER
-              </span>
+
+          {/* Safety Gate - The Decision Diamond */}
+          <div className="flex items-center justify-center py-2">
+            <div className="relative">
+              {/* Diamond shape */}
+              <div className="w-20 h-20 rotate-45 bg-amber-500/20 border-2 border-amber-500/50 rounded-lg flex items-center justify-center">
+                <div className="-rotate-45 text-center">
+                  <ShieldCheck
+                    size={20}
+                    className="text-amber-400 mx-auto mb-0.5"
+                  />
+                  <span className="text-[9px] font-bold text-amber-300 uppercase tracking-tight">
+                    Verify
+                  </span>
+                </div>
+              </div>
+              {/* Reject path */}
+              <div className="absolute -right-16 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                <div className="w-6 h-0.5 bg-red-500/50" />
+                <span className="text-[8px] text-red-400 font-medium">
+                  ✗ REJECT
+                </span>
+              </div>
+              {/* Accept path */}
+              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                <div className="w-0.5 h-4 bg-emerald-500/50" />
+                <span className="text-[8px] text-emerald-400 font-medium">
+                  ✓ PASS
+                </span>
+              </div>
             </div>
           </div>
-          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
+
+          {/* Fallback Provider - Verified */}
+          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 mt-6">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-medium text-slate-400">
-                Fallback Provider
+                Verified Fallback
               </span>
               <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-xs font-medium text-emerald-400">
                 <CheckCircle size={12} weight="fill" />
-                Active
+                Logic Verified
               </span>
             </div>
             <div className="flex items-center gap-3">
@@ -111,9 +139,7 @@ function Features({ onBookDemo = () => {} }) {
                 <p className="text-sm font-medium text-white">
                   claude-3-5-sonnet
                 </p>
-                <p className="text-xs text-emerald-400">
-                  3.2% drift (within baseline)
-                </p>
+                <p className="text-xs text-emerald-400">96.8% baseline match</p>
               </div>
             </div>
           </div>
