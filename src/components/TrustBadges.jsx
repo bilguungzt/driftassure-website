@@ -46,7 +46,7 @@ function TrustBadges() {
         {/* Featured Academic Badge with UWaterloo Logo */}
         <div className="flex justify-center mb-8">
           <div className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-indigo-500/10 border border-indigo-500/30 shadow-lg shadow-indigo-500/10">
-            <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center border border-white/20 p-2">
+            <div className="w-20 h-20 rounded-xl bg-white/10 flex items-center justify-center border border-white/20 p-1.5">
               <img
                 src={WATERLOO_LOGO}
                 alt="University of Waterloo"

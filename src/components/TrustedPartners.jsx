@@ -150,11 +150,11 @@ function TrustedPartners() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl font-medium tracking-tight text-white sm:text-5xl">
-            Trusted Partners
+            Universal LLM Protection
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-slate-400 leading-relaxed">
-            We elevate your AI stability to the highest level alongside the
-            world&apos;s leading LLM providers.
+            One proxy. Every provider. Real-time drift detection, automatic cost
+            optimization, and schema repair across all your AI workloads.
           </p>
         </motion.div>
 
@@ -407,8 +407,30 @@ function TrustedPartners() {
           >
             <span className="text-lg font-semibold text-white">Cognitude</span>
             <span className="ml-2 text-xs font-medium px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
-              Hub
+              Stability Engine
             </span>
+          </motion.div>
+
+          {/* Protection Stats */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-8 mt-12"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span>Z-Score Drift Detection</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+              <span>Auto Model Switching</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+              <span>Schema Repair</span>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -429,14 +451,15 @@ function TrustedPartners() {
           >
             <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8 shadow-lg shadow-blue-900/20">
               <span className="text-xs font-semibold tracking-wider text-blue-300 uppercase">
-                Integrations
+                Intelligence Engine
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-white mb-6">
-              Seamless Integrations
+              Drop-In Protection
             </h2>
             <p className="text-slate-400 text-lg max-w-xl mx-auto font-light">
-              Connect with your favorite tools to streamline workflows
+              One line of code. Full observability, cost control, and drift
+              protection for every LLM call.
             </p>
           </motion.div>
 
@@ -489,9 +512,9 @@ function TrustedPartners() {
                       strokeLinejoin="round"
                       className="text-white"
                     >
-                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                      <line x1="12" y1="22.08" x2="12" y2="12" />
+                      <circle cx="12" cy="12" r="1" />
+                      <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" />
+                      <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" />
                     </svg>
                   </div>
                 </div>
@@ -499,7 +522,7 @@ function TrustedPartners() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-32 gap-y-32">
-              {/* Item 1 (Top Left) - OpenAI */}
+              {/* Item 1 (Top Left) - Shadow Mode */}
               <motion.div
                 className="flex flex-col items-center text-center group"
                 initial={{ opacity: 0, y: 20 }}
@@ -507,42 +530,7 @@ function TrustedPartners() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <div className="w-16 h-16 rounded-2xl bg-[#0B0C10] border border-white/10 flex items-center justify-center mb-6 group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] transition-all duration-300">
-                  <OpenAILogo />
-                </div>
-                <p className="text-sm text-slate-300 max-w-[240px]">
-                  GPT models to generate content and build intelligent agents.
-                </p>
-              </motion.div>
-
-              {/* Item 2 (Top Right) - Notion */}
-              <motion.div
-                className="flex flex-col items-center text-center group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <div className="w-16 h-16 rounded-2xl bg-[#0B0C10] border border-white/10 flex items-center justify-center mb-6 group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] transition-all duration-300">
-                  <span className="font-serif text-3xl text-slate-400 group-hover:text-white transition-colors">
-                    N
-                  </span>
-                </div>
-                <p className="text-sm text-slate-300 max-w-[240px]">
-                  Summarize tasks, and organize info using Notion&apos;s
-                  powerful AI assistant.
-                </p>
-              </motion.div>
-
-              {/* Item 3 (Bottom Left) - LinkedIn */}
-              <motion.div
-                className="flex flex-col items-center text-center group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <div className="w-16 h-16 rounded-2xl bg-[#0B0C10] border border-white/10 flex items-center justify-center mb-6 group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] transition-all duration-300">
+                <div className="w-16 h-16 rounded-2xl bg-[#0B0C10] border border-white/10 flex items-center justify-center mb-6 group-hover:border-purple-500/50 group-hover:shadow-[0_0_20px_rgba(147,51,234,0.2)] transition-all duration-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="28"
@@ -553,19 +541,93 @@ function TrustedPartners() {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-slate-400 group-hover:text-white transition-colors"
+                    className="text-purple-400 group-hover:text-purple-300 transition-colors"
                   >
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                    <rect width="4" height="12" x="2" y="9" />
-                    <circle cx="4" cy="4" r="2" />
+                    <circle cx="12" cy="12" r="10" />
+                    <path
+                      d="M12 2a10 10 0 0 1 0 20"
+                      fill="currentColor"
+                      opacity="0.3"
+                    />
+                    <path d="M12 2v20" />
                   </svg>
                 </div>
+                <h3 className="text-white font-medium mb-2">Shadow Mode</h3>
                 <p className="text-sm text-slate-300 max-w-[240px]">
-                  Connect with LinkedIn and with dozens of other tools in it.
+                  Test cheaper models in production with zero risk. Semantic
+                  comparison shows exact cost savings before you switch.
                 </p>
               </motion.div>
 
-              {/* Item 4 (Bottom Right) - Twitter/X */}
+              {/* Item 2 (Top Right) - Token Efficiency */}
+              <motion.div
+                className="flex flex-col items-center text-center group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <div className="w-16 h-16 rounded-2xl bg-[#0B0C10] border border-white/10 flex items-center justify-center mb-6 group-hover:border-green-500/50 group-hover:shadow-[0_0_20px_rgba(34,197,94,0.2)] transition-all duration-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-green-400 group-hover:text-green-300 transition-colors"
+                  >
+                    <path d="M12 2v20M2 12h20" />
+                    <path d="M12 12L4 4" />
+                    <path d="M12 12l8 8" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </div>
+                <h3 className="text-white font-medium mb-2">
+                  Z-Score Detection
+                </h3>
+                <p className="text-sm text-slate-300 max-w-[240px]">
+                  Real-time anomaly detection with 99.7% confidence. Auto-switch
+                  to cheaper models when drift exceeds 3.5σ.
+                </p>
+              </motion.div>
+
+              {/* Item 3 (Bottom Left) - Agent Firewall */}
+              <motion.div
+                className="flex flex-col items-center text-center group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <div className="w-16 h-16 rounded-2xl bg-[#0B0C10] border border-white/10 flex items-center justify-center mb-6 group-hover:border-orange-500/50 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.2)] transition-all duration-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-orange-400 group-hover:text-orange-300 transition-colors"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                </div>
+                <h3 className="text-white font-medium mb-2">Agent Firewall</h3>
+                <p className="text-sm text-slate-300 max-w-[240px]">
+                  3-layer semantic repair catches broken JSON before your app
+                  crashes. Schema registry with no header limits.
+                </p>
+              </motion.div>
+
+              {/* Item 4 (Bottom Right) - Time Machine */}
               <motion.div
                 className="flex flex-col items-center text-center group"
                 initial={{ opacity: 0, y: 20 }}
@@ -584,15 +646,18 @@ function TrustedPartners() {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-slate-400 group-hover:text-white transition-colors"
+                    className="text-blue-400 group-hover:text-blue-300 transition-colors"
                   >
-                    <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
-                    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                    <path d="M2 12h2" />
+                    <path d="M20 12h2" />
                   </svg>
                 </div>
+                <h3 className="text-white font-medium mb-2">Time Machine</h3>
                 <p className="text-sm text-slate-300 max-w-[240px]">
-                  Connect with Twitter and with dozens of other tools in it
-                  without code.
+                  Fingerprint model behavior. Auto-rollback to stable versions
+                  when providers silently update their models.
                 </p>
               </motion.div>
             </div>
