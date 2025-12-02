@@ -20,6 +20,9 @@ import Pricing from "./components/PricingNew";
 import TechnicalFeatures from "./components/TechnicalFeaturesNew";
 import FAQ from "./components/FAQDark";
 import ContactModal from "./components/ContactModal";
+import TrustedPartners from "./components/TrustedPartners";
+import ConfigAsCode from "./components/ConfigAsCode";
+import AIAssistant from "./components/AIAssistant";
 
 // Navigation Links
 const navLinks = [
@@ -252,6 +255,9 @@ function App() {
         {/* Hero: New "Stability Insurance" positioning */}
         <Hero onBookDemo={() => openContactModal("engineer")} />
 
+        {/* Trusted Partners: LLM provider integrations hub */}
+        <TrustedPartners />
+
         {/* Section 2: Agitation - "The Era of Set and Forget AI is Over" */}
         <AgitationSection />
 
@@ -267,6 +273,12 @@ function App() {
 
         {/* Features: Reordered Four-Layer Platform */}
         <Features onBookDemo={() => openContactModal("engineer")} />
+
+        {/* Config as Code: Define policies in TypeScript/Python/YAML */}
+        <ConfigAsCode />
+
+        {/* AI Assistant: Natural language policy generation */}
+        <AIAssistant />
 
         {/* Pricing: Enterprise-focused with bifurcated CTAs */}
         <Pricing onBookDemo={() => openContactModal("engineer")} />

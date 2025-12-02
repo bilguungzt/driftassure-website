@@ -1,6 +1,80 @@
 import { useState, useEffect } from "react";
 import { ArrowRight, ShieldCheck, Play } from "@phosphor-icons/react";
 
+// NeonShield-style Radar Background Component
+function RadarPulse() {
+  return (
+    <div
+      className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[1100px] z-0 pointer-events-none select-none"
+      style={{
+        maskImage:
+          "linear-gradient(to bottom, black 0%, black 50%, transparent 85%)",
+        WebkitMaskImage:
+          "linear-gradient(to bottom, black 0%, black 50%, transparent 85%)",
+      }}
+    >
+      {/* Radar Container */}
+      <div className="relative w-full h-full flex items-center justify-center">
+        {/* 1. The Sweep / Scanner */}
+        <div className="absolute inset-0 w-full h-full rounded-full animate-[radar-scan_8s_linear_infinite]">
+          <div className="radar-sweep w-full h-full rounded-full" />
+          {/* Leading edge glowing line */}
+          <div className="absolute top-0 left-1/2 w-[2px] h-1/2 bg-gradient-to-b from-cyan-300 via-cyan-500 to-transparent origin-bottom -translate-x-1/2 shadow-[0_0_30px_rgba(34,211,238,1)]" />
+        </div>
+
+        {/* 2. Outer Ring Structure (Static + Slow Spin) */}
+        {/* Outermost dashed ring */}
+        <div className="absolute w-[98%] h-[98%] rounded-full border border-dashed border-cyan-500/10 opacity-30 animate-[spin_120s_linear_infinite]" />
+
+        {/* Main Outer Circle */}
+        <div className="absolute w-[80%] h-[80%] rounded-full border border-cyan-500/10 opacity-60" />
+
+        {/* Decorative Arc Slices */}
+        <svg
+          className="absolute w-[80%] h-[80%] animate-[spin_60s_linear_infinite_reverse]"
+          viewBox="0 0 100 100"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="49"
+            fill="none"
+            stroke="rgba(34,211,238,0.1)"
+            strokeWidth="0.2"
+            strokeDasharray="20 40"
+          />
+        </svg>
+
+        {/* 3. Inner Rings */}
+        <div className="absolute w-[72%] h-[72%] rounded-full border border-cyan-500/5" />
+
+        {/* 4. Grid Lines */}
+        <div className="absolute w-full h-full opacity-10">
+          <div className="absolute top-0 bottom-0 left-1/2 w-px bg-cyan-400" />
+          <div className="absolute left-0 right-0 top-1/2 h-px bg-cyan-400" />
+          <div className="absolute top-[14.6%] left-[14.6%] w-[70.8%] h-[70.8%] border border-cyan-400 rounded-full" />
+        </div>
+
+        {/* 5. Central Glowing Core */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] flex items-center justify-center">
+          <div className="absolute inset-0 bg-cyan-500/10 blur-xl rounded-full animate-pulse" />
+          <div className="w-[60%] h-[60%] border border-cyan-400/30 rounded-full flex items-center justify-center">
+            <div className="w-2 h-2 bg-cyan-300 rounded-full shadow-[0_0_10px_#22d3ee]" />
+          </div>
+        </div>
+
+        {/* Floating Data Points on Radar */}
+        <div className="absolute top-[20%] left-[75%] w-32 h-8 flex items-center gap-2 text-cyan-500/50 text-[10px] font-mono animate-pulse">
+          <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full" /> TARGET_LOCKED
+        </div>
+        <div className="absolute bottom-[40%] left-[25%] w-32 h-8 flex items-center gap-2 text-blue-500/50 text-[10px] font-mono animate-pulse delay-700">
+          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> SCANNING...
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Hero({ onBookDemo = () => {} }) {
   const [alertPhase, setAlertPhase] = useState("detecting");
 
@@ -16,9 +90,17 @@ function Hero({ onBookDemo = () => {} }) {
   }, []);
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-950 text-white">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#020204] text-white">
+      {/* Background Effects */}
+      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[120%] h-[800px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-[#020204]/80 to-transparent blur-[80px]" />
+      </div>
+
       {/* Subtle grid background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" />
+
+      {/* NeonShield Radar/pulse animated background */}
+      <RadarPulse />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 lg:py-28">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">

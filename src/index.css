@@ -77,3 +77,275 @@ body {
     font-size: 0.875rem;
     line-height: 1.5;
 }
+
+/* Hero Radar/Pulse Animations */
+@keyframes radarPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0;
+    }
+}
+
+@keyframes radarSweep {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* NeonShield-style Radar Animations */
+@keyframes radar-scan {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Radar sweep gradient */
+.radar-sweep {
+    background: conic-gradient(from 180deg at 50% 50%,
+            transparent 0deg,
+            transparent 200deg,
+            rgba(6, 182, 212, 0.05) 240deg,
+            rgba(6, 182, 212, 0.4) 360deg);
+}
+
+/* Flow animation for connecting lines */
+@keyframes flow {
+    to {
+        stroke-dashoffset: -1000;
+    }
+}
+
+.animate-flow {
+    stroke-dasharray: 10, 10;
+    animation: flow 40s linear infinite;
+}
+
+.animate-flow-fast {
+    stroke-dasharray: 6, 6;
+    animation: flow 20s linear infinite;
+}
+
+/* Pulse glow animation */
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+.glow-dot {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Glass effects for cyber aesthetic */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-surface {
+    background: rgba(10, 15, 30, 0.65);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Cyan gradient text */
+.text-gradient-cyan {
+    background: linear-gradient(to right, #22d3ee, #3b82f6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Scanner animation for flow beam */
+@keyframes scanner {
+
+    0%,
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* Center circle pulse animation (like neonshield) */
+@keyframes centerCirclePulse {
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    15% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(2.2);
+    }
+}
+
+.center-circle {
+    animation: centerCirclePulse 5s linear infinite;
+}
+
+.center-circle--2 {
+    animation-delay: -1.6s;
+}
+
+.center-circle--3 {
+    animation-delay: -3.3s;
+}
+
+/* Center ray animations */
+@keyframes centerRayX {
+
+    0%,
+    45% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes centerRayY {
+
+    0%,
+    45% {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+.center-ray-horizontal {
+    height: 1px;
+    animation: centerRayX 5s ease-out infinite;
+}
+
+.center-ray-vertical {
+    width: 1px;
+    animation: centerRayY 5s ease-out infinite;
+}
+
+.center-ray-left {
+    transform-origin: right center;
+}
+
+.center-ray-right {
+    transform-origin: left center;
+}
+
+.center-ray-top {
+    transform-origin: center bottom;
+}
+
+.center-ray-bottom {
+    transform-origin: center top;
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes dotRing {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+@keyframes slowRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Radial gradient support for Tailwind */
+.bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to));
+}
